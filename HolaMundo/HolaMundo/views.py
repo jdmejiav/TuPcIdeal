@@ -5,3 +5,6 @@ def  saludo(request):
 
 def adios(request):
     return HttpResponse("Adios mundo")
+
+def index(request):
+    return HttpResponse("Main page")

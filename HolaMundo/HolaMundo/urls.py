@@ -17,9 +17,11 @@ from django.contrib import admin
 from django.urls import path
 from HolaMundo.views import saludo
 from HolaMundo.views import adios
+from HolaMundo.views import index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('saludo/',saludo),
     path('adios/', adios),
+    path('', index),
 ]

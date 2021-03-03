@@ -60,9 +60,12 @@
               icon: 'success',
               title: 'Exito!!',
               text: 'Usuario Registrado',
-              timer: 3000,
+              timer: 2000,
               timerProgressBar: true,
-            })
+            }).then( () =>
+                {
+                  window.location = "http://localhost:3000/";
+                });
             })
             .catch(function (error) {
             console.log(error);
@@ -71,7 +74,7 @@
               title: 'Oops...',
               text: 'El correo ya fue registrado',
               footer: '<a href="http://localhost:3000/login">Inicia sesion</a>'
-            })
+              })
             });
            setSubmitting(false);
          }, 400);

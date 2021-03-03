@@ -1,9 +1,18 @@
 # DJANGO REST API
 
-Front end needs  
+This project need these libraries or frameworks using pip:
 
-[Django](https://www.djangoproject.com/).
-[Django Rest Framework](https://www.django-rest-framework.org/).
+Django run: 
+### `pip install Django`
+
+Django REST framework run: 
+### `pip install djangorestframework`
+
+Argon2-cffi run: 
+### `pip install argon2-cffi`  
+
+Cors-headers run: 
+### `pip install django-cors-headers`  
 
 ## 'Setup project'
 
@@ -21,15 +30,15 @@ which is responsible for creating new migrations based on the changes you have m
 
 which is responsible for applying and unapplying migrations.
 
-## 'python manage.py runserver'
+### `python manage.py runserver`
 
 which is responsible for stating the backend server.
 
-### 'sqlmigrate'
+### `sqlmigrate`
 
 which displays the SQL statements for a migration.
 
-### 'showmigrations'
+### `showmigrations`
 
 which lists a project’s migrations and their status.
 

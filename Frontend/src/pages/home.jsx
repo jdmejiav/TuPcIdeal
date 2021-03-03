@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
-import Registro from './Registro'
 
+import Navbar from '../components/Navbar/Navbar'
+import Registro from './Registro'
 
 export default class Home extends Component {
     
    render() {
        return(
             <div className="container">
-                <h1>MAIN PAGE</h1>
-                <Registro /> 
+
+                <Navbar/>
+                <Registro/>
             </div>
    )}
 }

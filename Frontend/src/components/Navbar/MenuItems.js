@@ -13,7 +13,7 @@ export const MenuItems = [
         cName : 'nav-links',
     },{
         tittle: 'Sign up',
-        url :'#',
+        url :'../registro',
         cName : 'nav-links',
     },
 ]

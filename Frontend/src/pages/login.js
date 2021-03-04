@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {Formik, Form} from 'formik'
 import * as Yup from 'yup'
-import FormikControl from '../components/FormikControl'
+import FormikControl from '../components/login/FormikControl'
 
 
 export default class Mainpage extends Component {

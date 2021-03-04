@@ -6,7 +6,6 @@ export default class Mainpage extends Component {
        return(
             <div>
                 <h1>MAIN PAGE</h1>
-                
             </div>         
    )}
 }

@@ -23,7 +23,7 @@ export default class Mainpage extends Component {
         }
 
         return(
-            <Formik initialValues ={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+            <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
                 {
                     formik=>{
                         return <Form>

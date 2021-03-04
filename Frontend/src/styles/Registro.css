@@ -14,9 +14,8 @@
 
 .container
 {
-    display: flex;
-    align-items: center;
-    height: 1000px;
+
+
     background-color: rgb(255, 255, 255); 
 }
 

@@ -1,7 +1,7 @@
 export const MenuItems = [
     {
         tittle: 'Home',
-        url :'#',
+        url :'/',
         cName : 'nav-links',
     },{
         tittle: 'Información Básica',

@@ -33,7 +33,9 @@ export default class Mainpage extends Component {
                             <h1 className="titulo_login">
                                 Login usuario existente
                             </h1>
+                            <div className="div_login">
                             <img className="foto_login" src={Login} className="PC"  />
+                            </div>
                             <div className="form_login"> 
                                 <div className="email_login">
                             <FormikControl

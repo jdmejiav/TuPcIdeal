@@ -29,7 +29,15 @@
 }
 
 .foto_login{
+    position: absolute;
+   object-fit: contain;
+  
+}
+
+.div_login{
+    margin-top: 20px;
+    padding-bottom: 0%;
+    margin-left: 590px;
     width: 200px;
     height: 200px;
-   
 }

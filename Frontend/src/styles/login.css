@@ -1,0 +1,35 @@
+
+
+.titulo_login {
+ background: linear-gradient( 90deg, rgb(53,173,255),rgba(189,85, 255));
+    padding: 40px;
+    color: aliceblue;
+    font-family: Arial;
+    text-align: center;
+  }
+
+.form_login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-weight: bolder;
+    
+    
+}
+
+.email_login{
+    padding-left: 10px;
+}
+
+.cont_login{
+    margin: 20px;
+    padding-right: 14px;
+    
+}
+
+.foto_login{
+    width: 200px;
+    height: 200px;
+   
+}

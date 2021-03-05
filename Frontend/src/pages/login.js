@@ -12,8 +12,10 @@ export default class Mainpage extends Component {
             email: '',
             password: ''
         }
+        
 
         const validationSchema = Yup.object({
+            
             email: Yup.string().email('email incorrecto').required('required'),
             password: Yup.string().required('required')
         })
@@ -26,18 +28,28 @@ export default class Mainpage extends Component {
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
                 {
                     formik=>{
-                        return <Form>
+                        return <Form >
+                            <h1 className="titulo_login">
+                                Login usuario existente
+                            </h1>
+                            <img className="foto_login" src="./images/login2.png"></img>
+                            <div className="form_login"> 
+                                <div className="email_login">
                             <FormikControl
                                 control= 'input'
                                 type ='email'
                                 label ='Email'
                                 name= 'email'/>
+                                </div>
+                                <div className="cont_login">
                                 <FormikControl
                                 control= 'input'
                                 type = 'password'
                                 label='Password'
                                 name ='password'/> 
+                                </div>
                                 <button type='submit' disabled={!formik.isValid}>Submit</button>
+                            </div>
                         </Form>
                     }
                 }

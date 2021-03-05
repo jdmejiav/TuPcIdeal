@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {Formik, Form} from 'formik'
 import * as Yup from 'yup'
 import FormikControl from '../components/login/FormikControl'
+import Login from '../images/login2.png';
 
 
 export default class Mainpage extends Component {
@@ -32,7 +33,7 @@ export default class Mainpage extends Component {
                             <h1 className="titulo_login">
                                 Login usuario existente
                             </h1>
-                            <img className="foto_login" src="./images/login2.png"></img>
+                            <img className="foto_login" src={Login} className="PC"  />
                             <div className="form_login"> 
                                 <div className="email_login">
                             <FormikControl

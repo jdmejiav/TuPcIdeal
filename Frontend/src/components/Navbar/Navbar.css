@@ -14,13 +14,31 @@
     margin-left: 20px;
     cursor: pointer;  
 }
+.navbar-logo:hover{    
+    color: #d4d4d4;
+    justify-self: start;
+    margin-left: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease-out;  
+    border-radius: 4px;
+}
+
 .fa-lightbulb{
     margin-left: 0.5rem;
     font-size:1.6rem;
 }
+.fa-lightbulb:hover{
+    margin-left: 0.5rem;
+    font-size:1.6rem;
+    color: #d4d4d4;
+    transition: all 0.2s ease-out;
+    border-radius: 4px;
+}
+
+
 .nav-menu{
     display: grid;
-    grid-template-columns: repeat(5,auto);
+    grid-template-columns: repeat(4,auto);
     grid-gap: 10px;
     list-style: none;
     text-align: center;
@@ -39,13 +57,12 @@
 }
 
 .nav-links:hover{
-    color: #6d76f7;
+    background-color:  rgb(53,173,255);
+    color: #fff;
     border-radius: 4px;
     transition: all 0.2s ease-out;
 }
-.fa-bars{
-    color: #ffff;
-}
+
 .nav-links-mobile{
     display: none;
 }

@@ -77,7 +77,7 @@
     width: 50%;
     color: white;
     animation-name: anim;
-    animation-duration: 5s;
+    animation-duration: 2s;
   }
   @keyframes anim {
       0%   {transform: translateX(1500px) rotate(0deg) translateY(0px);}

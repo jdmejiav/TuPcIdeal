@@ -1,7 +1,9 @@
 from django.urls import path
-from .views import RegistrerUser, GetUser
+from .views import CustomUserCreate, BlacklistTokenUpdateView
+
+app_name = 'api'
 
 urlpatterns = [
-    path('createU', RegistrerUser.as_view()),
-    path('SchU', GetUser.as_view()),
+    path('registrer/', CustomUserCreate.as_view(), name="create_user"),
+    path('logout/blacklist/', BlacklistTokenUpdateView.as_view(),name='blacklist')
 ]

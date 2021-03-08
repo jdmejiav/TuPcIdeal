@@ -1,42 +1,34 @@
-from django.shortcuts import render
-from rest_framework import generics, status
-from .serializers import CreateUserSerializer, UserSerializer
-from .models import RegistroUser
-from .encrypter import encripter, checker
-from rest_framework.views import APIView
+from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework import status
 from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializers import CustomUserSerializer
+from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.permissions import AllowAny
 
 
-# Create your views here.
+class CustomUserCreate(APIView):
+    permission_classes = [AllowAny]
 
-class RegistrerUser(APIView):
-    serializer_class = CreateUserSerializer
-    def post(self, request, format=None):
-        if not self.request.session.exists(self.request.session.session_key):
-            self.request.session.create()
-
-        serializer = self.serializer_class(data=request.data)
+    def post(self, request, format='json'):
+        serializer = CustomUserSerializer(data=request.data)
         if serializer.is_valid():
-            correo = serializer.data.get('correo')
-            nombre = serializer.data.get('nombre')
-            apellidos = serializer.data.get('apellidos')
-            password = encripter(serializer.data.get('password'))
-            if RegistroUser.objects.filter(correo=correo).exists():
-                return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
-            else:
-                registroUser = RegistroUser(correo= correo,nombre=nombre,apellidos=apellidos, password=password)
-                registroUser.save()
-                return Response(CreateUserSerializer(registroUser).data, status=status.HTTP_201_CREATED)
+            user = serializer.save()
+            if user:
+                json = serializer.data
+                return Response(json, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class GetUser(APIView):
-    serializer_class = UserSerializer
-    lookup_url_kwarg = 'mail'
-    def get(self, request, format=None):
-        correo = request.GET.get(self.lookup_url_kwarg)
-        if correo != None:
-            registroUser = RegistroUser.objects.filter(correo=correo)
-            if len(registroUser) > 0:
-                data = UserSerializer(registroUser[0]).data
-                return Response(data, status=status.HTTP_200_OK)
-            return Response({'User Not found': 'Invalid email Code.'}, status=status.HTTP_404_NOT_FOUND)
-        return Response({'Bad Request': 'Code paramater not found in request'}, status=status.HTTP_400_BAD_REQUEST)
+
+class BlacklistTokenUpdateView(APIView):
+    permission_classes = [AllowAny]
+    authentication_classes = ()
+
+    def post(self, request):
+        try:
+            refresh_token = request.data["refresh_token"]
+            token = RefreshToken(refresh_token)
+            token.blacklist()
+            return Response(status=status.HTTP_205_RESET_CONTENT)
+        except Exception as e:
+            return Response(status=status.HTTP_400_BAD_REQUEST)

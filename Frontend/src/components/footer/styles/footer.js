@@ -57,5 +57,4 @@ export const Tittle = styled.div`
     color: #fff;
     margin-botton:40px;
     text-decoration:none;
-
 `;

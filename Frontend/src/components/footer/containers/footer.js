@@ -14,7 +14,7 @@ export function FooterContainer(){
                         <Tittle>
                             Sobre el proyecto
                         </Tittle>
-                        <Link href='#'>
+                        <Link href='https://dev.azure.com/Proyectointegrador1G2/ProyectoIntegradorI'>
                             Documentación
                         </Link>
                     </Footer.Column>

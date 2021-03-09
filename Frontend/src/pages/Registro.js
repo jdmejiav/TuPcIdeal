@@ -3,6 +3,8 @@
  import { Formik, Form, Field, ErrorMessage } from 'formik';
  import axiosInstance from '../axios'
  import Swal from 'sweetalert2'
+import Navbar from '../components/Navbar/Navbar';
+import { FooterContainer } from '../components/footer/containers/footer';
  
  export default class Registro extends Component {
       
@@ -13,6 +15,7 @@
      render() {
          return(
            <div className= 'container'>
+           <Navbar/>  
            <div className='form'>
             <h1 className ='titulomain'>Registro Usuario</h1>
             <Formik 
@@ -97,6 +100,7 @@
               )}
             </Formik>
           </div>
+          <FooterContainer/>
           </div>
      )}
   }

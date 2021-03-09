@@ -1,43 +1,68 @@
-
-
-.titulo_login {
- background: linear-gradient( 90deg, rgb(53,173,255),rgba(189,85, 255));
-    padding: 40px;
-    color: aliceblue;
-    font-family: Arial;
-    text-align: center;
-  }
-
-.form_login{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    font-weight: bolder;
-    
-    
+*{
+    font-family: 'Monserrat',sans-serif;
 }
 
+
+.div_login{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    width: 300px;
+    height: 200px;
+    z-index: 15;
+    top: 35%;
+    left: 50%;
+    margin: -100px 0 0 -150px;
+}
+
+.img_div{
+    padding: 30px;
+    justify-content: center;
+    flex-direction: column;
+    font-weight: bolder;
+}
+
+.form_login{
+    display: grid;
+
+    left: 50%;
+}
+
+
 .email_login{
-    padding-left: 10px;
+    margin: 20px;
+    margin-left: 50px;
+
 }
 
 .cont_login{
-    margin: 20px;
-    padding-right: 14px;
-    
+    margin: 20px;   
 }
 
 .foto_login{
-    position: absolute;
-   object-fit: contain;
+
+    display: flex;
+    vertical-align: middle;
+    object-fit: contain;
   
 }
 
-.div_login{
-    margin-top: 20px;
-    padding-bottom: 0%;
-    margin-left: 590px;
-    width: 200px;
-    height: 200px;
-}
+
+.login {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+ 
+    right: 50%;
+    left: 50%;
+    width: 40%;
+
+    color: white;
+    animation-name: anim_foto_login;
+    animation-duration: 2s;
+  }
+
+  @keyframes anim_foto_login {
+      0%   {transform: translateX(1200px) rotate(0deg) translateY(0px);}
+      100% {transform: translateX(0px) rotate(0deg) translateY(0px) scaleZ(0.3);}
+    }

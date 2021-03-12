@@ -9,7 +9,7 @@ export default class NotFoundPage extends Component{
         <div>
           <img src={PageNotFound} className="PC"  />
           <p style={{textAlign:"center"}}>
-            <Link to="/">Go to Home</Link>
+            <Link to="/" className="btn">Go to Home</Link>
           </p>
         </div>
         )

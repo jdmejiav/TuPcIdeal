@@ -59,7 +59,16 @@ export default class Mainpage extends Component {
 			}).then( () =>
             {
                window.location = "http://localhost:3000/";
-            });
+            }).catch((err)=>{
+                
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Usuario o contraseña invalido',
+                    text: 'intenta nuevamente',
+                    timer: 2000,
+                    timerProgressBar: true,
+                  })
+            })
         }
 
         return(

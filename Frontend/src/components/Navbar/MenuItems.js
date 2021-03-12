@@ -5,9 +5,9 @@ export const MenuItems = [
         cName : 'nav-links',
     },{
         tittle: 'Información Básica',
-        url :'#',
+        url :'../info',
         cName : 'nav-links',
-    },{
+    },{ 
         tittle: 'Log in',
         url :'../login',
         cName : 'nav-links',

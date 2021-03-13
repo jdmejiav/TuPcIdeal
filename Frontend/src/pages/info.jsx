@@ -6,7 +6,7 @@ export default class info extends Component {
 
    render() {
        return(
-            <div>
+            <div className='container'>
                 <Navbar/>
                 <h1 className="titulo_info">
                     Información sobre computadores

@@ -1,4 +1,40 @@
 .titulo_info{
-    background-color: aqua;
+background: linear-gradient( 90deg, rgb(53,173,255),rgba(189,85,255));;
     text-align: center;
+}
+
+article{
+    width: 50%;
+    display: inline-block;
+    text-align: unset;
+    padding: 2%;
+    border:1px solid black;
+    margin: 4px;
+
+}
+.procesador{
+    text-align: center;
+}
+
+li{
+    margin-left: 30px;
+}
+
+
+.foto_rayzen{
+    padding: 10px; 
+    margin: 25px; 
+    border: .5px solid black; 
+    float: right; 
+    width: 300px;
+    height: 150px;
+    
+}
+
+.foot_rayzen{
+    object-fit: cover;
+}
+
+.par_ry{
+    width: 400px;
 }

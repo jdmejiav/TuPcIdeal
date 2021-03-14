@@ -13,6 +13,8 @@
     top: 35%;
     left: 50%;
     margin: -100px 0 0 -150px;
+    display: block;
+    
 }
 
 .img_div{
@@ -24,7 +26,6 @@
 
 .form_login{
     display: grid;
-
     left: 50%;
 }
 
@@ -37,6 +38,7 @@
 
 .cont_login{
     margin: 20px;   
+    margin-left: 50px;
 }
 
 .foto_login{

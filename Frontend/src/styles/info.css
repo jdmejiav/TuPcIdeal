@@ -1,6 +1,14 @@
+.container_info{
+    width: 100%;
+    height: 100%;
+}
+
 .titulo_info{
-background: linear-gradient( 90deg, rgb(53,173,255),rgba(189,85,255));;
+    background: linear-gradient(90deg, #000000,#000000);
+    color: #ffff;
     text-align: center;
+    display: block;
+    border: .5px solid #ffff ;
 }
 
 article{
@@ -9,8 +17,7 @@ article{
     text-align: unset;
     padding: 2%;
     border:1px solid black;
-    margin: 4px;
-
+    
 }
 .procesador{
     text-align: center;
@@ -33,8 +40,11 @@ li{
 
 .foot_rayzen{
     object-fit: cover;
+    transition: none;
+    animation: none;
 }
 
 .par_ry{
     width: 400px;
 }
+

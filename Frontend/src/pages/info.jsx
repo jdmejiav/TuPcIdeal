@@ -15,7 +15,7 @@ export default class info extends Component {
                 <div>
                    <article >
                        <section className="rayzen_R7">
-                       <h2 className="procesador">Procesador AMD RYZEN R7 </h2>
+                       <h2 className="procesador">Procesador AMD RYZEN 7 </h2>
                        <div className="foto_rayzen">
                             <img className="foot_rayzen" src={Info} className="login"  />
                        </div>
@@ -23,7 +23,7 @@ export default class info extends Component {
                        <div className="par_ry">
                        <p>
                            Caracterticas:
-                            <ul> 
+                            <ul>
                                 <li>Memoria RAM: 8GB </li>
                                 <li>Tamaño de pantalla: 14 pulgadas</li>
                                 <li>Disco duro HDD: No aplica</li>
@@ -34,12 +34,12 @@ export default class info extends Component {
                        </section>
                    </article>
                 </div>
-                {/*--<FooterContainer/> */}
-            </div> 
-            
-            
+                <FooterContainer/>
+            </div>
 
 
-            
+
+
+
    )}
 }

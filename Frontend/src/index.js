@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import './styles/Registro.css'
 import './styles/login.css'
+import './styles/info.css'
+import './styles/formulario.css'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 

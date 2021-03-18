@@ -2,14 +2,20 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
     vertical-align:center;
-    padding: 80px 10px;
     background: radial-gradient(circle, rgb(59, 59, 59), rgba(59, 59, 59) );
-    position:absolute;                  
+    position:fixed;                  
+    display: block;
     bottom:0;                          
     right:0;  
     left:0;
+    width: 100%;
+    height:  20%;
+    overflow-x:hidden;
+    overflow-y:hidden;
+
     @media (max-width: 3000px) {
-      padding: 70px 30px;
+      padding: 3rem;
+
     }
 
     `;
@@ -26,13 +32,11 @@ export const Column = styled.div`
     flex-direction: column;
     text-align: left;   
 
-
 `
 
 export const Row = styled.div`
 display: grid;
 vertical-align: middle;
-
 grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
 grid-gap: 20px;
 @media (max-width: 1000px) {
@@ -42,6 +46,7 @@ grid-gap: 20px;
 `;
 export const Link= styled.a`
     color:#d4d4d4;
+    margin-left:10px;
     margin-top:5px;
     font-size: 14px;
     text-decoration: none;
@@ -57,4 +62,5 @@ export const Tittle = styled.div`
     color: #fff;
     margin-botton:40px;
     text-decoration:none;
+    margin-left:10px;
 `;

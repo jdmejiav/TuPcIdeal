@@ -7,6 +7,12 @@ export default class Home extends Component {
        return(
             <div className="container">
                 <Navbar/>
+                
+                    <div className="body">  
+                        <div className="cuadrado">
+                       
+                        </div>
+                    </div>
                 <FooterContainer/>
             </div>
    )}

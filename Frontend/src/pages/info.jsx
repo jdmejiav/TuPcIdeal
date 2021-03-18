@@ -23,7 +23,7 @@ export default class info extends Component {
                        <div className="par_ry">
                        <p>
                            Caracterticas:
-                            <ul> 
+                            <ul>
                                 <li>Memoria RAM: 8GB </li>
                                 <li>Tamaño de pantalla: 14 pulgadas</li>
                                 <li>Disco duro HDD: No aplica</li>
@@ -34,12 +34,12 @@ export default class info extends Component {
                        </section>
                    </article>
                 </div>
-                {/*--<FooterContainer/> */}
-            </div> 
-            
-            
+                <FooterContainer/>
+            </div>
 
 
-            
+
+
+
    )}
 }

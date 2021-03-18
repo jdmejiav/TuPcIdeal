@@ -14,7 +14,6 @@
 
     color: #ffff;
     justify-self: start;
-
     cursor: pointer;  
 }
 .footbar-logo{
@@ -25,7 +24,7 @@
     cursor: pointer;  
 }
 .navbar-logo:hover{    
-    color: rgb(53,173,255);
+    color: #CD4E4E;
     justify-self: start;
 
     cursor: pointer;
@@ -33,7 +32,7 @@
     border-radius: 4px;
 }
 .footbar-logo:hover{    
-    color: rgb(53,173,255);
+    color: #CD4E4E;
     justify-self: start;
     margin-left: 20px;
     cursor: pointer;
@@ -48,7 +47,7 @@
 .fa-lightbulb:hover{
     margin-left: 0.5rem;
     font-size:1.6rem;
-    color: rgb(53,173,255);
+    color: #CD4E4E;
     transition: all 0.2s ease-out;
     border-radius: 4px;
 }
@@ -73,7 +72,7 @@
 }
 
 .nav-links:hover{
-    background-color:  rgb(53,173,255);
+    background-color:  #CD4E4E;
     color: #fff;
     border-radius: 4px;
     transition: all 0.2s ease-out;
@@ -84,4 +83,23 @@
 }
 .menu-icon{
     display: none;
+}
+
+
+.btn-home{
+
+
+}
+.fa-home{
+    
+    size: 40px;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.fa-home:hover{
+    size: 40px;
+    color:  #CD4E4E;
+    transition: all 0.2s ease-out;
+    cursor: pointer;
 }

@@ -1,10 +1,9 @@
-import react, {Component} from 'react';
+import {Component} from 'react'
 import {MenuItems} from './MenuItems';
 import './Navbar.css'
 
-
 class Navbar extends Component{
-    
+
     state={
         clicked: false
     }
@@ -12,18 +11,22 @@ class Navbar extends Component{
     render(){
         return(
             <nav className="NavbarItems">
-                <h1 className="navbar-logo">TuPCIdeal.com<i className="far fa-lightbulb"></i></h1>                
+                <h1 className="navbar-logo">TuPCIdeal.com<i className="far fa-lightbulb"></i></h1>
                 <ul className={this.state.clicked ? 'nav-menu active' : 'nav-menu'}>
+
+            
+                    <a className="btn-home"><i className="fas fa-home fa-lg"></i></a>
                     {
                         MenuItems.map((item,index)=>{
                             return(
-                                <li key={index}>    
+                                <li key={index}>
                                     <a className={item.cName} href={item.url}>
                                         {item.tittle}
                                     </a>
                                 </li>
                             )
                         })
+
                     }
                 </ul>
             </nav>

@@ -15,7 +15,7 @@ export default class info extends Component {
                 <div>
                    <article >
                        <section className="rayzen_R7">
-                       <h2 className="procesador">Procesador AMD RYZEN R7 </h2>
+                       <h2 className="procesador">Procesador AMD RYZEN 7 </h2>
                        <div className="foto_rayzen">
                             <img className="foot_rayzen" src={Info} className="login"  />
                        </div>

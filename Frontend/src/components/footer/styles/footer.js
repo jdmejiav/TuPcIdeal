@@ -52,7 +52,7 @@ export const Link= styled.a`
     text-decoration: none;
     cursor: pointer;
     &:hover{
-        color: rgb(53,173,255);
+        color: #CD4E4E;
         transition: 200ms ease-in;
         cursor: pointer;
 `;

@@ -15,7 +15,7 @@ export const Container = styled.div`
 
     @media (max-width: 3000px) {
       padding: 3rem;
-
+        
     }
 
     `;
@@ -55,6 +55,7 @@ export const Link= styled.a`
         color: #CD4E4E;
         transition: 200ms ease-in;
         cursor: pointer;
+    }
 `;
 
 export const Tittle = styled.div`

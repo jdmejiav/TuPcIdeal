@@ -7,7 +7,7 @@ import axiosInstance from '../axios'
 import Swal from 'sweetalert2'
 import Navbar from '../components/Navbar/Navbar';
 import {FooterContainer} from '../components/footer/containers/footer'
-
+import '../styles/login.css'
 export default class Mainpage extends Component {
 
     render(){

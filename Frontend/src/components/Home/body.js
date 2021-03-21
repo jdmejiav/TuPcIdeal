@@ -12,7 +12,6 @@ export default class Body extends Component{
                         Déjanos ayudarte en el proceso de encontrar TuPcIdeal para que puedas encontrar el computador que mejor se adapte a tus necesidades y al mejor precio.
                         ¡Regístrate Ahora!
                     </p></div>
-                    
                     <img src={pc} className="img-pc-home"/>
                     <a className="btn-registro" href="/registro">Registro</a>
                 </div>

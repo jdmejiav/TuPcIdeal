@@ -11,11 +11,12 @@ class Navbar extends Component{
     render(){
         return(
             <nav className="NavbarItems">
-                <h1 className="navbar-logo">TuPCIdeal.com<i className="far fa-lightbulb"></i></h1>
+                <a className="btn-tupcideal" href="/"><h1 className="navbar-logo">TuPCIdeal.com<i className="far fa-lightbulb"></i></h1></a>
+                
                 <ul className={this.state.clicked ? 'nav-menu active' : 'nav-menu'}>
 
             
-                    <a className="btn-home"><i className="fas fa-home fa-lg"></i></a>
+                    <a className="btn-home" href="/"><i className="fas fa-home fa-lg"></i></a>
                     {
                         MenuItems.map((item,index)=>{
                             return(

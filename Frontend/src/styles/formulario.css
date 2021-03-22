@@ -34,3 +34,44 @@
         box-shadow: inherit;
     }
 }
+
+.titulo_clas{
+    font-family: 'Libre Franklin', sans-serif;
+    display: block;
+    text-align: center;
+}
+
+.info{
+    margin-top: 20px;
+    text-align: center;
+}
+
+.clasificacion{
+    position: absolute;
+    top: 50%;
+    left: 35%;
+
+}
+
+button{
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    font-size: 14px;
+    line-height: 1;
+    white-space: normal;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.8);
+    background: #18c4c4;
+    letter-spacing: 2px;
+    padding: 14px;
+    border-radius: 500px;
+}
+
+.pregunta_clasi{
+    position: absolute;
+    top: 40%;
+    left: 35%;
+    text-align: center;
+}

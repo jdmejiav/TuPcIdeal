@@ -5,6 +5,7 @@ import './styles/Registro.css'
 import './styles/login.css'
 import './styles/info.css'
 import './styles/formulario.css'
+import './components/formularios/basico.css'
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';

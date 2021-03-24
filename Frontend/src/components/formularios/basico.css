@@ -3,11 +3,12 @@
     text-align: center;
     top: 15%;
     left: 17%;
-
 }
 
 .pregunta1{
     position: absolute;
+    display: inline-block;
+    box-sizing: border-box;
     top: 30%;
     left: 7%;
 }
@@ -16,6 +17,11 @@
     position: absolute;
     top: 35%;
     left: 7%;
+    transition-duration: .5s;
+}
+
+.check1:hover{
+    background-color: #CD4E4E;
 }
 
 .pregunta2{
@@ -66,8 +72,16 @@
     text-decoration: none;
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.8);
-    background: #18c4c4;
+    background: #CD4E4E;
     letter-spacing: 2px;
     padding: 14px;
     border-radius: 500px;
+}
+
+.cont1{
+    border: 2px solid black;
+    top: 30%;
+    left: 7%;
+    display: inline-block;
+    box-sizing: border-box;
 }

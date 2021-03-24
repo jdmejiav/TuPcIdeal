@@ -1,6 +1,6 @@
-//import Navbar from 'Navbar/Navbar';
+import Navbar from '../Navbar/Navbar'
+import {FooterContainer} from '../footer/containers/footer'
 import React from "react";
-//import {FooterContainer} from 'footer'
 import './basico.css'
 import { Formik, Field, Form } from "formik";
 
@@ -12,7 +12,7 @@ const Usos =["Ofitmatica", "Estudio", "Multimedia", "Diseño Grafico",
 "Programacion", "Programas de ingenieria", "Otro" ];
 const FormikCheck = () => (
   <div>
-    
+    <Navbar/>
     <div className="titulo_clas">
       <h2>Encuentra con nosotros TuPCideal</h2>
     </div>
@@ -72,7 +72,7 @@ const FormikCheck = () => (
         </Form>
       )}
     </Formik>
-    
+  <FooterContainer/>
   </div>
   
 );

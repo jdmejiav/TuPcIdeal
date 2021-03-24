@@ -4,12 +4,8 @@ import React from "react";
 import '../styles/formulario.css'
 import { Formik, Field, Form } from "formik";
 import {FooterContainer} from '../components/footer/containers/footer'
-
-const Status = ["OPEN", "ACKNOWLEDGED", "SUPPRESSED", "RESOLVED", "CLOSED"];
-
-const Severity = ["LOW", "MEDIUM", "HIGH", "CRITICAL", "URGENT"];
-const Usos = ["Trabajo","Compras","Ocio","Edición"];
 const Usuario =["Nulo", "Novato", "Medio", "Avanzado"];
+
 const FormikCheck = () => (
   <div>
     <Navbar/>
@@ -25,17 +21,16 @@ const FormikCheck = () => (
       </div>
     <Formik
       initialValues={{
-        /*status: [],
-        severity: [],
-        usos: [],*/
         usuario: [],
       }}
-      onSubmit={async (values) => {
-        console.log(values);
-        alert(JSON.stringify(values, null, 4));
+      onSubmit={ (values) => {
+        if(values.usuario=="Novato")
+        {
+          window.location = "/formbasic";
+        }
       }}
     >     
-      {({ values }) => (
+      {() => (
         <Form>
           <div role="group" aria-labelledby="checkbox-group" className="clasificacion">
             {Usuario.map((name) => (
@@ -51,17 +46,6 @@ const FormikCheck = () => (
   
 );
 
-/*const FormikCheckBoxStatus = ({ name }) => {
-  return (
-    <div>
-      <label>
-        <Field type="checkbox" name="status" value={name} />
-        <span> {name}</span>
-      </label>
-    </div>
-  );
-};*/
-
 const FormikUsuario = ({ name }) => {
   return (
     <div>
@@ -73,31 +57,5 @@ const FormikUsuario = ({ name }) => {
   );
 };
 
-/*const FormikCheckBoxSeverity = ({ name }) => {
-  return (
-    <div>
-      <label>
-        <Field type="checkbox" name="severity" value={name} />
-        <span> {name}</span>
-      </label>
-    </div>
-  );
-};
-
-const FormikUsos = ({ name }) => {
-  return (
-    <div>
-      <label>
-        <Field
-          type="checkbox"
-          name="status"
-          value={name}
-          style={{ background: "green" }}
-        />
-        <span> {name}</span>
-      </label>
-    </div>
-  );
-};*/
 export default FormikCheck;
 

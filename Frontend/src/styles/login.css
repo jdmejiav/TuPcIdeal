@@ -18,6 +18,10 @@
 }
 
 .img_div{
+
+    width: 100%;
+    height: 200px;
+    text-align: center;
     padding: 30px;
     justify-content: center;
     flex-direction: column;
@@ -26,7 +30,7 @@
 
 .form_login{
     display: grid;
-    left: 50%;
+    justify-content: center;
 }
 
 
@@ -68,3 +72,93 @@
       0%   {transform: translateX(1200px) rotate(0deg) translateY(0px);}
       100% {transform: translateX(0px) rotate(0deg) translateY(0px) scaleZ(0.3);}
     }
+
+.titulo{
+    color: navy;
+    margin: 40px;
+}
+
+.caja-login{
+    position: absolute;
+    top: 16%;
+    width: 1000px;
+    height: 500px;
+    left: 25%;
+    right: 30%;    
+    background: #F1F1F1;
+    animation-name: boxShadowAnimation;
+    animation-duration: 2s;
+    box-shadow: 0px 4px 30px 2px rgba(0, 0, 0, 0.75)
+}
+/*
+@media screen and (max-width:1360px){
+    .caja-login{
+        top: 16%;
+        width: 600px;
+        height: 300px;
+        left: 15%;
+        right: 30%;    
+        background: #F1F1F1;
+        animation-name: boxShadowAnimation;
+        animation-duration: 2s;
+        box-shadow: 0px 4px 30px 2px rgba(0, 0, 0, 0.75)
+    }
+    .img_div{
+        visibility:hidden;
+    }
+    .form_login{
+        position: absolute;
+        top: 0%;
+    }
+}
+*/
+.login-info{
+
+    display: flex;
+    height: 100%;
+    width: 50%;
+    float: right;
+    background-color: #CD4E4E;
+
+}
+.login-container{
+    margin: 0;
+    display: flex;
+    height: 100%;
+    width: 50%;
+    float: left;
+    background-color: #F1F1F1;
+    
+}
+
+
+.btn-login
+{
+    text-align:"center";
+
+    display:inline-block;
+    padding: 16px 48px 18px;
+    font-size: 14px;
+    white-space: normal;
+    text-decoration: none;
+
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 11px;
+    background: #CD4E4E;
+    letter-spacing: 2px;
+    padding: 14px;
+    cursor: pointer;
+    color: white;
+  }
+  .btn-login:hover
+  {
+    background-color: #853838; 
+ 
+  }
+
+  .texto-login{
+    position: absolute;
+    left: 50%;
+    color: #F1F1F1;
+    text-align: center;    
+}

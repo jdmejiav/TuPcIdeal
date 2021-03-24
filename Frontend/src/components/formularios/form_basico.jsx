@@ -1,7 +1,7 @@
-//import {Navbar} from './Navbar/Navbar';
+import Navbar from '../Navbar/Navbar'
+import {FooterContainer} from '../footer/containers/footer'
 import React from "react";
-//import {FooterContainer} from './footer/footer';
-import './basico.css';
+import './basico.css'
 import { Formik, Field, Form } from "formik";
 
 const Presupuesto = ["Bajo", "Moderado", "Alto"];
@@ -12,7 +12,7 @@ const Usos =["Ofitmatica", "Estudio", "Multimedia", "Diseño Grafico",
 "Programacion", "Programas de ingenieria", "Otro" ];
 const FormikCheck = () => (
   <div>
-    {/*<Navbar/>*/}
+    <Navbar/>
     <div className="titulo_clas">
       <h2>Encuentra con nosotros TuPCideal</h2>
     </div>
@@ -35,15 +35,14 @@ const FormikCheck = () => (
       {({ values }) => (
         <Form> 
           <div role="group" aria-labelledby="checkbox-group" className="preguntas_bas">
-            
-              <div className="pregunta1">
+            <div className="pregunta1">
                 ¿Qué presupuesto tienes?
-              </div>
-              <div className="check1">
-              {Presupuesto.map((name) => (
-                <FormikPresupuesto name={name} />
-              ))}
-              </div>
+            </div>
+            <div className="check1">
+            {Presupuesto.map((name) => (
+              <FormikPresupuesto name={name} />
+            ))}
+            </div>
             <div className="pregunta2">
                 ¿Qué tipo de computador quieres?
             </div>
@@ -69,11 +68,11 @@ const FormikCheck = () => (
             ))}
             </div>
           </div>
-          <button classname="btnbasic" type="submit">Submit</button>
+          <button classname= "btnbasic"type="submit">Submit</button>
         </Form>
       )}
     </Formik>
-    {/*<FooterContainer/>*/}
+  <FooterContainer/>
   </div>
   
 );

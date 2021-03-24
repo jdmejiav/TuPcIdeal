@@ -1,0 +1,73 @@
+.infobasic{
+    position: absolute;
+    text-align: center;
+    top: 15%;
+    left: 17%;
+
+}
+
+.pregunta1{
+    position: absolute;
+    top: 30%;
+    left: 7%;
+}
+
+.check1{
+    position: absolute;
+    top: 35%;
+    left: 7%;
+}
+
+.pregunta2{
+    position: absolute;
+    top: 30%;
+    left: 26%;
+}
+
+.check2{
+    position: absolute;
+    top: 35%;
+    left: 26%;
+}
+
+
+.pregunta3{
+    position: absolute;
+    top: 30%;
+    left: 50%;
+}
+
+.check3{
+    position: absolute;
+    top: 35%;
+    left: 50%;
+}
+
+
+.pregunta4{
+    position: absolute;
+    top: 30%;
+    left: 75%;
+}
+
+.check4{
+    position: absolute;
+    top: 35%;
+    left: 75%;
+}
+
+.btnbasic{
+    position: absolute;
+    top: 65%;
+    left: 45%;
+    font-size: 14px;
+    line-height: 1;
+    white-space: normal;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.8);
+    background: #18c4c4;
+    letter-spacing: 2px;
+    padding: 14px;
+    border-radius: 500px;
+}

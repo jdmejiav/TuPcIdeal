@@ -2,21 +2,19 @@ import React, { Component } from 'react'
 import {Formik, Form} from 'formik'
 import * as Yup from 'yup'
 import FormikControl from '../components/login/FormikControl'
-import Login from '../images/login2.png';
 import foto_login from '../images/foto-login.png'
 import axiosInstance from '../axios'
 import Swal from 'sweetalert2'
 import Navbar from '../components/Navbar/Navbar';
 import {FooterContainer} from '../components/footer/containers/footer'
 import '../styles/login.css'
-export default class Mainpage extends Component {
+export default class Login extends Component {
 
     render(){
 
         const initialValues ={
             email: '',
-            password: ''
-            
+            password: ''     
         }
         
         const islogin = localStorage.getItem('access_token')? 'JWT ' + localStorage.getItem('access_token'): null
@@ -77,52 +75,49 @@ export default class Mainpage extends Component {
                     <Navbar/>
                         <div className="caja-login">
                             <div className="login-container">
-                                <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-                                    
+                                <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>                                   
+                                {
+                                    formik=>
                                     {
-                                        formik=>{
-                                            if(islogin)
-                                            {
-                                                window.location = "http://localhost:3000/";
-                                            }else
-                                            {
-                                                return <Form >
+                                        if(islogin)
+                                        {
+                                            window.location = "/";
+                                        }else
+                                        {
+                                            return <Form>
+                                                
+                                                    <div className="img_div">
+                                                        <h1  className="titulo"> Log In</h1>
+                                                        <p>¡Es un gusto Tenerte devuelta!</p>
+                                                    </div>
                                                     
-                                                        <div className="img_div">
-                                                            <h1  className="titulo"> Log In</h1>
-                                                            <p>¡Es un gusto Tenerte devuelta!</p>
-
+                                                    <div className="form_login"> 
+                                                        <div className="email_login">
+                                                            <FormikControl
+                                                                control= 'input'
+                                                                type ='email'
+                                                                label ='Email'
+                                                                name= 'email'
+                                                            />
                                                         </div>
-                                                        
-                                                        <div className="form_login"> 
-                                                            <div className="email_login">
-                                                                <FormikControl
-                                                                    control= 'input'
-                                                                    type ='email'
-                                                                    label ='Email '
-                                                                    name= 'Email'
-                                                                />
-                                                            </div>
-                                                            <div className="cont_login">
-                                                                <FormikControl
-                                                                    control= 'input'
-                                                                    type = 'password'
-                                                                    label='Password '
-                                                                    name ='Password'
-                                                                /> 
-                                                            </div>
-                                                            <a type='submit' className="btn-login" disabled={!formik.isValid}>Log-In</a>
+                                                        <div className="cont_login">
+                                                            <FormikControl
+                                                                control= 'input'
+                                                                type = 'password'
+                                                                label='Password'
+                                                                name ='password'
+                                                            /> 
                                                         </div>
-                                                   
-                                                </Form>
-                                            }
+                                                        <button type='submit' className="btn-login" disabled={!formik.isValid}>Log-In</button>
+                                                    </div>                                                   
+                                            </Form>
                                         }
                                     }
+                                }
                                 </Formik>
                         </div>
                         <div className="login-info">
                             <img className="foto-login" src={foto_login}></img>
-
                         </div>
                         </div>
                     <FooterContainer/>

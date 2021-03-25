@@ -112,9 +112,9 @@ const styleField= {
                         <ErrorMessage name="email" component="div" />
                         <Field style={styleField} className='field' placeholder='Contraseña' type="password" name="password" />
                         <ErrorMessage name="password" component="div" />
-                        <a type="submit" className="btn" disabled={isSubmitting}>
+                        <button type="submit" className="btn" disabled={isSubmitting}>
                           Registrar
-                        </a>
+                        </button>
                       </Form>
                       
                     )}

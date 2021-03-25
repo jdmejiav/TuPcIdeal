@@ -17,5 +17,5 @@ class Getbasicform(APIView):
             return Response("Valid data :)", status=status.HTTP_201_CREATED)      
         else:
             print(serializer)  
-            return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'Bad Request':'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
            

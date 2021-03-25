@@ -24,9 +24,12 @@ const FormikCheck = () => (
         usuario: [],
       }}
       onSubmit={ (values) => {
-        if(values.usuario=="Novato")
+        if(values.usuario=="Novato" || values.usuario=="Nulo")
         {
           window.location = "/formbasic";
+        }
+        else if (values.usuario=="Medio"){
+          window.location ="/formmedio";
         }
       }}
     >     
@@ -37,7 +40,9 @@ const FormikCheck = () => (
               <FormikUsuario name={name} />
             ))}
           </div>
-          <button type="submit">Submit</button>
+          <div className="btmform">
+            <button type="submit" className="btn-form">Continuar </button>
+          </div>
         </Form>
       )}
     </Formik>

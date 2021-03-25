@@ -4,8 +4,8 @@ import React from "react";
 import './basico.css'
 import { Formik, Field, Form } from "formik";
 
-const Presupuesto = ["Bajo", "Moderado", "Alto"];
 
+const Presupuesto = ["Bajo", "Moderado", "Alto"];
 const Tipo = ["Portatil", "Escritorio", "All in one"];
 const Marca = ["HP","Lenovo","Asus","Otro", "Indiferente"];
 const Usos =["Ofitmatica", "Estudio", "Multimedia", "Diseño Grafico",
@@ -13,6 +13,7 @@ const Usos =["Ofitmatica", "Estudio", "Multimedia", "Diseño Grafico",
 const FormikCheck = () => (
   <div>
     <Navbar/>
+    <div className ="container_basico">
     <div className="titulo_clas">
       <h2>Encuentra con nosotros TuPCideal</h2>
     </div>
@@ -33,15 +34,18 @@ const FormikCheck = () => (
       }}
     >     
       {({ values }) => (
+        
         <Form> 
           <div role="group" aria-labelledby="checkbox-group" className="preguntas_bas">
-            <div className="pregunta1">
+            <div className="cont1">
+              <div className="pregunta1">
                 ¿Qué presupuesto tienes?
-            </div>
-            <div className="check1">
-            {Presupuesto.map((name) => (
-              <FormikPresupuesto name={name} />
-            ))}
+              </div>
+              <div className="check1">
+                {Presupuesto.map((name) => (
+                 <FormikPresupuesto name={name} />
+                ))}
+              </div>  
             </div>
             <div className="pregunta2">
                 ¿Qué tipo de computador quieres?
@@ -68,10 +72,11 @@ const FormikCheck = () => (
             ))}
             </div>
           </div>
-          <button classname= "btnbasic"type="submit">Submit</button>
+          <button type="submit" className="btn-basic">Continuar </button>
         </Form>
       )}
     </Formik>
+    </div>
   <FooterContainer/>
   </div>
   
@@ -80,7 +85,7 @@ const FormikCheck = () => (
 const FormikPresupuesto = ({ name }) => {
   return (
     <div>
-      <label>
+      <label id="basic" >
         <Field type="radio" name="Presupuesto" value={name} />
         <span> {name}</span>
       </label>
@@ -91,7 +96,7 @@ const FormikPresupuesto = ({ name }) => {
 const FormikTipo= ({ name }) => {
   return (
     <div>
-      <label>
+      <label id="basic">
         <Field type="radio" name="Tipo" value={name} />
         <span> {name}</span>
       </label>
@@ -102,7 +107,7 @@ const FormikTipo= ({ name }) => {
 const FormikMarca = ({ name }) => {
   return (
     <div>
-      <label>
+      <label id="basic">
         <Field type="checkbox" name="Marca" value={name} />
         <span> {name}</span>
       </label>
@@ -113,7 +118,7 @@ const FormikMarca = ({ name }) => {
 const FormikUsos = ({ name }) => {
   return (
     <div>
-      <label>
+      <label id="basic">
         <Field
           type="checkbox"
           name="Usos"

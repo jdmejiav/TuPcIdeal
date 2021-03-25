@@ -8,6 +8,7 @@ import Logout from './components/logout'
 import info from './pages/info.jsx'
 import formulario from './pages/formulario.jsx'
 import formubasic from '././components/formularios/form_basico.jsx'
+import formedio from '././components/formularios/form_intermedio.jsx'
 
 import NotFoundPage from './error/NotFoundPage.jsx';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
@@ -24,6 +25,7 @@ function App() {
           <Route exact path='/' component={Home} />
           <Route exact path='/form' component={formulario} />
           <Route exact path='/formbasic' component={formubasic} />
+          <Route exact path='/formmedio' component={formedio} />
           <Route path="*" component={NotFoundPage} />
       </Switch>
     </BrowserRouter>

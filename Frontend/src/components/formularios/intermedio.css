@@ -1,0 +1,197 @@
+#medio{
+    transition-duration: .5s;
+}
+
+#medio:hover{
+    background-color: aqua;
+    text-transform: none;
+}
+
+p{
+    font-family: 'Libre Franklin', sans-serif;
+}
+
+.cont1{
+    display: inline-block;
+    width: 210px;
+    height: 100px;
+    position: absolute;
+    top:30%;
+    left: 5%;;
+}
+.pregunta1{
+    position: absolute;
+    margin-top: 0%;
+    box-sizing: content-box;
+}
+.check1{
+    position: absolute;
+    margin-top: 40px;
+    box-sizing: border-box;
+}
+
+.cont2{
+    display: inline-block;
+    width: 210px;
+    height: 100px;
+    position: absolute;
+    top:30%;
+    left: 20%;;
+}
+
+.preguntai2{
+    position: absolute;
+    box-sizing: border-box;
+    margin-top: 0%;
+}
+
+.checki2{
+    position: absolute;
+    box-sizing: border-box;
+    margin-top: 40px;
+    padding-top: 2%;
+}
+
+.cont3{
+    display: inline-block;
+    width: 210px;
+    height: 100px;
+    position: absolute;
+    top:30%;
+    left: 35%;;
+}
+
+.preguntai3{
+    position: absolute;
+    box-sizing: border-box;
+    margin-top: 0%;
+}
+
+.checki3{
+    position: absolute;
+    box-sizing: content-box;
+    margin-top: 40px;
+    padding-top: 2%;
+}
+
+.cont4{
+    display: inline-block;
+    width: 210px;
+    height: 100px;
+    position: absolute;
+    top:30%;
+    left: 50%;;
+}
+
+.preguntai4{
+    position: absolute;
+    box-sizing: border-box;
+    margin-top: 0%;
+}
+
+.checki4{
+    position: absolute;
+    box-sizing: content-box;
+    margin-top: 40px;
+    padding-top: 2%;
+}
+
+.cont5{
+    display: inline-block;
+    width: 210px;
+    height: 100px;
+    position: absolute;
+    top:30%;
+    left: 65%;;
+}
+
+.preguntai5{
+    position: absolute;
+    box-sizing: border-box;
+    margin-top: 0%;
+}
+
+.checki5{
+    position: absolute;
+    box-sizing: content-box;
+    margin-top: 40px;
+    padding-top: 2%;
+}
+
+
+.cont6{
+    display: inline-block;
+    width: 210px;
+    height: 100px;
+    position: absolute;
+    top:30%;
+    left: 80%;;
+}
+
+.preguntai6{
+    position: absolute;
+    box-sizing: border-box;
+    margin-top: 0%;
+}
+
+.checki6{
+    position: absolute;
+    box-sizing: content-box;
+    margin-top: 40px;
+    padding-top: 2%;
+}
+
+
+.btn-int{
+    text-align:"center";
+    display:inline-block;
+    padding: 16px 48px 18px;
+    font-size: 14px;
+    white-space: normal;
+    text-decoration: none;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 11px;
+    background: #CD4E4E;
+    letter-spacing: 2px;
+    padding: 14px;
+    cursor: pointer;
+    color: white;
+    left: 50%;
+    top: 65%;
+    position: absolute;
+}
+
+.btn-int:hover
+{
+  background-color: #853838; 
+  cursor: pointer;
+
+}
+
+
+@media screen and (max-width: 600px){
+    .cont1{
+        display: block;
+    }
+
+    .cont2{
+        display: block;
+    }
+
+    .cont3{
+        display: block;
+    }
+
+    .cont4{
+        display: block;
+    }
+
+    .cont5{
+        display: block;
+    }
+
+
+    
+}
+
+

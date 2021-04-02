@@ -13,3 +13,14 @@ export const MenuItems = [
         cName : 'nav-links',
     },
 ]
+export const MenuItems2 = [
+    {
+        tittle: 'Información Básica',
+        url :'../info',
+        cName : 'nav-links',
+    },{ 
+        tittle: 'Log Out',
+        url :'../logout',
+        cName : 'nav-links2',
+    }
+]

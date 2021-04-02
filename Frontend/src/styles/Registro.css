@@ -79,7 +79,7 @@
   }
   .btn:hover
   {
-    background-color: #853838; 
+    background-color: #993A3A; 
  
   }
 
@@ -115,7 +115,7 @@
     display: inline-block;
     height: 100%;
     width: 50%;
-    float: left;
+
     background-color: #f1f1f1;
 
 }

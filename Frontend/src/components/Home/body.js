@@ -13,7 +13,7 @@ export default class Body extends Component{
                         ¡Regístrate Ahora!
                     </p></div>
                     <img src={pc} className="img-pc-home"/>
-                    <a className="btn-registro" href="/registro">Registro</a>
+                    <button className="btn-registro" href="/registro">Registro</button>
                 </div>
             </div>   
         )

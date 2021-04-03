@@ -4,7 +4,7 @@ export const Container = styled.div`
     vertical-align:center;
     background: radial-gradient(circle, rgb(59, 59, 59), rgba(59, 59, 59) );
     position:fixed;                  
-    display: block;
+
     bottom:0;                          
     right:0;  
     left:0;

@@ -13,6 +13,24 @@ const Usos =["Ofitmatica", "Estudio", "Multimedia", "Diseño Grafico",
 const Pantalla  =["Grande","Equilibrado","Pequeño"];
 
 
+const infoPresupuesto ={
+  "Bajo":"Computador para cumplir con los requerimientos, pero es posible que en un mediano plazo se quede obsoleto",
+  "Moderado":"Computador para complir con los requerimientos durante un buen periodo de tiempo",
+  "Alto":"Computador para cumplir con los requerimientos de manera holgada y continuar funcionando por muchos años"
+};
+
+const infoTipo ={
+  "Portatil":"Computador Portátil",
+  "Escritorio":"Computador de Mesa (Solo la Torre)",
+  "All in one":"Computador con todo en uno de mesa (Pantalla es pantalla y torre a la vez)"
+};
+
+const infoPantalla ={
+  "Grande":"Computador con pantalla grande, suele ser pesado y tener una batería más duradera y pesado",
+  "Equilibrado":"Computador con pantalla equilibrada, suele tener una duración de batería estándar y es fácil de transportar",
+  "Pequeño":"Computador con pantalla pequeña, suelen tener una duración de batería larga y son fáciles de transportar"
+};
+
 const FormikCheck = () => {
 
 
@@ -20,12 +38,22 @@ const FormikCheck = () => {
   const [nJSON, setnJSON] = useState(4);
 
   const FormikPresupuesto = ({ name }) => {
+    console.log( infoPresupuesto[name])
+    console.log( name)
     return (
-      <div>
+      <div className="pregunta-presuspuesto">
         <label id="basic" >
           <Field type="radio" name="Presupuesto" value={name} />
           <span> {name}</span>
+          
         </label>
+        <div className="icon info-presupuesto">
+          <div className= "texto-info-presupuesto">
+            <p>{infoPresupuesto[name]}</p>
+          </div>
+          <span><i class="far fa-question-circle"></i></span>
+
+        </div>
       </div>
     );
   };
@@ -46,7 +74,7 @@ const FormikCheck = () => {
   const FormikTipo= ({ name }) => {
     
     return (
-      <div onClick ={(val)=>{
+      <div className="pregunta-tipo" onClick ={(val)=>{
         handleOnclickTipo(val,name)
       }
     }>
@@ -55,6 +83,13 @@ const FormikCheck = () => {
           />
           <span> {name}</span>
         </label>
+        <div className="icon info-presupuesto">
+          <div className= "texto-info-presupuesto">
+            <p>{infoTipo[name]}</p>
+          </div>
+          <span><i class="far fa-question-circle"></i></span>
+
+        </div>
       </div>
     );
   };
@@ -89,11 +124,18 @@ const FormikCheck = () => {
   const FormikPantalla= ({ name }) => {
     
     return (
-      <div>
+      <div className="pregunta-pantalla">
         <label id="basic">
           <Field type="radio" name="Pantalla" value={name}/>
           <span> {name}</span>
         </label>
+        <div className="icon info-presupuesto">
+          <div className= "texto-info-presupuesto">
+            <p>{infoPantalla[name]}</p>
+          </div>
+          <span><i class="far fa-question-circle"></i></span>
+
+        </div>
       </div>
     );
   };
@@ -129,8 +171,11 @@ const FormikCheck = () => {
             <div role="group" aria-labelledby="checkbox-group" className="preguntas_bas">
               <div className="cont1">
                 <div className="pregunta1">
-                  ¿Qué presupuesto tienes?
+                  
+                  ¿Qué presupuesto tienes? 
+                  
                 </div>
+
                 <div className="check1">
                   {Presupuesto.map((name) => (
                   <FormikPresupuesto name={name} />
@@ -163,7 +208,7 @@ const FormikCheck = () => {
               </div>
               {portatil && <div> 
                 <div className="pregunta5">
-                        ¿Qué tipo de pantalla necesitas?
+                        ¿Qué Tamaño de pantalla necesitas?
                 </div>
                 <div className="check5">
                 {Pantalla.map((name) => (

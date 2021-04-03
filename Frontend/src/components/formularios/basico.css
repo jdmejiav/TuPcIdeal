@@ -83,6 +83,21 @@
     left: 75%;
 }
 
+
+.pregunta5{
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    box-sizing: content-box;
+}
+.check5{
+    position: absolute;
+    top: 54%;
+    left: 5%;
+    box-sizing: border-box;
+}
+
+
 .btn-basic{
     text-align:"center";
     display:inline-block;

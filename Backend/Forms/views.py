@@ -13,7 +13,7 @@ class Getbasicform(APIView):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             print(serializer.data)
-            #WS.falabella()
+            WS.Ktronix()
             return Response("Valid data :)", status=status.HTTP_201_CREATED)      
         else:
             print(serializer)  

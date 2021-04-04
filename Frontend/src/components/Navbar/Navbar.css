@@ -1,4 +1,5 @@
 .NavbarItems{
+    z-index: 1;
     background: linear-gradient(90deg, #000000,#000000);
     height:  80px;
     display: flex;

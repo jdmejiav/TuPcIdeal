@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
+    z-index: 1;
     vertical-align:center;
     background: radial-gradient(circle, rgb(59, 59, 59), rgba(59, 59, 59) );
     position:fixed;                  

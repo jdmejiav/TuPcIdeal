@@ -1,6 +1,5 @@
 
 import React from 'react';
-
 import Registro from './pages/Registro';
 import login from './pages/login';
 import Home from './pages/home.jsx'
@@ -9,7 +8,7 @@ import info from './pages/info.jsx'
 import formulario from './pages/formulario.jsx'
 import formubasic from '././components/formularios/form_basico.jsx'
 import formedio from '././components/formularios/form_intermedio.jsx'
-
+import formavan from '././components/formularios/form_avan.jsx'
 import NotFoundPage from './error/NotFoundPage.jsx';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 
@@ -26,6 +25,7 @@ function App() {
           <Route exact path='/form' component={formulario} />
           <Route exact path='/formbasic' component={formubasic} />
           <Route exact path='/formmedio' component={formedio} />
+          <Route exact path='/formavanzado' component={formavan} />
           <Route path="*" component={NotFoundPage} />
       </Switch>
     </BrowserRouter>

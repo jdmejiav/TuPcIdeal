@@ -31,6 +31,9 @@ const FormikCheck = () => (
         else if (values.usuario=="Medio"){
           window.location ="/formmedio";
         }
+        else if (values.usuario=="Avanzado"){
+          window.location ="/formavanzado";
+        }
       }}
     >     
       {() => (

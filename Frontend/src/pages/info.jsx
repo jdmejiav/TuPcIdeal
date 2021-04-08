@@ -14,24 +14,21 @@ export default class info extends Component {
                 </h1>
                 <div>
                    <article >
-                       <section className="rayzen_R7">
-                       <h2 className="procesador">Procesador AMD RYZEN 7 </h2>
-                       <div className="foto_rayzen">
-                            <img className="foot_rayzen" src={Info} className="login"  />
-                       </div>
-                       <time datetime="21/01/2021">Publicado el 12/03/2021</time>
-                       <div className="par_ry">
-                       <p>
-                           Caracterticas:
-                            <ul>
-                                <li>Memoria RAM: 8GB </li>
-                                <li>Tamaño de pantalla: 14 pulgadas</li>
-                                <li>Disco duro HDD: No aplica</li>
-                                <li>Unidad de estado sólido SSD: 256GB</li>
-                            </ul>
-                       </p>
-                       </div>
+                       <section className="procesadores">
+                            <h2 className="subt1"> Procesadores</h2>
+                            <p>El procesador es el cerebro del sistema, justamente procesa todo lo que ocurre en la PC y ejecuta todas las acciones que existen. Cuanto más rápido sea el procesador que tiene una computadora, más rápidamente se ejecutarán las órdenes que se le den a la máquina.
+
+Fuente: https://concepto.de/procesador/#ixzz6rJU1CKgL</p>
+<p className="p2">
+    probando probando
+</p>
                        </section>
+                   </article>
+                   <article>
+
+                   </article>
+                   <article>
+
                    </article>
                 </div>
                 <FooterContainer/>

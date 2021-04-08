@@ -1,7 +1,7 @@
 import Navbar from '../Navbar/Navbar'
 import {FooterContainer} from '../footer/containers/footer'
 import React, {useState} from "react";
-import './intermedio.css'
+import './avanzado.css'
 import { Formik, Field, Form } from "formik";
 
 
@@ -11,8 +11,10 @@ const Marca = ["HP","Lenovo","Asus","Otro", "Indiferente"];
 const Usos =["Ofitmatica", "Estudio", "Multimedia", "Diseño Grafico",
 "Programacion", "Programas de ingenieria", "Otro" ];
 const Memoria=["4GB", "8GB", "16GB", "Otro"];
-const Solido = ["Si", "No"]
+const Solido = ["Si", "No"];
+const Almacenamiento =["256GB", "512GB", "1TB", "2TB", "Indiferente", "Otro"];
 const Pantalla  =["Grande","Equilibrado","Pequeño"];
+const Gama =["Baja", "Media" , "Alta"];
 
 const infoPresupuesto ={
   "Bajo":"Computador para cumplir con los requerimientos, pero es posible que en un mediano plazo se quede obsoleto",
@@ -31,7 +33,6 @@ const infoPantalla ={
   "Equilibrado":"Computador con pantalla equilibrada, suele tener una duración de batería estándar y es fácil de transportar",
   "Pequeño":"Computador con pantalla pequeña, suelen tener una duración de batería larga y son fáciles de transportar"
 };
-
 
 const FormikCheck = () => {
 
@@ -139,6 +140,28 @@ const FormikCheck = () => {
       );
   };
 
+  const FormikAlmacenamiento =({name})=>{
+    return (
+    <div>
+        <label id="medio">
+          <Field type="radio" name="Almacenamiento" value={name} />
+          <span> {name}</span>
+        </label>
+      </div>
+      );
+    };
+
+    const FormikGama =({name})=>{
+        return(
+            <div>
+               <label id="basic">
+                   <Field type="radio" name="Gama" value={name} />
+                   <span>{name}</span>
+                </label> 
+            </div>
+        );
+    };
+
   const FormikPantalla= ({ name }) => {
     
     return (
@@ -168,7 +191,7 @@ const FormikCheck = () => {
       <div className="infobasic">
         Con el siguiente formulario nos haremos una idea de cuanto sabes sobre computadores
         así podremos darte una mejor experiencia.
-        <p>Nivel intermedio</p>
+        <p>Nivel avanzado</p>
       </div>
       <Formik
         initialValues={{
@@ -178,6 +201,8 @@ const FormikCheck = () => {
           Usos: [],
           Memoria:[],
           Solido:[],
+          Almacenamiento: [],
+          Gama:[],
         }}
         onSubmit={async (values) => {
           console.log(values);
@@ -186,50 +211,50 @@ const FormikCheck = () => {
       >     
         {({ values }) => (
           
-          <Form> 
-            <div role="group" aria-labelledby="checkbox-group" className="preguntas_bas">
-                  <div className="cont1">
-                  <div className="pregunta1">
+            <Form> 
+                <div role="group" aria-labelledby="checkbox-group" className="preguntas_bas">
+                  <div className="conta1">
+                  <div className="preguntaa1">
                       ¿Qué presupuesto tienes?
                   </div>
-                  <div className="check1">
+                  <div className="checka1">
                       {Presupuesto.map((name) => (
                       <FormikPresupuesto name={name}  />
                       ))}
                   </div>  
                   </div>
-                  <div className="cont2">
-                      <div className="preguntai2">
+                  <div className="conta2">
+                      <div className="preguntaa2">
                       ¿Qué tipo de computador quieres?
                       </div>
-                      <div className="checki2">
+                      <div className="checka2">
                       {Tipo.map((name) => (
                           <FormikTipo name={name} />
                       ))}
                       </div>
                   </div>
-                  <div className="cont3">
-                      <div className="preguntai3">
+                  <div className="conta3">
+                      <div className="preguntaa3">
                           ¿Tienes alguna marca en mente?
                       </div>
-                      <div className="checki3">
+                      <div className="checka3">
                       {Marca.map((name) => (
                       <FormikMarca name={name} />
                       ))}
                       </div>
                   </div>
-                  <div className="cont4">
-                      <div className="preguntai4">
+                  <div className="conta4">
+                      <div className="preguntaa4">
                           ¿Para qué vas a utilizar el computador?
                       </div>
-                      <div className="checki4">
+                      <div className="checka4">
                       {Usos.map((name) => (
                       <FormikUsos name={name} />
                       ))}
                       </div>
                   </div>
-                  <div className="cont5">
-                      <div className="preguntai5">
+                  <div className="conta5">
+                      <div className="preguntaa5">
                           ¿Memoria minima?
                           <div className="icon info-presupuesto" style = {{top:"25px", left:"0px"}}>
                             <div className= "texto-info-presupuesto">
@@ -239,14 +264,14 @@ const FormikCheck = () => {
 
                           </div>
                       </div>
-                      <div className= "checki5">
+                      <div className= "checka5">
                       {Memoria.map((name) => (
                       <FormikMemoria name={name} />
                       ))}
                       </div>
                   </div>
-                  <div className="cont6">
-                    <div className="preguntai6">
+                  <div className="conta6">
+                    <div className="preguntaa6">
                       ¿Necesitas disco de estado solido?
                       <div className="icon info-presupuesto" style = {{top:"25px", left:"0px"}}>
                         <div className= "texto-info-presupuesto">
@@ -254,24 +279,53 @@ const FormikCheck = () => {
                         </div>
                         <span><i class="far fa-question-circle"></i></span>
                      </div>
+                        </div>
+                        <div className= "checka6">
+                        {Solido.map((name) => (
+                        <FormikSolido name={name} />
+                        ))}
                     </div>
-                    <div className= "checki6">
-                    {Solido.map((name) => (
-                    <FormikSolido name={name} />
-                    ))}
-                  </div>
-              </div>
-              {portatil && <div> 
-                <div className="pregunta5">
-                        ¿Qué Tamaño de pantalla necesitas?
                 </div>
-                <div className="check5">
-                {Pantalla.map((name) => (
-                  <FormikPantalla name={name} />
-                ))}
+                <div className="conta7">
+                      <div className="preguntaa7">
+                          ¿Almacenamiento minimo?
+                          <div className="icon info-presupuesto" style = {{top:"25px", left:"0px"}}>
+                            <div className= "texto-info-presupuesto">
+                              <p>Sirve para guardar un mayor numero de aplicaciones, 
+                                  documentos e información</p>
+                            </div>
+                            <span><i class="far fa-question-circle"></i></span>
+                          </div>
+                      </div>
+                      <div className= "checka7">
+                      {Almacenamiento.map((name) => (
+                      <FormikAlmacenamiento name={name} />
+                      ))}
+                      </div>
+                  </div>
+                {portatil && <div> 
+                <div className="conta8">
+                    <div className="preguntaa8">
+                        ¿Qué Tamaño de pantalla necesitas?
+                    </div>
+                    <div className="checka8">
+                        {Pantalla.map((name) => (
+                        <FormikPantalla name={name} />
+                        ))}
+                    </div>
                 </div>
               </div>
               }
+              <div className="conta9">
+                <div className="preguntaa9">
+                    ¿Qué gama de tarjeta grafica?
+                </div>
+                <div className="checka9">
+                    {Gama.map((name) => (
+                        <FormikGama name={name} />
+                      ))}
+                </div>
+              </div>
             </div>
                       
             <div className="btnint">

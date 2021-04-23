@@ -206,11 +206,10 @@ const FormikCheck = () => {
         }}
         onSubmit={async (values) => {
           console.log(values);
-          alert(JSON.stringify(values, null, nJSON));
+          alert(JSON.stringify(values, null, nJSON))
         }}
       >     
         {({ values }) => (
-          
             <Form> 
                 <div role="group" aria-labelledby="checkbox-group" className="preguntas_bas">
                   <div className="conta1">
@@ -329,7 +328,7 @@ const FormikCheck = () => {
             </div>
                       
             <div className="btnint">
-              <button type="submit" className="btn-int">Continuar </button>
+              <button type="submit" href="/resultados" className="btn-int">Continuar </button>
             </div>
           </Form>
         )}

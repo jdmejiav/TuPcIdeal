@@ -3,12 +3,13 @@ import {FooterContainer} from '../footer/containers/footer'
 import React, {useState} from "react";
 import './avanzado.css'
 import { Formik, Field, Form } from "formik";
+import axiosInstance from '../../axios'
 
 
 const Presupuesto = ["Bajo", "Moderado", "Alto"];
 const Tipo = ["Portatil", "Escritorio", "All in one"];
 const Marca = ["HP","Lenovo","Asus","Otro", "Indiferente"];
-const Usos =["Ofitmatica", "Estudio", "Multimedia", "Diseño Grafico",
+const Usos =["Ofimatica", "Estudio", "Multimedia", "Diseño Grafico",
 "Programacion", "Programas de ingenieria", "Otro" ];
 const Memoria=["4GB", "8GB", "16GB", "Otro"];
 const Solido = ["Si", "No"];
@@ -207,6 +208,25 @@ const FormikCheck = () => {
         onSubmit={async (values) => {
           console.log(values);
           alert(JSON.stringify(values, null, nJSON));
+          setTimeout(() => {
+            axiosInstance
+              .post(`form/avanzado/`, {
+                  Presupuesto: values.Presupuesto,
+                  Tipo: values.Tipo,
+                  Marca: values.Marca,
+                  Usos: values.Usos,
+                  Memoria: values.Memoria,
+                  Solido: values.Solido,
+                  Almacenamiento: values.Almacenamiento,
+                  Pantalla: values.Pantalla,
+                  Gama: values.Gama
+              }).then(function (response) {
+                  alert(JSON.stringify(response))
+              })
+              .catch(function (error) {
+
+              });
+          }, 1000);
         }}
       >     
         {({ values }) => (

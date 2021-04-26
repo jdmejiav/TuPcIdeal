@@ -43,7 +43,7 @@ class Getintermediateform(APIView):
             solido = data.get('Solido')
             pantalla = data.get('Pantalla')
             Info = FI.FormIntermediate(presupuesto,tipo,marca,usos,memoria,solido,pantalla)
-            RDS.analyze_data(Info)
+            Results = RDS.analyze_data(Info)
 
             content = {'user_count': '2'}
             print(data)

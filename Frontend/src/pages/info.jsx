@@ -23,7 +23,7 @@ export default class info extends Component {
                                 las instrucciones que tu le quieres dar al computador, esto gracias a una serie de algoritmos matematicos 
                                 que permiten que los comandos que hagas sean convertidos a un lenguaje que el computador pueda interpretar para realizar sus operaciones.
                             </div>
-                            <p className="p2">
+                            <p id="parrafo" className="p2">
                                 <h2>caracteristicas principales</h2>
                                 <div id="pq">Todas las CPU son distintas y algunas estan diseñadas de modo que las puedas utilizar para ciertas cosas en especifico,
                                 acontinuación te diremos las principales caracteristicas de los procesadores.
@@ -46,7 +46,7 @@ export default class info extends Component {
                                     </dd>
                                 </dl>
                             </p>
-                            <p>
+                            <p id="parrafo">
                                 <h2>Tipos de procesadores</h2>
                                 <div id="pq">Existen dos tipos de procesadores que son los mas utlizados comunmente, los INTEL y los AMD</div>
                             </p>
@@ -63,7 +63,7 @@ export default class info extends Component {
                             las cuales se conectan como una parte externa al PC, estas suelen ser usadas si las tareas que se van a realizar son muy pesadas
                             como videojuegos, edicion de video y fotografia.
                         </div>
-                            <p className="p2">
+                            <p id="parrafo" className="p2">
                                 <h2>Caracteristicas principales</h2>
                                 <dl>
                                     <dt>Procesador grafico:</dt>
@@ -102,7 +102,7 @@ export default class info extends Component {
                             Es la memoria principal de un dispositivo, esa donde se almacenan de forma temporal los datos de los programas que estás utilizando en este momento.<br/>
                             Esto quiere decir que entre mayor memoria RAM tenga tu computador, mas aplicaciones va a poder correr de forma fluida mientras estan en segundo plano (si, entre mas RAM, mas ventanas de google podras tener abiertas tambien)
                             </div>
-                            <p className="p2">
+                            <p id="parrafo" className="p2">
                                 <h2>¿Para qué sirve?</h2>
                                 Tu ordenador o móvil no ejecuta todas las acciones utilizando únicamente el disco duro, ya que si lo hiciera tardaría demasiado en ejecutarlas. 
                                 Por eso, se utiliza un tipo de memoria mucho más rápida para hacer estas tareas más inmediatas, y es la encargada de almacenar las instrucciones de la CPU o los datos que las aplicaciones necesitan constantemente.

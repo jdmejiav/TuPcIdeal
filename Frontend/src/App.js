@@ -11,7 +11,9 @@ import formedio from '././components/formularios/form_intermedio.jsx'
 import formavan from '././components/formularios/form_avan.jsx'
 import NotFoundPage from './error/NotFoundPage.jsx';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
+import Resultados from './pages/resultados'
 
+import resultados from './pages/resultados'
 
 function App() {
   return (
@@ -22,6 +24,7 @@ function App() {
           <Route exact path='/info' component={info} />
           <Route exact path="/logout" component={Logout} />
           <Route exact path='/' component={Home} />
+          <Route exact path='/resultados' component={Resultados} />
           <Route exact path='/form' component={formulario} />
           <Route exact path='/formbasic' component={formubasic} />
           <Route exact path='/formmedio' component={formedio} />

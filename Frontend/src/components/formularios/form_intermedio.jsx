@@ -3,6 +3,7 @@ import {FooterContainer} from '../footer/containers/footer'
 import React, {useState} from "react";
 import './intermedio.css'
 import { Formik, Field, Form } from "formik";
+import axiosInstance from '../../axios'
 
 
 const Presupuesto = ["Bajo", "Moderado", "Alto"];
@@ -182,6 +183,23 @@ const FormikCheck = () => {
         onSubmit={async (values) => {
           console.log(values);
           alert(JSON.stringify(values, null, nJSON));
+          setTimeout(() => {
+            axiosInstance
+              .post(`form/intermedio/`, {
+                  Presupuesto: values.Presupuesto,
+                  Tipo: values.Tipo,
+                  Marca: values.Marca,
+                  Usos: values.Usos,
+                  Memoria: values.Memoria,
+                  Solido: values.Solido,
+                  Pantalla: values.Pantalla
+              }).then(function (response) {
+                  alert(JSON.stringify(response))
+              })
+              .catch(function (error) {
+
+              });
+          }, 1000);
         }}
       >     
         {({ values }) => (

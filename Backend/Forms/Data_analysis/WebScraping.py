@@ -1,55 +1,58 @@
-import requests
-from bs4 import BeautifulSoup
+from .Falabella import falabella
+import pandas as pd
 
-def falabella():
-    URL = 'https://www.falabella.com.co/falabella-co/category/cat1361001/Computadores--Portatiles-'
-    page = requests.get(URL)
+def processreco(recos,self,typeform:int):
+    RAM =''
+    SSD =''
+    CAPACIDAD=''
+    Pantalla = self.pantalla
 
-    soup = BeautifulSoup(page.content, 'html.parser')
-    results = soup.find(id='testId-searchResults-products')
-    job_elems = results.find_all('div', class_='jsx-1585533350 search-results-list')#jsx-4018082099 section__pod-bottom-description
-    print(len(job_elems))
+    TIPO={
+        "Portatil":0,
+        "Escritorio":1,
+        "All in one":2
+    }
 
-    for job_elem in job_elems:
-        title_elem = job_elem.find('ul', class_='jsx-4018082099 section__pod-bottom-description')
-        price = job_elem.find('li', class_='jsx-3342506598 price-0')
-        price2 = job_elem.find('li', class_='jsx-3342506598 price-0')
-        title_elem= title_elem.text
-        title_elem = title_elem.replace("Memoria"," Memoria")
-        title_elem = title_elem.replace("Tamaño"," Tamaño")
-        title_elem = title_elem.replace("Disco"," Disco")
-        title_elem = title_elem.replace("Unidad"," Unidad")
-        print("Producto",title_elem)
-        print("Precio:",price.text)
-        print("Precio final:",price2.text)
-        print()
-        #print(results.prettify())
+    Tamano={
+        "Grande":[15,16],
+        "Equilibrado":[13,14],
+        "Pequeño":[11,12]
+    }
+    Pantalla = Tamano[Pantalla]
+    TipoPc = TIPO[self.tipo]
+    print(TipoPc)
+    if typeform == 0:        
+        print(0)
 
-def Ktronix():
+    elif typeform == 1 or typeform == 2:
+        RAM = self.memoria
+        SSD = self.solido
+        if SSD == "Si":
+            SSD = True
+        else:
+            SSD = False
 
-    URL = 'https://www.ktronix.com/computadores-tablets/computadores-portatiles/c/BI_104_KTRON'
-    page = requests.get(URL)
+    if typeform == 2:
+        CAPACIDAD = self.almacenamiento
 
-    soup = BeautifulSoup(page.content, 'html.parser')
-    results = soup.find(class_='product__listing product__list')
-    job_elems = results.find_all('li', class_='product__list--item product__list--ktronix js-product-item')#jsx-4018082099 section__pod-bottom-description
-    print(len(job_elems))
-    #print(results.prettify())
+    Resultados = falabella(TipoPc)
 
+    Recomendaciones = list()
+    
+    RecoF=""
 
-    for job_elem in job_elems:
-        Pcinfo = job_elem.find_all('div', class_='product__information')#jsx-4018082099 section__pod-bottom-description
-        for specs in Pcinfo:
-            pcspecslist = specs.find('div', class_='product__information--specifications__block')
-            
-            if(pcspecslist is not None):
-                ''' 
-                b = a.find('div', class_='item--key')
-                c = a.find('div', class_='item--value')
-                f = a.find('div', class_='ilistem--key')
-                '''
-                pcname = specs.find('h2', class_='product__information--name')
-                print(pcname.text)
-                print(pcspecslist.text)
-        price = job_elem.find('p', class_='product__price--discounts__price')
-        print("Precio:",price.find('span',class_='price').text)
+    for values in recos.index:
+        Cpu = recos['CPU'][values]
+        Gpu = recos['GPU'][values]
+        Ram = recos['RAM'][values]
+        Ram = Ram.replace(' gb','GB')
+        if RAM is not "":
+            Ram = RAM
+        print(Cpu)
+        #print(Resultados.loc[(Resultados['CPU'] is Cpu) & (Resultados['RAM'] is Ram) & ((Resultados['Spantalla']>=Pantalla[0])&(Resultados['Spantalla']<=Pantalla[1]))])
+        #print(Resultados.loc[(Resultados['CPU'] is Cpu)])
+        RecoF = Resultados.loc[Resultados['CPU'].isin([Cpu])]
+        RecoF = RecoF.loc[RecoF['RAM'].isin([Ram]) & ((RecoF['Spantalla']>=Pantalla[0])&(RecoF['Spantalla']<=Pantalla[1]))]
+
+        #RecoF = RecoF.head(1)
+    return RecoF

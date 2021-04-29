@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from .Data_analysis import WebScraping as WS
 from .Data_analysis import FormI as FI
 from .Data_analysis import Recomendersys as RDS
-
+import pandas as pd
 # Create your views here.
 
 class Getbasicform(APIView):
@@ -22,8 +22,11 @@ class Getbasicform(APIView):
             marca = data.get('Marca')
             usos = data.get('Usos')
             pantalla = data.get('Pantalla')
-            info = FI.FormBasic(presupuesto,tipo,marca,usos,pantalla)
-            return Response("Valid data :)", status=status.HTTP_201_CREATED)      
+            Info = FI.FormBasic(presupuesto,tipo,marca,usos,pantalla)
+            print(data)
+            Results = RDS.analyze_data(Info)
+            WS.processreco(Results,Info,0)
+            return Response(Results, status=status.HTTP_201_CREATED)      
         else:
             print(serializer)  
             return Response({'Bad Request':'Invalid basic form data...'}, status=status.HTTP_400_BAD_REQUEST)
@@ -43,11 +46,10 @@ class Getintermediateform(APIView):
             solido = data.get('Solido')
             pantalla = data.get('Pantalla')
             Info = FI.FormIntermediate(presupuesto,tipo,marca,usos,memoria,solido,pantalla)
-            Results = RDS.analyze_data(Info)
-
-            content = {'user_count': '2'}
             print(data)
-            return Response(content, status=status.HTTP_201_CREATED)      
+            Results = RDS.analyze_data(Info)
+            RecoF = WS.processreco(Results,Info,1)
+            return Response(RecoF, status=status.HTTP_201_CREATED)      
         else:
             print(serializer)  
             return Response({'Bad Request':'Invalid intermediate form data...'}, status=status.HTTP_400_BAD_REQUEST)
@@ -68,9 +70,8 @@ class Getadvancedform(APIView):
             pantalla = data.get('Pantalla')
             gama = data.get('Gama')
             Info = FI.FormAdvanced(presupuesto,tipo,marca,usos,memoria,solido,almacenamiento,pantalla,gama)            
-
-            content = {'user_count': '2'}
-            return Response(content, status=status.HTTP_201_CREATED)      
+            Results = RDS.analyze_data(Info)
+            return Response(Results, status=status.HTTP_201_CREATED)      
         else:
             print(serializer)  
             return Response({'Bad Request':'Invalid advanced form data...'}, status=status.HTTP_400_BAD_REQUEST)

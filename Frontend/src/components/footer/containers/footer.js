@@ -22,7 +22,7 @@ export function FooterContainer(){
                         <Tittle>
                             Links de Interés
                         </Tittle>
-                            <Link>
+                            <Link href="/info">
                                 Partes computador
                             </Link>
                             <Link>

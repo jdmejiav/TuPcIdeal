@@ -9,10 +9,9 @@ h1{
 }
 
 .box-recomendacion1{
-
     display: inline-block;
     margin-top: 2%;
-
+    z-index: 1;
     margin-left: 15%;
     width: 500px;
     

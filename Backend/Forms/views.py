@@ -36,6 +36,9 @@ class Getintermediateform(APIView):
     def post(self, request, format=None):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
+            import time
+
+            start = time.time()
 
             data = serializer.data
             presupuesto =  data.get('Presupuesto')
@@ -49,6 +52,10 @@ class Getintermediateform(APIView):
             print(data)
             Results = RDS.analyze_data(Info)
             RecoF = WS.processreco(Results,Info,1)
+
+            end = time.time()
+            print(end - start)
+            
             return Response(RecoF, status=status.HTTP_201_CREATED)      
         else:
             print(serializer)  

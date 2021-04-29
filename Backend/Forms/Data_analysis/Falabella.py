@@ -39,7 +39,9 @@ def falabella(Sele:int):
         page = requests.get(url)
         soup = BeautifulSoup(page.content, 'html.parser')
         results = soup.find(id='productInfoContainer')
-        job_elems = results.find_all('tr', class_='jsx-428502957')#jsx-4018082099 section__pod-bottom-description
+        results2 = soup.find('div',class_='jsx-2134917503 headline-wrapper fa--image-gallery-item__desktop')
+        img = results2.find('img',class_='jsx-2487856160')
+        job_elems = results.find_all('tr', class_='jsx-428502957')
         Specs = {
             "CPU": "",
             "RAM": "",
@@ -52,7 +54,7 @@ def falabella(Sele:int):
             "Modelo tarjeta de video":"",
             "Capacidad de la tarjeta de video":"",
             "url":url,
-            "image":"",
+            "urli":img['src'],
             "Marca":"",
             "Tipo":""            
         }
@@ -75,9 +77,17 @@ def falabella(Sele:int):
             if Nombre.text in translate:
                 ValorN = translate[Nombre.text]
                 spec = job_elem.find('td',class_='jsx-428502957 property-value')
-                Specs[ValorN]= spec.text
+                Specs[ValorN]= (spec.text).lower()
         pantalla = Specs["Spantalla"]
         pantalla = pantalla.replace(" pulgadas","")
         Specs["Spantalla"]= float(pantalla)
+        ssd = Specs['SSD']
+        Gpumemo = Specs['Capacidad de la tarjeta de video']
+        if ssd == "" or ssd =="no aplica":
+            Specs['SSD']=False
+
+        if Gpumemo == "" or Gpumemo =="no aplica":
+            Specs['Capacidad de la tarjeta de video']=False
+
         pcs.append(Specs)
     return pd.DataFrame.from_dict(pcs)

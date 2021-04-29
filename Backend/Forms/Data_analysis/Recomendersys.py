@@ -46,8 +46,6 @@ def get_recommendations(title,budget:str):
             idx = idx[0]
     except:
         idx = indices[title]
-
-    print(idx)
     #add the selected value on idx to still have the pc recomendation
     Specs = metadata.iloc[idx]
     Specs = Specs.to_dict()

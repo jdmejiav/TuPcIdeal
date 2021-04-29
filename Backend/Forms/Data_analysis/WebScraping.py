@@ -16,15 +16,13 @@ def processreco(recos,self,typeform:int):
     Tamano={
         "Grande":[15,16],
         "Equilibrado":[13,14],
-        "Pequeño":[11,12]
+        "Pequeño":[12,13]
     }
     Pantalla = Tamano[Pantalla]
     TipoPc = TIPO[self.tipo]
     print(TipoPc)
-    if typeform == 0:        
-        print(0)
 
-    elif typeform == 1 or typeform == 2:
+    if typeform == 1 or typeform == 2:
         RAM = self.memoria
         SSD = self.solido
         if SSD == "Si":
@@ -40,19 +38,32 @@ def processreco(recos,self,typeform:int):
     Recomendaciones = list()
     
     RecoF=""
-
     for values in recos.index:
         Cpu = recos['CPU'][values]
         Gpu = recos['GPU'][values]
         Ram = recos['RAM'][values]
-        Ram = Ram.replace(' gb','GB')
-        if RAM is not "":
+        Ssd = recos['SSD'][values]
+        Ram = Ram.replace(' gb','gb')
+        if RAM != 'otro':
             Ram = RAM
+            Ram = Ram.replace('GB','gb')
+
+        ''' fix
+        if SSD != '':
+            Ssd = SSD
+        '''
         print(Cpu)
+        print(Gpu)
+        print(Ssd,SSD)
+
         #print(Resultados.loc[(Resultados['CPU'] is Cpu) & (Resultados['RAM'] is Ram) & ((Resultados['Spantalla']>=Pantalla[0])&(Resultados['Spantalla']<=Pantalla[1]))])
         #print(Resultados.loc[(Resultados['CPU'] is Cpu)])
         RecoF = Resultados.loc[Resultados['CPU'].isin([Cpu])]
         RecoF = RecoF.loc[RecoF['RAM'].isin([Ram]) & ((RecoF['Spantalla']>=Pantalla[0])&(RecoF['Spantalla']<=Pantalla[1]))]
+        
+        if Gpu == "nvidia/radeon":
+            RecoF = RecoF.loc[RecoF['Capacidad de la tarjeta de video']!=False]
 
         #RecoF = RecoF.head(1)
+        #print(RecoF.index)#mirar Int64Index([], dtype='int64') para cuando no haya opcion en www
     return RecoF

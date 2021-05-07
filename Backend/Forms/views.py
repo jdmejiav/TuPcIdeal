@@ -41,7 +41,7 @@ class Getintermediateform(APIView):
             start = time.time()
 
             data = serializer.data
-            presupuesto =  data.get('Presupuesto')
+            presupuesto =  data.get('Presupuesto').lower()
             tipo = data.get('Tipo')
             marca = data.get('Marca')
             usos = data.get('Usos')
@@ -55,7 +55,6 @@ class Getintermediateform(APIView):
 
             end = time.time()
             print(end - start)
-            
             return Response(RecoF, status=status.HTTP_201_CREATED)      
         else:
             print(serializer)  

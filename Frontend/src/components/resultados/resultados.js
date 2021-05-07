@@ -1,6 +1,6 @@
 import React from "react";
 import "./resultados.css";
-
+import axiosInstance from '../../axios'
 export default class Body extends React.Component {
   constructor(props) {
     super(props);
@@ -26,9 +26,24 @@ export default class Body extends React.Component {
              this.setState(res.data)
         })
     }*/
-
+    componentDidMount(){
+      axiosInstance
+      .post(`/form/intermediate/`, {
+        Presupuesto:this.state['Presupuesto'],
+        Tipo:this.state['Tipo'],
+        Marca:this.state['Marca'],
+        Usos:this.state['Usos'],
+        Pantalla:this.state['Pantalla'],
+        Memoria:this.state['Memoria'],
+        Solido:this.state['Solido']  
+      }).then( (response) => {
+        this.state =JSON.stringify(response.data[0])
+        console.log(JSON.stringify(response.data[0]))
+        this.state = localStorage.setItem("formResult", JSON.stringify((response.data[0])));
+      })
+    }
   URL = (key) => {
-    if (key == "urlprod") {
+    if (key == "url") {
       return (
         <div>
           <p>URL : </p>
@@ -54,9 +69,9 @@ export default class Body extends React.Component {
           {Object.keys(this.state).map((key) => {
             return (
               <div className="box-info">
-                {key == "url" ? (
+                {key == "urli" ? (
                   <div>
-                    <img src={this.state[key]} />
+                    <img className = "img1" src={this.state[key]} />
                     <hr />
                   </div>
                 ) : (
@@ -72,7 +87,7 @@ export default class Body extends React.Component {
           {Object.keys(this.state).map((key) => {
             return (
               <div className="box-info2">
-                {key == "url" ? (
+                {key == "urli" ? (
                   <div>
                     <img src={this.state[key]} />
                     <hr />

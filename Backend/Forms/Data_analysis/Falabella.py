@@ -9,11 +9,14 @@ def getpages(url:str):
     page = requests.get(url)
     soup = BeautifulSoup(page.content, 'html.parser')
     results = soup.find(id='testId-searchResults-actionBar-bottom')
-    job_elems = results.find_all('li', class_='jsx-1738323148 jsx-1104282991 pagination-item')#jsx-4018082099 section__pod-bottom-description
-    for i in job_elems:
-        value =i
-    numberpages = value.find('button',class_='jsx-1738323148 jsx-1104282991 pagination-button')
-    numberpages = int(numberpages.text)
+    try:
+        job_elems = results.find_all('li', class_='jsx-1738323148 jsx-1104282991 pagination-item')#jsx-4018082099 section__pod-bottom-description
+        for i in job_elems:
+            value =i
+        numberpages = value.find('button',class_='jsx-1738323148 jsx-1104282991 pagination-button')
+        numberpages = int(numberpages.text)
+    except:
+        numberpages=1
     for pages in range(1 ,numberpages+1):
         URL = url+"?page="+str(pages)
         GetURLS(URL)
@@ -42,7 +45,9 @@ def falabella(Sele:int):
         results2 = soup.find('div',class_='jsx-2134917503 headline-wrapper fa--image-gallery-item__desktop')
         img = results2.find('img',class_='jsx-2487856160')
         job_elems = results.find_all('tr', class_='jsx-428502957')
-        Specs = {
+
+        specs = {
+            "urli":img['src'],
             "CPU": "",
             "RAM": "",
             "Spantalla": "",
@@ -54,9 +59,8 @@ def falabella(Sele:int):
             "Modelo tarjeta de video":"",
             "Capacidad de la tarjeta de video":"",
             "url":url,
-            "urli":img['src'],
             "Marca":"",
-            "Tipo":""            
+            "Tipo":"",
         }
         translate = {
             "Procesador": "CPU",
@@ -77,17 +81,16 @@ def falabella(Sele:int):
             if Nombre.text in translate:
                 ValorN = translate[Nombre.text]
                 spec = job_elem.find('td',class_='jsx-428502957 property-value')
-                Specs[ValorN]= (spec.text).lower()
-        pantalla = Specs["Spantalla"]
+                specs[ValorN]= (spec.text).lower()
+        pantalla = specs["Spantalla"]
         pantalla = pantalla.replace(" pulgadas","")
-        Specs["Spantalla"]= float(pantalla)
-        ssd = Specs['SSD']
-        Gpumemo = Specs['Capacidad de la tarjeta de video']
+        specs["Spantalla"]= float(pantalla)
+        ssd = specs['SSD']
+        Gpumemo = specs['Capacidad de la tarjeta de video']
         if ssd == "" or ssd =="no aplica":
-            Specs['SSD']=False
+            specs['SSD']=False
 
         if Gpumemo == "" or Gpumemo =="no aplica":
-            Specs['Capacidad de la tarjeta de video']=False
-
-        pcs.append(Specs)
+            specs['Capacidad de la tarjeta de video']=False
+        pcs.append(specs)
     return pd.DataFrame.from_dict(pcs)

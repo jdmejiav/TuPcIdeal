@@ -1,6 +1,6 @@
 from .Falabella import falabella
 import pandas as pd
-
+import json
 def processreco(recos,self,typeform:int):
     RAM =''
     SSD =''
@@ -15,10 +15,23 @@ def processreco(recos,self,typeform:int):
 
     Tamano={
         "Grande":[15,16],
-        "Equilibrado":[13,14],
-        "Pequeño":[12,13]
+        "Equilibrado":[13,14.9],
+        "Pequeño":[12,13.5]
     }
-    Pantalla = Tamano[Pantalla]
+
+    TamanoM={
+        "Grande":[23,30],
+        "Equilibrado":[19,22],
+        "Pequeño":[18,19]
+    }
+
+    presupuesto={
+        "Bajo":[1000000,1500000],
+        "Moderado":[1500000,2200000],
+        "Alto":[2200000]
+    }
+    Pantalla1 = Tamano[Pantalla]
+    Pantalla2 = TamanoM[Pantalla]
     TipoPc = TIPO[self.tipo]
     print(TipoPc)
 
@@ -35,9 +48,13 @@ def processreco(recos,self,typeform:int):
 
     Resultados = falabella(TipoPc)
 
-    Recomendaciones = list()
+    Recomendaciones = pd.DataFrame(columns=['CPU','RAM','Spantalla','HDD','SSD','Modelo del procesador','RAM expandible','GPU','Modelo tarjeta de video','Capacidad de la tarjeta de video','url','urli','Marca','Tipo'])
     
-    RecoF=""
+    if TipoPc == 2:
+        Resultados = Resultados.loc[Resultados['Tipo'].isin(["all in one"])]
+    elif TipoPc == 1:
+        Resultados = Resultados.loc[Resultados['Tipo'].isin(["computadores de escritorio"])]
+    
     for values in recos.index:
         Cpu = recos['CPU'][values]
         Gpu = recos['GPU'][values]
@@ -59,11 +76,29 @@ def processreco(recos,self,typeform:int):
         #print(Resultados.loc[(Resultados['CPU'] is Cpu) & (Resultados['RAM'] is Ram) & ((Resultados['Spantalla']>=Pantalla[0])&(Resultados['Spantalla']<=Pantalla[1]))])
         #print(Resultados.loc[(Resultados['CPU'] is Cpu)])
         RecoF = Resultados.loc[Resultados['CPU'].isin([Cpu])]
-        RecoF = RecoF.loc[RecoF['RAM'].isin([Ram]) & ((RecoF['Spantalla']>=Pantalla[0])&(RecoF['Spantalla']<=Pantalla[1]))]
-        
+        if TipoPc == 0:
+            RecoF = RecoF.loc[RecoF['RAM'].isin([Ram]) & ((RecoF['Spantalla']>=Pantalla1[0])&(RecoF['Spantalla']<=Pantalla1[1]))]
+        if TipoPc == 1:
+            RecoF = RecoF.loc[RecoF['RAM'].isin([Ram])]
+        if TipoPc == 2:
+            RecoF = RecoF.loc[RecoF['RAM'].isin([Ram]) & ((RecoF['Spantalla']>=Pantalla2[0])&(RecoF['Spantalla']<=Pantalla2[1]))]
         if Gpu == "nvidia/radeon":
             RecoF = RecoF.loc[RecoF['Capacidad de la tarjeta de video']!=False]
 
-        #RecoF = RecoF.head(1)
-        #print(RecoF.index)#mirar Int64Index([], dtype='int64') para cuando no haya opcion en www
-    return RecoF
+        if not RecoF.empty:
+            Recomendaciones = Recomendaciones.append(RecoF, ignore_index=True)
+            
+    Recomendaciones=Recomendaciones.drop_duplicates()
+
+    if Recomendaciones.empty:
+        jsonf = recos.to_json(orient="records")
+        parsed = json.loads(jsonf)
+        Recomendaciones= parsed
+
+    elif len(Recomendaciones)>=1:
+        jsonf = Recomendaciones.to_json(orient="records")
+        parsed = json.loads(jsonf)
+        Recomendaciones= parsed
+
+    print(len(Recomendaciones))
+    return Recomendaciones

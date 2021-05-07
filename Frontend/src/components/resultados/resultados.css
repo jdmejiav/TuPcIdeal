@@ -54,5 +54,11 @@ h1{
     border-color: black;
 }
 
+.body-container-resultados 
+img
+{
+    width: 400px;
+    height: 400px;
+}
 
 

@@ -18,7 +18,7 @@ const FormikCheck = () => (
     </div>
     <div className="pregunta_clasi">
       ¿Como consideras tu nivel de conocimiento sobre computadores?
-    </div>
+    </div> 
     <Formik
       initialValues={{
         usuario: [],

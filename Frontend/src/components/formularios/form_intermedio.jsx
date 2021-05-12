@@ -22,11 +22,11 @@ const Pantalla = ["Grande", "Equilibrado", "Pequeño"];
 
 const infoPresupuesto = {
   Bajo:
-    "Computador para cumplir con los requerimientos, pero es posible que en un mediano plazo se quede obsoleto",
+    "1'000.000-1'700.000 COP",
   Moderado:
-    "Computador para complir con los requerimientos durante un buen periodo de tiempo",
+    "1'750.000-2'100.000 COP",
   Alto:
-    "Computador para cumplir con los requerimientos de manera holgada y continuar funcionando por muchos años",
+    "+2'100.000 COP"
 };
 
 const infoTipo = {

@@ -12,12 +12,12 @@ export const Container = styled.div`
   height: 20%;
   overflow-x: hidden;
   overflow-y: hidden;
-
-  @media (max-width: 3000px) {
-    padding: 3rem;
-  }
+  padding: 3rem;
 `;
+
+
 export const Wrapper = styled.div`
+
   displat: flex;
   flex-direction: colum;
   justify-content: center;

@@ -78,13 +78,16 @@
 
 
 .nav-links{
+    font-family: 'Hind Siliguri', sans-serif;
+    font-weight: lighter;
     color: #ffff;
     text-decoration: none;
     padding: 0.5rem 1rem;
 }
 
 .nav-links2{
-
+    font-family: 'Hind Siliguri', sans-serif;
+    font-weight: lighter;
     background-color: #CD4E4E;
     border-radius: 4px;
     color: #ffffff;
@@ -100,7 +103,7 @@
 .nav-links2:hover{
     background-color: #993A3A;
     border-radius: 4px;
-    color: #000000;
+    color: #ffff;
     text-decoration: none;
     padding: 0.5rem 1rem;
 }

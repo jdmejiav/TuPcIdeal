@@ -8,7 +8,7 @@ const Presupuesto = ["Bajo", "Moderado", "Alto"];
 const Tipo = ["Portatil", "Escritorio", "All in one"];
 const Marca = ["HP", "Lenovo", "Asus", "Otro", "Indiferente"];
 const Usos = [
-  "Ofitmatica",
+  "Ofimática",
   "Estudio",
   "Multimedia",
   "Diseño Grafico",
@@ -38,11 +38,11 @@ const infoTipo = {
 
 const infoPantalla = {
   Grande:
-    "Computador con pantalla grande, suele ser pesado y tener una batería más duradera y pesado",
+    "Pantalla de más de 15\" (pulgadas)",
   Equilibrado:
-    "Computador con pantalla equilibrada, suele tener una duración de batería estándar y es fácil de transportar",
+    "Pantalla de 13\" a 14.9\" (pulgadas)",
   Pequeño:
-    "Computador con pantalla pequeña, suelen tener una duración de batería larga y son fáciles de transportar",
+    "Pantalla de hasta 13.5\" (pulgadas)",
 };
 
 const FormikCheck = () => {
@@ -183,6 +183,7 @@ const FormikCheck = () => {
         </div>
         <Formik
           initialValues={{
+            tipof: 1,
             Presupuesto: [],
             Tipo: [],
             Marca: [],
@@ -192,8 +193,9 @@ const FormikCheck = () => {
           }}
           onSubmit={async (values) => {
             console.log(values);
-            alert(JSON.stringify(values, null, nJSON));
+            //alert(JSON.stringify(values, null, nJSON));
             localStorage.setItem("formResult", JSON.stringify(values));
+            window.location = "/resultados"
           }}
         >
           {({ values }) => (

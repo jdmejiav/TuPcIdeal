@@ -84,7 +84,10 @@ def falabella(Sele:int):
                 specs[ValorN]= (spec.text).lower()
         pantalla = specs["Spantalla"]
         pantalla = pantalla.replace(" pulgadas","")
-        specs["Spantalla"]= float(pantalla)
+        try:
+            specs["Spantalla"]= float(pantalla)
+        except :
+            specs["Spantalla"] = 0.0
         ssd = specs['SSD']
         Gpumemo = specs['Capacidad de la tarjeta de video']
         if ssd == "" or ssd =="no aplica":

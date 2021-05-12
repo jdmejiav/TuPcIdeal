@@ -1,10 +1,10 @@
 import React from 'react'
 import Footer from '../'
 import { Link, Tittle } from '../styles/footer'
-
+import  '../styles/footer.css'
 export function FooterContainer(){
     return(
-        <Footer>
+        <Footer className="footer-container">
             <Footer.Wrapper>
                 <Footer.Row>
                     <Footer.Column>

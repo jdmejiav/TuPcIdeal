@@ -6,6 +6,11 @@
 
 }
 
+html {
+  min-height: 100%;
+  position: relative;
+}
+
 .App {
   text-align: center;
 

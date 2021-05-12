@@ -5,7 +5,7 @@ from Forms.models import Recomendations
 
 Diccionario = {
     "Programacion": 4,
-    "Ofimatica": 6,
+    "Ofimática": 6,
     "Diseño Grafico": 2,
     "Arquitectura": 1,
     "Programas de ingenieria": 3,

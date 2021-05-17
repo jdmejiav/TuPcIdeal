@@ -6,7 +6,7 @@ import { Formik, Field, Form } from "formik";
 
 const Presupuesto = ["Bajo", "Moderado", "Alto"];
 const Tipo = ["Portatil", "Escritorio", "All in one"];
-const Marca = ["HP", "Lenovo", "Asus", "Otro", "Indiferente"];
+const Marca = ["HP", "Lenovo", "Asus", "Indiferente"];
 const Usos = [
   "Ofimática",
   "Estudio",
@@ -14,7 +14,6 @@ const Usos = [
   "Diseño Grafico",
   "Programacion",
   "Programas de ingenieria",
-  "Otro",
 ];
 const Memoria = ["4GB", "8GB", "16GB", "Otro"];
 const Solido = ["Si", "No"];
@@ -194,8 +193,13 @@ const FormikCheck = () => {
           onSubmit={async (values) => {
             console.log(values);
             //alert(JSON.stringify(values, null, nJSON));
+            if(values.Tipo=="Escritorio" || values.Tipo=="All in one" )
+            {
+              values.Pantalla="Equilibrado"
+            }
             localStorage.setItem("formResult", JSON.stringify(values));
             window.location = "/resultados"
+            
           }}
         >
           {({ values }) => (

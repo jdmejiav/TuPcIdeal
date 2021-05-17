@@ -9,5 +9,5 @@ class FormsConfig(AppConfig):
         from .Data_analysis import WebScraping as ws
         ws.startServ()
         scheduler = BackgroundScheduler()
-        scheduler.add_job(ws.startServ, 'interval', minutes=10)
+        scheduler.add_job(ws.startServ, 'interval', minutes=120)
         scheduler.start()

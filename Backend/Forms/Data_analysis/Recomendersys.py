@@ -22,7 +22,9 @@ def analyze_data(self):
         if value<Seleccion:
             Seleccion = value
             Reco = i
-    return get_recommendations(Reco,self.presupuesto)
+    print(Reco,self.presupuesto)
+    budget = self.presupuesto.lower()
+    return get_recommendations(Reco,budget)
 
 def get_recommendations(title,budget:str):
 
@@ -68,7 +70,9 @@ def get_recommendations(title,budget:str):
     # Get the similar recomendation indices
     recomendationid = [i[0] for i in sim_scores]
     data = metadata.iloc[recomendationid]
+    '''
     Filter = data['PRESUPUESTO']==budget
     TopResults= data[Filter]
     finalreco = TopResults.head(2)
-    return finalreco
+    '''
+    return data

@@ -1,6 +1,20 @@
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
+from selenium import webdriver
+
+'''
+borrar cuando funcione todo
+
+options = webdriver.ChromeOptions()
+options.add_argument('--ignore-certificate-errors')
+options.add_argument('--ignore-certificate-errors-spki-list')
+options.add_argument('--ignore-ssl-errors')
+options.add_argument("--log-level=3")
+options.add_argument('--incognito')
+options.add_argument('--headless')
+driver = webdriver.Chrome("D:\Downloads\chromedriver", options=options)
+'''
 
 urls= list()
 
@@ -21,6 +35,7 @@ def getpages(url:str):
         URL = url+"?page="+str(pages)
         GetURLS(URL)
 def GetURLS(url:str):
+    '''
     page = requests.get(url)
     soup = BeautifulSoup(page.content, 'html.parser')
     results = soup.find(id='testId-searchResults-products')
@@ -28,11 +43,43 @@ def GetURLS(url:str):
     for product in Products:
         if product['href'] not in urls:
             urls.append(product['href'])
+    '''
+
+    options = webdriver.ChromeOptions()
+    options.add_argument('--ignore-certificate-errors')
+    options.add_argument('--ignore-certificate-errors-spki-list')
+    options.add_argument('--ignore-ssl-errors')
+    options.add_argument("--log-level=3")
+    options.add_argument('--incognito')
+    options.add_argument('--headless')
+    driver = webdriver.Chrome("D:\Downloads\chromedriver", options=options)
+
+
+    driver.get(url)
+    page_source = driver.page_source
+    soup= BeautifulSoup(page_source,"lxml")
+
+    results = soup.find(class_='jsx-4099777552 search-results--products')
+    i=0
+    j=0
+    for link in results.find_all('a',href=True):
+        if link.get('href') not in urls:
+            urls.append(link.get('href'))
+            i+=1
+        else:
+            j+=1
+    print("TOTAL OF PRODUCTS->",i)
+    print("already added on last search->",j)
+
+    driver.quit()
+
 def falabella(Sele:int):
     TYPEPC = ""
     if Sele == 0:
+        print("Search laptops")
         TYPEPC="https://www.falabella.com.co/falabella-co/category/cat1361001/Computadores--Portatiles-"
     elif Sele == 1:
+        print("Search desktop pc and all in one")
         TYPEPC="https://www.falabella.com.co/falabella-co/category/cat50611/Computadores-de-Mesa"
     elif Sele == 2:
         TYPEPC="https://www.falabella.com.co/falabella-co/category/cat50611/Computadores-de-Mesa"
@@ -44,10 +91,21 @@ def falabella(Sele:int):
         results = soup.find(id='productInfoContainer')
         results2 = soup.find('div',class_='jsx-2134917503 headline-wrapper fa--image-gallery-item__desktop')
         img = results2.find('img',class_='jsx-2487856160')
+        results3 = soup.find('div',class_='jsx-3342506598 cmr-icon-container')
+        price = results3.find('span',class_='copy13 primary high jsx-3736277290 normal')
+        price = price.text
+        price = price.split()
+        price = price[1]
+        price = price.replace('.','')
+        try:
+            price =int(price)
+        except:
+            price =0
         job_elems = results.find_all('tr', class_='jsx-428502957')
 
         specs = {
             "urli":img['src'],
+            "Precio":price,
             "CPU": "",
             "RAM": "",
             "Spantalla": "",
@@ -61,6 +119,7 @@ def falabella(Sele:int):
             "url":url,
             "Marca":"",
             "Tipo":"",
+            "Almacenamiento":""
         }
         translate = {
             "Procesador": "CPU",
@@ -88,10 +147,22 @@ def falabella(Sele:int):
             specs["Spantalla"]= float(pantalla)
         except :
             specs["Spantalla"] = 0.0
-        ssd = specs['SSD']
         Gpumemo = specs['Capacidad de la tarjeta de video']
+
+        ssd = specs['SSD']
         if ssd == "" or ssd =="no aplica":
             specs['SSD']=False
+        else:
+            specs['SSD']=True
+            specs['Almacenamiento']=ssd
+
+        hdd = specs['HDD']
+        if hdd == "" or hdd =="no aplica":
+            specs['HDD']=False
+        else:
+            specs['HDD']=True
+            specs['Almacenamiento']=hdd
+        
 
         if Gpumemo == "" or Gpumemo =="no aplica":
             specs['Capacidad de la tarjeta de video']=False

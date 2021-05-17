@@ -25,8 +25,8 @@ class Getbasicform(APIView):
             Info = FI.FormBasic(presupuesto,tipo,marca,usos,pantalla)
             print(data)
             Results = RDS.analyze_data(Info)
-            WS.processreco(Results,Info,0)
-            return Response(Results, status=status.HTTP_201_CREATED)      
+            RecoF = WS.processreco(Results,Info,0)
+            return Response(RecoF, status=status.HTTP_201_CREATED)      
         else:
             print(serializer)  
             return Response({'Bad Request':'Invalid basic form data...'}, status=status.HTTP_400_BAD_REQUEST)
@@ -77,7 +77,8 @@ class Getadvancedform(APIView):
             gama = data.get('Gama')
             Info = FI.FormAdvanced(presupuesto,tipo,marca,usos,memoria,solido,almacenamiento,pantalla,gama)            
             Results = RDS.analyze_data(Info)
-            return Response(Results, status=status.HTTP_201_CREATED)      
+            RecoF = WS.processreco(Results,Info,2)
+            return Response(RecoF, status=status.HTTP_201_CREATED)      
         else:
             print(serializer)  
             return Response({'Bad Request':'Invalid advanced form data...'}, status=status.HTTP_400_BAD_REQUEST)

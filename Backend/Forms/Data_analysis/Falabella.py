@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 from selenium import webdriver
-
+from progress.bar import ChargingBar
 '''
 borrar cuando funcione todo
 
@@ -60,21 +60,16 @@ def GetURLS(url:str):
     soup= BeautifulSoup(page_source,"lxml")
 
     results = soup.find(class_='jsx-4099777552 search-results--products')
-    i=0
-    j=0
+
     for link in results.find_all('a',href=True):
         if link.get('href') not in urls:
             urls.append(link.get('href'))
-            i+=1
-        else:
-            j+=1
-    print("TOTAL OF PRODUCTS->",i)
-    print("already added on last search->",j)
 
     driver.quit()
 
 def falabella(Sele:int):
     TYPEPC = ""
+    error=0
     if Sele == 0:
         print("Search laptops")
         TYPEPC="https://www.falabella.com.co/falabella-co/category/cat1361001/Computadores--Portatiles-"
@@ -85,86 +80,104 @@ def falabella(Sele:int):
         TYPEPC="https://www.falabella.com.co/falabella-co/category/cat50611/Computadores-de-Mesa"
     getpages(TYPEPC)
     pcs = list()
+    bar = ChargingBar('Processing Falabella', max=len(urls))
     for url in urls:
-        page = requests.get(url)
-        soup = BeautifulSoup(page.content, 'html.parser')
-        results = soup.find(id='productInfoContainer')
-        results2 = soup.find('div',class_='jsx-2134917503 headline-wrapper fa--image-gallery-item__desktop')
-        img = results2.find('img',class_='jsx-2487856160')
-        results3 = soup.find('div',class_='jsx-3342506598 cmr-icon-container')
-        price = results3.find('span',class_='copy13 primary high jsx-3736277290 normal')
-        price = price.text
-        price = price.split()
-        price = price[1]
-        price = price.replace('.','')
         try:
-            price =int(price)
+            page = requests.get(url)
+            soup = BeautifulSoup(page.content, 'html.parser')
+            results = soup.find(id='productInfoContainer')
+            try:
+                results2 = soup.find('div',class_='jsx-2134917503 headline-wrapper fa--image-gallery-item__desktop')
+                img = results2.find('img',class_='jsx-2487856160')
+            except:
+                img=""
+            try:
+                results3 = soup.find('div',class_='jsx-3342506598 cmr-icon-container')
+                price = results3.find('span',class_='copy13 primary high jsx-3736277290 normal')
+                price = price.text
+                price = price.split()
+                price = price[1]
+                price = price.replace('.','')
+                price =int(price)
+            except:
+                price =0
+            job_elems = results.find_all('tr', class_='jsx-428502957')
+
+            specs = {
+                "urli":img['src'],
+                "Precio":price,
+                "CPU": "",
+                "RAM": "",
+                "Spantalla": "",
+                "HDD":"",
+                "SSD":"",
+                "Tipos almacenamiento":"",
+                "Modelo del procesador":"",
+                "RAM expandible":"",
+                "GPU":"",
+                "Modelo tarjeta de video":"",
+                "Capacidad de la tarjeta de video":"",
+                "url":url,
+                "Marca":"",
+                "Tipo":"",
+                "Almacenamiento":""
+            }
+            translate = {
+                "Procesador": "CPU",
+                "Memoria RAM": "RAM",
+                "Tamaño de la pantalla": "Spantalla",
+                "Disco duro HDD":"HDD",
+                "Unidad de estado sólido SSD":"SSD",
+                "Modelo del procesador":"Modelo del procesador",
+                "RAM expandible":"RAM expandible",
+                "Tarjeta de video":"GPU",
+                "Modelo tarjeta de video":"Modelo tarjeta de video",
+                "Capacidad de la tarjeta de video":"Capacidad de la tarjeta de video",
+                "Marca":"Marca",
+                "Tipo":"Tipo"
+            }
+            for job_elem in job_elems:
+                Nombre = job_elem.find('td',class_='jsx-428502957 property-name')
+                if Nombre.text in translate:
+                    ValorN = translate[Nombre.text]
+                    spec = job_elem.find('td',class_='jsx-428502957 property-value')
+                    specs[ValorN]= (spec.text).lower()
+            pantalla = specs["Spantalla"]
+            pantalla = pantalla.replace(" pulgadas","")
+            try:
+                specs["Spantalla"]= float(pantalla)
+            except :
+                specs["Spantalla"] = 0.0
+            Gpumemo = specs['Capacidad de la tarjeta de video']
+
+            ssd = specs['SSD']
+            if ssd == "" or ssd =="no aplica":
+                specs['SSD']=False
+            else:
+                specs['SSD']=ssd
+                specs['Almacenamiento']=""
+
+            hdd = specs['HDD']
+            if hdd == "" or hdd =="no aplica":
+                specs['HDD']=False
+            else:
+                specs['HDD']=hdd
+                specs['Almacenamiento']=""
+            hdd = specs['HDD']
+            ssd = specs['SSD']
+            if hdd!=False and ssd!=False:
+                specs['Tipos almacenamiento']="disco hibrido (hdd + sdd)"
+            elif hdd!=False:
+                specs['Tipos almacenamiento']="disco duro (hdd)"
+            elif ssd!=False:
+                specs['Tipos almacenamiento']="disco estado solido (ssd)"
+
+            if Gpumemo == "" or Gpumemo =="no aplica":
+                specs['Capacidad de la tarjeta de video']=False
+            pcs.append(specs)
         except:
-            price =0
-        job_elems = results.find_all('tr', class_='jsx-428502957')
-
-        specs = {
-            "urli":img['src'],
-            "Precio":price,
-            "CPU": "",
-            "RAM": "",
-            "Spantalla": "",
-            "HDD":"",
-            "SSD":"",
-            "Modelo del procesador":"",
-            "RAM expandible":"",
-            "GPU":"",
-            "Modelo tarjeta de video":"",
-            "Capacidad de la tarjeta de video":"",
-            "url":url,
-            "Marca":"",
-            "Tipo":"",
-            "Almacenamiento":""
-        }
-        translate = {
-            "Procesador": "CPU",
-            "Memoria RAM": "RAM",
-            "Tamaño de la pantalla": "Spantalla",
-            "Disco duro HDD":"HDD",
-            "Unidad de estado sólido SSD":"SSD",
-            "Modelo del procesador":"Modelo del procesador",
-            "RAM expandible":"RAM expandible",
-            "Tarjeta de video":"GPU",
-            "Modelo tarjeta de video":"Modelo tarjeta de video",
-            "Capacidad de la tarjeta de video":"Capacidad de la tarjeta de video",
-            "Marca":"Marca",
-            "Tipo":"Tipo"
-        }
-        for job_elem in job_elems:
-            Nombre = job_elem.find('td',class_='jsx-428502957 property-name')
-            if Nombre.text in translate:
-                ValorN = translate[Nombre.text]
-                spec = job_elem.find('td',class_='jsx-428502957 property-value')
-                specs[ValorN]= (spec.text).lower()
-        pantalla = specs["Spantalla"]
-        pantalla = pantalla.replace(" pulgadas","")
-        try:
-            specs["Spantalla"]= float(pantalla)
-        except :
-            specs["Spantalla"] = 0.0
-        Gpumemo = specs['Capacidad de la tarjeta de video']
-
-        ssd = specs['SSD']
-        if ssd == "" or ssd =="no aplica":
-            specs['SSD']=False
-        else:
-            specs['SSD']=True
-            specs['Almacenamiento']=ssd
-
-        hdd = specs['HDD']
-        if hdd == "" or hdd =="no aplica":
-            specs['HDD']=False
-        else:
-            specs['HDD']=True
-            specs['Almacenamiento']=hdd
-        
-
-        if Gpumemo == "" or Gpumemo =="no aplica":
-            specs['Capacidad de la tarjeta de video']=False
-        pcs.append(specs)
+            error+=1
+        bar.next()
+    bar.finish()
+    print("Errors searching:",error)      
     return pd.DataFrame.from_dict(pcs)

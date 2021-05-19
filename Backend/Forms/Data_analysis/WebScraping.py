@@ -1,10 +1,11 @@
 from datetime import datetime
 from .Falabella import falabella
+from .Ktronix import ktronix
 import pandas as pd
 import json
 
-ResultadosPortatil = pd.DataFrame(columns=['CPU','RAM','Spantalla','HDD','SSD','Almacenamiento','Modelo del procesador','RAM expandible','GPU','Modelo tarjeta de video','Capacidad de la tarjeta de video','url','urli','Marca','Tipo'])
-ResultadosDesk = pd.DataFrame(columns=['CPU','RAM','Spantalla','HDD','SSD','Almacenamiento','Modelo del procesador','RAM expandible','GPU','Modelo tarjeta de video','Capacidad de la tarjeta de video','url','urli','Marca','Tipo'])
+ResultadosPortatil = pd.DataFrame(columns=['CPU','RAM','Spantalla','HDD','SSD','Tipos almacenamiento','Almacenamiento','Modelo del procesador','RAM expandible','GPU','Modelo tarjeta de video','Capacidad de la tarjeta de video','url','urli','Marca','Tipo'])
+ResultadosDesk = pd.DataFrame(columns=['CPU','RAM','Spantalla','HDD','SSD','Tipos almacenamiento','Almacenamiento','Modelo del procesador','RAM expandible','GPU','Modelo tarjeta de video','Capacidad de la tarjeta de video','url','urli','Marca','Tipo'])
 Activated = False
 
 def startServ():
@@ -14,6 +15,7 @@ def startServ():
     global ResultadosDesk
     Activated = False
     Resultados1 = falabella(0)
+    Resultados1 = Resultados1.append(ktronix(0), ignore_index=True)
     Resultados2 = falabella(1)
     if Resultados1.empty:
         print("null")
@@ -29,6 +31,7 @@ def startServ():
     print("Complete")
 
 def processreco(recos,self,typeform:int):
+    print("gola",Activated)
     if Activated:
         RAM =''
         SSD =''
@@ -71,7 +74,7 @@ def processreco(recos,self,typeform:int):
             else:
                 SSD = False
         
-        Resultados = pd.DataFrame(columns=['urli','CPU','RAM','Spantalla','HDD','SSD','Almacenamiento','Modelo del procesador','RAM expandible','GPU','Modelo tarjeta de video','Capacidad de la tarjeta de video','url','Marca','Tipo'])
+        Resultados = pd.DataFrame(columns=['urli','CPU','RAM','Spantalla','HDD','SSD','Tipos almacenamiento','Almacenamiento','Modelo del procesador','RAM expandible','GPU','Modelo tarjeta de video','Capacidad de la tarjeta de video','url','Marca','Tipo'])
         
         if typeform == 2:
             CAPACIDAD = self.almacenamiento
@@ -82,7 +85,7 @@ def processreco(recos,self,typeform:int):
             global ResultadosDesk       
             Resultados = ResultadosDesk 
 
-        Recomendaciones = pd.DataFrame(columns=['urli','CPU','RAM','Spantalla','HDD','SSD','Almacenamiento','Modelo del procesador','RAM expandible','GPU','Modelo tarjeta de video','Capacidad de la tarjeta de video','url','Marca','Tipo'])
+        Recomendaciones = pd.DataFrame(columns=['urli','Precio','CPU','RAM','Spantalla','HDD','SSD','Tipos almacenamiento','Almacenamiento','Modelo del procesador','RAM expandible','GPU','Modelo tarjeta de video','Capacidad de la tarjeta de video','url','Marca','Tipo'])
 
         if TipoPc == 2:
             Resultados = Resultados.loc[Resultados['Tipo'].isin(["all in one"])]
@@ -151,6 +154,12 @@ def processreco(recos,self,typeform:int):
         print(len(Recomendaciones))
         return Recomendaciones
     else:
+        '''
+        reparar
+        recos = recos['PRESUPUESTO']==self.presupuesto
+        recos= data[recos]
+        recos = TopResults.head(2)
+        '''
         jsonf = recos.to_json(orient="records")
         parsed = json.loads(jsonf)
         return parsed

@@ -3,17 +3,51 @@ from .Falabella import falabella
 from .Ktronix import ktronix
 import pandas as pd
 import json
+import threading
 
 ResultadosPortatil = pd.DataFrame(columns=['CPU','RAM','Spantalla','HDD','SSD','Tipos almacenamiento','Almacenamiento','Modelo del procesador','RAM expandible','GPU','Modelo tarjeta de video','Capacidad de la tarjeta de video','url','urli','Marca','Tipo'])
 ResultadosDesk = pd.DataFrame(columns=['CPU','RAM','Spantalla','HDD','SSD','Tipos almacenamiento','Almacenamiento','Modelo del procesador','RAM expandible','GPU','Modelo tarjeta de video','Capacidad de la tarjeta de video','url','urli','Marca','Tipo'])
 Activated = False
+
+def fala():
+    Resultados1 = falabella(0)
+    Resultados2 = falabella(1)
+    global ResultadosPortatil
+    global ResultadosDesk
+    if Resultados1.empty:
+        print("null")
+    else:
+        ResultadosPortatil = ResultadosPortatil.append(Resultados1, ignore_index=True)
+        del Resultados1
+    if Resultados2.empty:
+        print("null")
+    else:
+        ResultadosDesk = ResultadosDesk.append(Resultados2, ignore_index=True)
+        del Resultados2
+def ktron():
+    global ResultadosPortatil
+    global ResultadosDesk
+    Resultados1 = ktronix(0)
+    if Resultados1.empty:
+        print("null")
+    else:
+        ResultadosPortatil = ResultadosPortatil.append(Resultados1, ignore_index=True)
+        del Resultados1
 
 def startServ():
     print("Searching products on falabella.com")
     global Activated
     global ResultadosPortatil
     global ResultadosDesk
-    Activated = False
+    Activated = True
+    t1 = threading.Thread(target=fala)
+    t2 = threading.Thread(target=ktron)
+  
+    # starting thread 1
+    t1.start()
+    # starting thread 2
+    t2.start()
+    '''
     Resultados1 = falabella(0)
     Resultados1 = Resultados1.append(ktronix(0), ignore_index=True)
     Resultados2 = falabella(1)
@@ -27,6 +61,7 @@ def startServ():
     else:
         ResultadosDesk = Resultados2
         del Resultados2
+    '''
     Activated = True
     print("Complete")
 

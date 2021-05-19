@@ -58,7 +58,7 @@ def ktronix(Sele:int):
         TYPEPC="https://www.ktronix.com/computadores-tablet/computadores-escritorio/computadores-all-in-one/c/BI_0060_KTRON"
     getpages(TYPEPC)
     pcs = list()
-    bar = ChargingBar('Processing Ktronix', max=len(urls))
+    bar = ChargingBar('Processing', max=len(urls))
     for url in urls:
         page = requests.get(url)
         soup = BeautifulSoup(page.content, 'html.parser')

@@ -80,7 +80,7 @@ def falabella(Sele:int):
         TYPEPC="https://www.falabella.com.co/falabella-co/category/cat50611/Computadores-de-Mesa"
     getpages(TYPEPC)
     pcs = list()
-    bar = ChargingBar('Processing Falabella', max=len(urls))
+    bar = ChargingBar('Processing', max=len(urls))
     for url in urls:
         try:
             page = requests.get(url)

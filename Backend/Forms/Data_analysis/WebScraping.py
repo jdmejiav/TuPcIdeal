@@ -40,11 +40,11 @@ def startServ():
     global ResultadosPortatil
     global ResultadosDesk
     Activated = True
-    t1 = threading.Thread(target=fala)
+    #t1 = threading.Thread(target=fala)
     t2 = threading.Thread(target=ktron)
   
     # starting thread 1
-    t1.start()
+    #t1.start()
     # starting thread 2
     t2.start()
     '''

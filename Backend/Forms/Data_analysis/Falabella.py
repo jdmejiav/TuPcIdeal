@@ -2,6 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from chromedriver_py import binary_path # this will get you the path variable
 from progress.bar import ChargingBar
 '''
 borrar cuando funcione todo
@@ -46,13 +48,15 @@ def GetURLS(url:str):
     '''
 
     options = webdriver.ChromeOptions()
+    options.add_argument('--no-sandbox')
     options.add_argument('--ignore-certificate-errors')
     options.add_argument('--ignore-certificate-errors-spki-list')
     options.add_argument('--ignore-ssl-errors')
     options.add_argument("--log-level=3")
     options.add_argument('--incognito')
     options.add_argument('--headless')
-    driver = webdriver.Chrome("D:\Downloads\chromedriver", options=options)
+    options.add_argument("--remote-debugging-port=9222")
+    driver = webdriver.Chrome(executable_path=binary_path, options=options)
 
 
     driver.get(url)

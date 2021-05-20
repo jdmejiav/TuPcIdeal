@@ -2,7 +2,9 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 from requests.api import get
+from chromedriver_py import binary_path # this will get you the path variable
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from progress.bar import ChargingBar
 
 urls= list()
@@ -22,16 +24,18 @@ def GetURLS(url:str):
     options.add_argument('--ignore-certificate-errors')
     options.add_argument('--ignore-certificate-errors-spki-list')
     options.add_argument('--ignore-ssl-errors')
+    options.add_argument('--no-sandbox-')
     options.add_argument("--log-level=3")
     options.add_argument('--incognito')
     options.add_argument('--headless')
-    driver = webdriver.Chrome("D:\Downloads\chromedriver", options=options)
+    options.add_argument('--remote-debugging-port=9222')
+    driver = webdriver.Chrome(executable_path=binary_path, chrome_options=options)
     driver.get(url)
     page_source = driver.page_source
     soup= BeautifulSoup(page_source,"lxml")
 
     results = soup.find(class_='product__listing product__list')
-    for link in results.find_all('a',href=True):
+    for link in results.find_all('a',class_="js-product-click-datalayer",href=True):
         if link.get('href') not in urls:
             txt = "https://www.ktronix.com/"
             txt+= link.get('href')

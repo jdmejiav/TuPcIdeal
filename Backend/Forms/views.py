@@ -17,7 +17,7 @@ class Getbasicform(APIView):
         if serializer.is_valid():
 
             data = serializer.data
-            presupuesto =  data.get('Presupuesto')
+            presupuesto =  data.get('Presupuesto').lower()
             tipo = data.get('Tipo')
             marca = data.get('Marca')
             usos = data.get('Usos')
@@ -66,7 +66,7 @@ class Getadvancedform(APIView):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             data = serializer.data
-            presupuesto =  data.get('Presupuesto')
+            presupuesto =  data.get('Presupuesto').lower()
             tipo = data.get('Tipo')
             marca = data.get('Marca')
             usos = data.get('Usos')

@@ -1,7 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
-from requests.api import get
 from chromedriver_py import binary_path # this will get you the path variable
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -24,7 +23,7 @@ def GetURLS(url:str):
     options.add_argument('--ignore-certificate-errors')
     options.add_argument('--ignore-certificate-errors-spki-list')
     options.add_argument('--ignore-ssl-errors')
-    options.add_argument('--no-sandbox-')
+    options.add_argument('--no-sandbox')
     options.add_argument("--log-level=3")
     options.add_argument('--incognito')
     options.add_argument('--headless')

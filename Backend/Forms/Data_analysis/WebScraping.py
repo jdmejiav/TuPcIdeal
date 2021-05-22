@@ -11,7 +11,6 @@ Activated = False
 
 def fala():
     Resultados1 = falabella(0)
-    Resultados2 = falabella(1)
     global ResultadosPortatil
     global ResultadosDesk
     if Resultados1.empty:
@@ -19,11 +18,13 @@ def fala():
     else:
         ResultadosPortatil = ResultadosPortatil.append(Resultados1, ignore_index=True)
         del Resultados1
+    Resultados2 = falabella(1)
     if Resultados2.empty:
         print("null")
     else:
         ResultadosDesk = ResultadosDesk.append(Resultados2, ignore_index=True)
         del Resultados2
+    ktron()
 def ktron():
     global ResultadosPortatil
     global ResultadosDesk
@@ -40,13 +41,13 @@ def startServ():
     global ResultadosPortatil
     global ResultadosDesk
     Activated = True
-    #t1 = threading.Thread(target=fala)
-    t2 = threading.Thread(target=ktron)
+    t1 = threading.Thread(target=fala)
+    #t2 = threading.Thread(target=ktron)
   
     # starting thread 1
-    #t1.start()
+    t1.start()
     # starting thread 2
-    t2.start()
+    #t2.start()
     '''
     Resultados1 = falabella(0)
     Resultados1 = Resultados1.append(ktronix(0), ignore_index=True)

@@ -1,7 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
-from requests.api import get
 from selenium import webdriver
 from progress.bar import ChargingBar
 
@@ -25,13 +24,14 @@ def GetURLS(url:str):
     options.add_argument("--log-level=3")
     options.add_argument('--incognito')
     options.add_argument('--headless')
+    options.add_argument('--remote-debugging-port=9222')
     driver = webdriver.Chrome("D:\Downloads\chromedriver", options=options)
     driver.get(url)
     page_source = driver.page_source
     soup= BeautifulSoup(page_source,"lxml")
 
     results = soup.find(class_='product__listing product__list')
-    for link in results.find_all('a',href=True):
+    for link in results.find_all('a',class_="js-product-click-datalayer",href=True):
         if link.get('href') not in urls:
             txt = "https://www.ktronix.com/"
             txt+= link.get('href')
@@ -145,9 +145,10 @@ def ktronix(Sele:int):
                             x=x[0]
                             x+="tb"
                         else:
-                            x=x[0]+x[1]
+                            x=x[0]
+                            x+='gb'
                     specs[ValorN]= x  
-            results3 = soup.find(id='collapse_classification_2')
+            results3 = soup.find(id='collapse_classification_0')
             results3 = results3.find_all('tr')
             for process in results3:
                 Nombre1 = process.find('td',class_='attrib specifications_lines')

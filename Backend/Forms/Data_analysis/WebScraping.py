@@ -10,6 +10,7 @@ ResultadosDesk = pd.DataFrame(columns=['CPU','RAM','Spantalla','HDD','SSD','Tipo
 Activated = False
 
 def fala():
+    print("Searching products on falabella.com")
     Resultados1 = falabella(0)
     global ResultadosPortatil
     global ResultadosDesk
@@ -24,8 +25,10 @@ def fala():
     else:
         ResultadosDesk = ResultadosDesk.append(Resultados2, ignore_index=True)
         del Resultados2
-    ktron()
+    print("Finish")
+    #ktron()
 def ktron():
+    print("Searching products on Ktronix.com")
     global ResultadosPortatil
     global ResultadosDesk
     Resultados1 = ktronix(0)
@@ -34,9 +37,9 @@ def ktron():
     else:
         ResultadosPortatil = ResultadosPortatil.append(Resultados1, ignore_index=True)
         del Resultados1
+    print("Finish")
 
 def startServ():
-    print("Searching products on falabella.com")
     global Activated
     global ResultadosPortatil
     global ResultadosDesk
@@ -64,10 +67,8 @@ def startServ():
         del Resultados2
     '''
     Activated = True
-    print("Complete")
 
 def processreco(recos,self,typeform:int):
-    print("gola",Activated)
     if Activated:
         RAM =''
         SSD =''
@@ -97,6 +98,7 @@ def processreco(recos,self,typeform:int):
             "moderado":[1500000,2200000],
             "alto":[2200000]
         }
+        Marca = self.marca
         Pantalla1 = Tamano[Pantalla]
         Pantalla2 = TamanoM[Pantalla]
         TipoPc = TIPO[self.tipo]
@@ -140,14 +142,12 @@ def processreco(recos,self,typeform:int):
                 Ram = Ram.replace('GB','gb')
                 print("entre")
 
-            ''' fix
-            if SSD != '':
-                Ssd = SSD
             '''
             print(Cpu)
             print(Gpu)
             print(Ssd,SSD)
             print(Ram)
+            '''
 
             RecoF = Resultados.loc[Resultados['CPU'].isin([Cpu])]
             if TipoPc == 0:
@@ -163,6 +163,11 @@ def processreco(recos,self,typeform:int):
             else:
                 RecoF = RecoF.loc[RecoF['Capacidad de la tarjeta de video']==False]
 
+            if SSD:
+                opcion1='disco estado solido (ssd)'
+                opcion2='disco hibrido (hdd + sdd)'
+                RecoF= RecoF.loc[(RecoF['Tipos almacenamiento'] == opcion1)]
+
             if not RecoF.empty:
                 Recomendaciones = Recomendaciones.append(RecoF, ignore_index=True)
             else:
@@ -171,16 +176,24 @@ def processreco(recos,self,typeform:int):
         Recomendaciones=Recomendaciones.drop_duplicates()
         Precios = self.presupuesto
         Rango = presupuesto[Precios]
+
+        if "Indiferente" not in Marca:
+            for marcas in Marca:
+                marcas = marcas.lower()
+                print(marcas)
+                Recomendaciones = Recomendaciones.loc[Recomendaciones['Marca'].isin([marcas])]
+
         if Precios=="alto":
             Recomendaciones = Recomendaciones.loc[((Recomendaciones['Precio']>=Rango[0]))]
         else:
             Recomendaciones = Recomendaciones.loc[((Recomendaciones['Precio']>=Rango[0])&(Recomendaciones['Precio']<=Rango[1]))]
 
         if Recomendaciones.empty:
+            recos = recos.loc[recos['PRESUPUESTO'].isin([self.presupuesto])]
+            recos = recos.head(2)
             jsonf = recos.to_json(orient="records")
             parsed = json.loads(jsonf)
             Recomendaciones= parsed
-            print("Vacio")
 
         elif len(Recomendaciones)>=1:
             jsonf = Recomendaciones.to_json(orient="records")
@@ -190,12 +203,8 @@ def processreco(recos,self,typeform:int):
         print(len(Recomendaciones))
         return Recomendaciones
     else:
-        '''
-        reparar
-        recos = recos['PRESUPUESTO']==self.presupuesto
-        recos= data[recos]
-        recos = TopResults.head(2)
-        '''
+        recos = recos.loc[recos['PRESUPUESTO'].isin([self.presupuesto])]
+        recos = recos.head(2)
         jsonf = recos.to_json(orient="records")
         parsed = json.loads(jsonf)
         return parsed

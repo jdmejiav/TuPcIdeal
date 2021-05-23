@@ -148,7 +148,8 @@ def ktronix(Sele:int):
                             x=x[0]
                             x+="tb"
                         else:
-                            x=x[0]+x[1]
+                            x=x[0]
+                            x+="gb"
                     specs[ValorN]= x  
             results3 = soup.find(id='collapse_classification_2')
             results3 = results3.find_all('tr')

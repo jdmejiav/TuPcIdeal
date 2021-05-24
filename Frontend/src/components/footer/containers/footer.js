@@ -28,6 +28,9 @@ export function FooterContainer(){
                             <Link>
                                 Funcionamiento computador
                             </Link>
+                            <Link href="https://docs.google.com/forms/d/1Z2oHxrejXE-Ek3FwCdx_pcDH2MmRac4LJEDd9HES-tM/edit">
+                                Ayúdanos a mejorar
+                            </Link>
                     </Footer.Column>
 
                 </Footer.Row>

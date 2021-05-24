@@ -3,8 +3,26 @@ import { FooterContainer } from "../footer/containers/footer";
 import React, { useState } from "react";
 import "./basico.css";
 import { Formik, Field, Form } from "formik";
+import Slider, { SliderTooltip } from 'rc-slider';import 'rc-slider/assets/index.css';
 
-const Presupuesto = ["Bajo", "Moderado", "Alto"];
+const { createSliderWithTooltip } = Slider;
+const Range = createSliderWithTooltip(Slider.Range);
+const { Handle } = Slider;
+
+const handle = props => {
+  const { value, dragging, index, ...restProps } = props;
+  return (
+    <SliderTooltip
+      prefixCls="rc-slider-tooltip"
+      overlay={`${value}`}
+      visible={dragging}
+      placement="top"
+      key={index}
+    >
+      <Handle value={value} {...restProps} />
+    </SliderTooltip>
+  );
+};
 const Tipo = ["Portatil", "Escritorio", "All in one"];
 const Marca = ["HP", "Lenovo", "Asus", "Indiferente"];
 const Usos = [
@@ -43,29 +61,33 @@ const infoPantalla = {
 };
 
 const FormikCheck = () => {
+
+
+
   const [portatil, setPortatil] = useState(false);
   const [nJSON, setnJSON] = useState(4);
+  
+  var varlable =[]
 
   const FormikPresupuesto = ({ name }) => {
-    console.log(infoPresupuesto[name]);
-    console.log(name);
     return (
       <div className="pregunta-presuspuesto">
-        <label id="basic">
-          <Field type="radio" name="Presupuesto" value={name} />
-          <span> {name}</span>
-        </label>
-        <div className="icon info-presupuesto">
-          <div className="texto-info-presupuesto">
-            <p>{infoPresupuesto[name]}</p>
-          </div>
-          <span>
-            <i class="far fa-question-circle"></i>
-          </span>
-        </div>
+          <Range 
+          min={1000000} 
+          max={6000000} 
+          defaultValue={[1000000, 2000000]} 
+          allowCross={false}
+          tipFormatter={value => `${value}`} 
+          onChange = {async e => {
+            varlable=e
+          }
+          }
+          />
       </div>
     );
   };
+
+
 
   const handleOnclickTipo = async (e, name) => {
     if (name == "Portatil") {
@@ -169,7 +191,10 @@ const FormikCheck = () => {
             Pantalla: [],
           }}
           onSubmit={async (values) => {
-            console.log(values);
+            //console.log(values);
+
+            values.Presupuesto=varlable
+
             if(values.Tipo=="Escritorio" || values.Tipo=="All in one" )
             {
               values.Pantalla="Equilibrado"
@@ -187,22 +212,21 @@ const FormikCheck = () => {
                 className="preguntas_bas"
               >
                 <div className="cont1">
-                  <div className="pregunta1">¿Qué presupuesto tienes?</div>
+                  <div className="pregunta1">¿Qué tipo de computador quieres?</div>
 
                   <div className="check1">
-                    {Presupuesto.map((name) => (
-                      <FormikPresupuesto name={name} />
-                    ))}
-                  </div>
-                </div>
-                <div className="pregunta2">
-                  ¿Qué tipo de computador quieres?
-                </div>
-                <div className="check2">
                   {Tipo.map((name) => (
                     <FormikTipo name={name} />
                   ))}
                 </div>
+                  
+                </div>
+                <div className="pregunta2">
+                  ¿Qué presupuesto tienes?
+                </div>
+                <div className="check2">
+                    <FormikPresupuesto/>
+                  </div>
                 <div className="pregunta3">¿Tienes alguna marca en mente?</div>
                 <div className="check3">
                   {Marca.map((name) => (

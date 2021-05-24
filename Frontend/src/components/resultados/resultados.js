@@ -126,8 +126,16 @@ export default class Body extends React.Component {
     }
   }
   URL = (key) => {
+    if (key == "Spantalla"){
+      return (
+        <div>
+          <p>
+            Pantalla : {this.state.answer1[key]}"
+          </p>
 
-
+        </div>
+      )
+    }
     
     if (key == "Precio") {
       const formatter = new Intl.NumberFormat('en-US', {
@@ -147,7 +155,7 @@ export default class Body extends React.Component {
 
     }
     
-//{formatter.format(parseInt(this.state.answer1[key]))}
+
     if (key == "url") {
       return (
         <div>
@@ -165,7 +173,18 @@ export default class Body extends React.Component {
       </div>
     );
   };
+
+
   URL2 = (key) => {
+    if (key == "Spantalla"){
+      return (
+        <div>
+          <p>
+            Pantalla : {this.state.answer2[key]}"
+          </p>
+        </div>
+      )
+    }
 
     
     if (key == "Precio") {
@@ -178,7 +197,7 @@ export default class Body extends React.Component {
         <div>
           <p>{key} : </p>
           <p>
-             {formatter.format(this.state.answer1[key])}$
+             {formatter.format(this.state.answer2[key])}$
           </p>
     	<hr></hr>
         </div>
@@ -203,7 +222,27 @@ export default class Body extends React.Component {
   };
 
   USOS = (key) => {
-    if (key == "Usos" || key == "Marca") {
+    if (key == "Usos" || key == "Marca" || key == "Presupuesto") {
+      if (key=="Presupuesto"){
+        const formatter = new Intl.NumberFormat('en-US', {
+          style: 'currency',
+          currency: 'COP',
+        });
+
+        return (
+          <div>
+            <p>{key} : </p>
+            {this.state.form[key].map((key2) => (
+              <div>{formatter.format(key2)}$</div>
+            ))}
+            <hr />
+          </div>
+        );
+
+
+      }
+      
+      
       return (
         <div>
           <p>{key} : </p>

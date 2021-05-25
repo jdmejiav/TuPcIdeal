@@ -23,10 +23,9 @@ def analyze_data(self):
             Seleccion = value
             Reco = i
     print(Reco,self.presupuesto)
-    budget = self.presupuesto.lower()
-    return get_recommendations(Reco,budget)
+    return get_recommendations(Reco)
 
-def get_recommendations(title,budget:str):
+def get_recommendations(title):
 
     all_entries = Recomendations.objects.all()
     all_entries = all_entries.values()

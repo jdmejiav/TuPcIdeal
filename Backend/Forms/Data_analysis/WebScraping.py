@@ -42,13 +42,13 @@ def startServ():
     global ResultadosPortatil
     global ResultadosDesk
     Activated = True
-    #t1 = threading.Thread(target=fala)
-    t2 = threading.Thread(target=ktron)
+    t1 = threading.Thread(target=fala)
+    #t2 = threading.Thread(target=ktron)
   
     # starting thread 1
-    #t1.start()
+    t1.start()
     # starting thread 2
-    t2.start()
+    #t2.start()
     '''
     Resultados1 = falabella(0)
     Resultados1 = Resultados1.append(ktronix(0), ignore_index=True)
@@ -94,9 +94,10 @@ def processreco(recos,self,typeform:int):
         }
 
         presupuesto={
-            "bajo":[1000000,1500000],
-            "moderado":[1500000,2200000],
-            "alto":[2200000]
+            "bajo":[1000000,2000000],
+            "ajustado":[1500000,2000000],
+            "moderado":[2000000,2600000],
+            "alto":[26000000,4000000]
         }
         Marca = self.marca
         Pantalla1 = Tamano[Pantalla]
@@ -162,10 +163,11 @@ def processreco(recos,self,typeform:int):
                 RecoF = RecoF.loc[RecoF['Capacidad de la tarjeta de video']==False]
 
             if SSD:
+                print("HOLA")
                 opcion1='disco estado solido (ssd)'
                 opcion2='disco hibrido (hdd + sdd)'
-                RecoF= RecoF.loc[(RecoF['Tipos almacenamiento'] == opcion1)]
-
+                RecoF = RecoF.loc[(RecoF['Tipos almacenamiento'] == opcion1)]
+            #print(RecoF)
             if not RecoF.empty:
                 Recomendaciones = Recomendaciones.append(RecoF, ignore_index=True)
             else:
@@ -173,16 +175,13 @@ def processreco(recos,self,typeform:int):
 
         Recomendaciones=Recomendaciones.drop_duplicates()
         Precios = self.presupuesto
-        Rango = presupuesto[Precios]
+        Rango = Precios
 
         if "Indiferente" not in Marca:
             for marcas in Marca:
                 Recomendaciones = Recomendaciones.loc[Recomendaciones['Marca'].isin([marcas.lower()])]
 
-        if Precios=="alto":
-            Recomendaciones = Recomendaciones.loc[((Recomendaciones['Precio']>=Rango[0]))]
-        else:
-            Recomendaciones = Recomendaciones.loc[((Recomendaciones['Precio']>=Rango[0])&(Recomendaciones['Precio']<=Rango[1]))]
+        Recomendaciones = Recomendaciones.loc[((Recomendaciones['Precio']>=Rango[0])&(Recomendaciones['Precio']<=Rango[1]))]
 
         if Recomendaciones.empty:
             '''

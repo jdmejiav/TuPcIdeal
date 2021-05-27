@@ -19,6 +19,7 @@ def fala():
     else:
         ResultadosPortatil = ResultadosPortatil.append(Resultados1, ignore_index=True)
         del Resultados1
+    '''
     Resultados2 = falabella(1)
     if Resultados2.empty:
         print("null")
@@ -26,6 +27,7 @@ def fala():
         ResultadosDesk = ResultadosDesk.append(Resultados2, ignore_index=True)
         del Resultados2
     print("Finish")
+    '''
     #ktron()
 def ktron():
     print("Searching products on Ktronix.com")
@@ -76,7 +78,7 @@ def processreco(recos,self,typeform:int):
         Pantalla = self.pantalla
 
         TIPO={
-            "Portatil":0,
+            "Portátil":0,
             "Escritorio":1,
             "All in one":2
         }
@@ -135,13 +137,17 @@ def processreco(recos,self,typeform:int):
             Gpu = recos['GPU'][values]
             Ram = recos['RAM'][values]
             Ssd = recos['SSD'][values]
-            Ram = Ram.replace(' gb','gb')
+            try:
+                Ram = int(Ram.replace(' gb',''))
+            except:
+                Ram = Ram.replace(' gb','')
             if RAM != 'otro' and RAM !='':
                 print("RAM:",RAM,"Ram:",Ram)
-                Ram = RAM
-                Ram = Ram.replace('GB','gb')
+                try:
+                    Ram = int(RAM.replace('GB',''))
+                except:
+                    Ram = RAM.replace('GB','')
                 print("entre")
-
             '''
             print(Cpu)
             print(Gpu)
@@ -151,7 +157,7 @@ def processreco(recos,self,typeform:int):
 
             RecoF = Resultados.loc[Resultados['CPU'].isin([Cpu])]
             if TipoPc == 0:
-                RecoF = RecoF.loc[RecoF['RAM'].isin([Ram])& ((RecoF['Spantalla']>=Pantalla1[0])&(RecoF['Spantalla']<=Pantalla1[1]))]
+                RecoF = RecoF.loc[ ((RecoF['RAM']>=Ram) & (RecoF['Spantalla']>=Pantalla1[0])&(RecoF['Spantalla']<=Pantalla1[1]))]#(RecoF['RAM']>=Ram) &
             if TipoPc == 1:
                 #RecoF = RecoF.loc[RecoF['RAM'].isin([Ram])]
                 RecoF = RecoF.loc[RecoF['RAM'].isin([Ram])]
@@ -166,7 +172,7 @@ def processreco(recos,self,typeform:int):
             if SSD:
                 opcion1='disco estado solido (ssd)'
                 opcion2='disco hibrido (hdd + sdd)'
-                RecoF= RecoF.loc[(RecoF['Tipos almacenamiento'] == opcion1)]
+                RecoF = RecoF.loc[(RecoF['Tipos almacenamiento'] == opcion1)]
 
             if not RecoF.empty:
                 Recomendaciones = Recomendaciones.append(RecoF, ignore_index=True)
@@ -175,18 +181,13 @@ def processreco(recos,self,typeform:int):
 
         Recomendaciones=Recomendaciones.drop_duplicates()
         Precios = self.presupuesto
-        Rango = presupuesto[Precios]
+        Rango = Precios
 
         if "Indiferente" not in Marca:
-            for marcas in Marca:
-                marcas = marcas.lower()
-                print(marcas)
-                Recomendaciones = Recomendaciones.loc[Recomendaciones['Marca'].isin([marcas])]
+            Marcas = [x.lower() for x in Marca]
+            Recomendaciones = Recomendaciones.loc[Recomendaciones['Marca'].isin(Marcas)]
 
-        if Precios=="alto":
-            Recomendaciones = Recomendaciones.loc[((Recomendaciones['Precio']>=Rango[0]))]
-        else:
-            Recomendaciones = Recomendaciones.loc[((Recomendaciones['Precio']>=Rango[0])&(Recomendaciones['Precio']<=Rango[1]))]
+        Recomendaciones = Recomendaciones.loc[((Recomendaciones['Precio']>=Rango[0])&(Recomendaciones['Precio']<=Rango[1]))]
 
         if Recomendaciones.empty:
             recos = recos.loc[recos['PRESUPUESTO'].isin([self.presupuesto])]

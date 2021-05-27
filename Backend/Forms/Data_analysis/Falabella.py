@@ -67,7 +67,12 @@ def GetURLS(url:str):
 
     for link in results.find_all('a',href=True):
         if link.get('href') not in urls:
-            urls.append(link.get('href'))
+            if 'falabella.com' not in link.get('href'):
+                enlace = 'https://www.falabella.com.co'
+                enlace += link.get('href')
+                urls.append(enlace)
+            else:    
+                urls.append(link.get('href'))
 
     driver.quit()
 
@@ -111,10 +116,10 @@ def falabella(Sele:int):
                 "urli":img['src'],
                 "Precio":price,
                 "CPU": "",
-                "RAM": "",
+                "RAM": 0,
                 "Spantalla": "",
-                "HDD":"",
-                "SSD":"",
+                "HDD":0,
+                "SSD":0,
                 "Tipos almacenamiento":"",
                 "Modelo del procesador":"",
                 "RAM expandible":"",
@@ -124,7 +129,7 @@ def falabella(Sele:int):
                 "url":url,
                 "Marca":"",
                 "Tipo":"",
-                "Almacenamiento":""
+                "Almacenamiento":0
             }
             translate = {
                 "Procesador": "CPU",
@@ -158,15 +163,50 @@ def falabella(Sele:int):
             if ssd == "" or ssd =="no aplica":
                 specs['SSD']=False
             else:
+                #print(ssd)
+                if 'gb' in ssd:       
+                    try:
+                        value1 = int(ssd.replace('gb',''))
+                        ssd = value1
+                        capacidad1 = specs['Almacenamiento']
+                        specs['Almacenamiento']= capacidad1+ssd
+                        #print(ssd)
+                    except:
+                        ssd=value1                     
+                elif 'tb' in ssd:
+                    try:
+                        value2 = int(ssd.replace('tb',''))
+                        ssd = value2*1000
+                        capacidad2 = specs['Almacenamiento']
+                        specs['Almacenamiento']= capacidad2+ssd
+                        #print(ssd)
+                    except:
+                        ssd=value2
                 specs['SSD']=ssd
-                specs['Almacenamiento']=""
 
             hdd = specs['HDD']
             if hdd == "" or hdd =="no aplica":
                 specs['HDD']=False
             else:
+                if 'gb' in hdd:       
+                    try:
+                        value3 = int(hdd.replace('gb',''))
+                        hdd = value3
+                        capacidad3 = specs['Almacenamiento']
+                        specs['Almacenamiento']= capacidad3+hdd
+                        #print(ssd)
+                    except:
+                        hdd=value3                     
+                elif 'tb' in hdd:
+                    try:
+                        value4 = int(hdd.replace('tb',''))
+                        hdd = value4*1000
+                        capacidad4 = specs['Almacenamiento']
+                        specs['Almacenamiento']= capacidad4+hdd
+                        #print(ssd)
+                    except:
+                        hdd=value4
                 specs['HDD']=hdd
-                specs['Almacenamiento']=""
             hdd = specs['HDD']
             ssd = specs['SSD']
             if hdd!=False and ssd!=False:
@@ -178,6 +218,15 @@ def falabella(Sele:int):
 
             if Gpumemo == "" or Gpumemo =="no aplica":
                 specs['Capacidad de la tarjeta de video']=False
+
+            ram= specs['RAM']
+            if 'gb' in ram:
+                value = ram.replace('gb','')
+                try:
+                    value = int(value)
+                except:
+                    value = value
+                specs['RAM']=value
             pcs.append(specs)
         except:
             error+=1

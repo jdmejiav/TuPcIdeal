@@ -10,7 +10,7 @@ class BasicFormSerializer(serializers.Serializer):
 
 class IntermediateFormSerializer(serializers.Serializer):
    """Your data serializer, define your fields here."""
-   Presupuesto = serializers.CharField()
+   Presupuesto = serializers.ListField()
    Tipo = serializers.CharField()
    Marca = serializers.ListField()
    Usos = serializers.ListField()

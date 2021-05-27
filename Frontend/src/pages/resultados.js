@@ -9,6 +9,7 @@ export default class Resultados extends React.Component {
       <div>
         <Navbar />
         <Body />
+        <FooterContainer/>
       </div>
     );
   }

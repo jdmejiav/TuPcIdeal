@@ -16,6 +16,9 @@ const FormikCheck = () => (
       Con el siguiente formulario nos haremos una idea de cuanto sabes sobre
       computadores así podremos darte una mejor experiencia.
     </div>
+
+
+    <div>
     <div className="pregunta_clasi">
       ¿Como consideras tu nivel de conocimiento sobre computadores?
     </div> 
@@ -52,8 +55,10 @@ const FormikCheck = () => (
         </Form>
       )}
     </Formik>
+    </div>
     <FooterContainer />
   </div>
+  
 );
 
 const FormikUsuario = ({ name }) => {

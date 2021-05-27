@@ -222,26 +222,23 @@ export default class Body extends React.Component {
   };
 
   USOS = (key) => {
-    if (key == "Usos" || key == "Marca" || key == "Presupuesto") {
-      if (key=="Presupuesto"){
+    if (key == "Usos" || key == "Marca" || key =="Presupuesto") {
+      
+      if (key == "Presupuesto"){
         const formatter = new Intl.NumberFormat('en-US', {
           style: 'currency',
           currency: 'COP',
         });
 
-        return (
-          <div>
-            <p>{key} : </p>
-            {this.state.form[key].map((key2) => (
-              <div>{formatter.format(key2)}$</div>
-            ))}
-            <hr />
-          </div>
-        );
-
-
+        <div>
+          <p>{key} : </p>
+          {this.state.form[key].map((key2) => (
+            <div>{formatter.format(parseInt(key2))}</div>
+          ))}
+          <hr />
+        </div>
       }
-      
+
       
       return (
         <div>

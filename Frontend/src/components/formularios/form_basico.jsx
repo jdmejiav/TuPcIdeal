@@ -23,25 +23,20 @@ const handle = props => {
     </SliderTooltip>
   );
 };
-const Tipo = ["Portatil", "Escritorio", "All in one"];
+const Tipo = ["Portátil", "Escritorio", "All in one"];
 const Marca = ["HP", "Lenovo", "Asus", "Indiferente"];
 const Usos = [
   "Ofimática",
   "Estudio",
   "Multimedia",
-  "Diseño Grafico",
-  "Programacion",
-  "Programas de ingenieria",
+  "Diseño Gráfico",
+  "Programación",
+  "Programas de ingeniería",
 ];
 const Pantalla = ["Grande", "Equilibrado", "Pequeño"];
 
 const infoPresupuesto = {
-  Bajo:
-    "1'000.000-1'700.000 COP",
-  Moderado:
-    "1'750.000-2'100.000 COP",
-  Alto:
-    "+2'100.000 COP",
+"Presupuesto":"Elije un mínimo y un máximo que estas dispueso a pagar para encontrar TuPCIdeal (COP)"
 };
 
 const infoTipo = {
@@ -67,7 +62,7 @@ const FormikCheck = () => {
   const [portatil, setPortatil] = useState(false);
   const [nJSON, setnJSON] = useState(4);
   
-  var varlable =[]
+  var variable =[1000000,6000000]
 
   const FormikPresupuesto = ({ name }) => {
     return (
@@ -79,10 +74,11 @@ const FormikCheck = () => {
           allowCross={false}
           tipFormatter={value => `${value}`} 
           onChange = {async e => {
-            varlable=e
+            variable=e
           }
           }
           />
+          
       </div>
     );
   };
@@ -90,7 +86,7 @@ const FormikCheck = () => {
 
 
   const handleOnclickTipo = async (e, name) => {
-    if (name == "Portatil") {
+    if (name == "Portátil") {
       setPortatil(true);
       setnJSON(5);
     } else {
@@ -193,7 +189,7 @@ const FormikCheck = () => {
           onSubmit={async (values) => {
             //console.log(values);
 
-            values.Presupuesto=varlable
+            values.Presupuesto=variable
 
             if(values.Tipo=="Escritorio" || values.Tipo=="All in one" )
             {
@@ -213,7 +209,7 @@ const FormikCheck = () => {
               >
                 <div className="cont1">
                   <div className="pregunta1">¿Qué tipo de computador quieres?</div>
-
+                
                   <div className="check1">
                   {Tipo.map((name) => (
                     <FormikTipo name={name} />
@@ -223,7 +219,16 @@ const FormikCheck = () => {
                 </div>
                 <div className="pregunta2">
                   ¿Qué presupuesto tienes?
+                  <div className="icon info-presupuesto">
+                    <div className="texto-info-presupuesto">
+                      <p>{infoPresupuesto["Presupuesto"]}</p>
+                    </div>
+                    <span>
+                      <i class="far fa-question-circle"></i>
+                    </span>
+                 </div>
                 </div>
+                
                 <div className="check2">
                     <FormikPresupuesto/>
                   </div>

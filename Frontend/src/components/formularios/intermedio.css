@@ -11,108 +11,109 @@ p{
     font-family: 'Libre Franklin', sans-serif;
 }
 
+
+.container_medio{
+
+    width: 100%;
+    height: 45vh;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
 .cont1{
-    display: inline-block;
+    
     width: 210px;
     height: 100px;
-    position: absolute;
-    top:30%;
-    left: 5%;;
+
+
+}
+.preguntas_bas{
+    display: flex;
+    flex-direction: row;
+
+}
+.contPreguntaPantalla{
+    width: 210px;
+    height: 100px;
 }
 .pregunta1{
-    position: absolute;
+    
     margin-top: 0%;
     box-sizing: content-box;
 }
 .check1{
-    position: absolute;
     margin-top: 40px;
     box-sizing: border-box;
 }
 
 .cont2{
-    display: inline-block;
     width: 210px;
     height: 100px;
-    position: absolute;
-    top:30%;
-    left: 20%;;
 }
 
 .preguntai2{
-    position: absolute;
     box-sizing: border-box;
     margin-top: 0%;
 }
 
 .checki2{
-    position: absolute;
     box-sizing: border-box;
     margin-top: 40px;
     padding-top: 2%;
 }
 
 .cont3{
-    display: inline-block;
+
     width: 210px;
     height: 100px;
-    position: absolute;
-    top:30%;
-    left: 35%;;
+
 }
 
 .preguntai3{
-    position: absolute;
     box-sizing: border-box;
     margin-top: 0%;
 }
 
 .checki3{
-    position: absolute;
     box-sizing: content-box;
     margin-top: 40px;
     padding-top: 2%;
 }
 
 .cont4{
-    display: inline-block;
+    
+
     width: 210px;
     height: 100px;
-    position: absolute;
-    top:30%;
-    left: 50%;;
-}
 
+}
+.PreguntaPantalla{
+    box-sizing: border-box;
+    margin-top: 0%;
+}
 .preguntai4{
-    position: absolute;
     box-sizing: border-box;
     margin-top: 0%;
 }
 
 .checki4{
-    position: absolute;
     box-sizing: content-box;
     margin-top: 40px;
     padding-top: 2%;
 }
 
 .cont5{
-    display: inline-block;
     width: 210px;
     height: 100px;
-    position: absolute;
-    top:30%;
-    left: 65%;;
+
 }
 
 .preguntai5{
-    position: absolute;
     box-sizing: border-box;
     margin-top: 0%;
 }
 
 .checki5{
-    position: absolute;
     box-sizing: content-box;
     margin-top: 40px;
     padding-top: 2%;
@@ -120,22 +121,16 @@ p{
 
 
 .cont6{
-    display: inline-block;
     width: 210px;
     height: 100px;
-    position: absolute;
-    top:30%;
-    left: 80%;;
 }
 
 .preguntai6{
-    position: absolute;
     box-sizing: border-box;
     margin-top: 0%;
 }
 
 .checki6{
-    position: absolute;
     box-sizing: content-box;
     margin-top: 40px;
     padding-top: 2%;
@@ -144,7 +139,6 @@ p{
 
 .btn-int{
     text-align:"center";
-    display:inline-block;
     padding: 16px 48px 18px;
     font-size: 14px;
     white-space: normal;
@@ -158,7 +152,6 @@ p{
     color: white;
     left: 50%;
     top: 65%;
-    position: absolute;
 }
 
 .btn-int:hover
@@ -167,30 +160,54 @@ p{
   cursor: pointer;
 
 }
-
-
 @media screen and (max-width: 600px){
+    
+    .container_medio{
+        display:  !important flex;
+        flex-direction: !important column;
+        
+    }
     .cont1{
-        display: block;
+        display: flex;
+        flex-direction: !important column;
     }
 
     .cont2{
-        display: block;
+        display: flex;
+        flex-direction: !important column;
     }
 
     .cont3{
-        display: block;
+        display: flex;
+        flex-direction: !important column;
     }
 
     .cont4{
-        display: block;
+        display: flex;
+        flex-direction: !important column;
     }
 
     .cont5{
-        display: block;
+        display: flex;
+        flex-direction: !important column;
     }
 
+    .cont{
+        display: flex;
+        flex-direction: !important column;
+    }
 
+    body{
+        background-color: aquamarine;
+    }
+    .preguntas_bas{
+        border: red 1px solid;
+
+    }
+
+    #main {
+        flex-direction: column;
+    }
     
 }
 

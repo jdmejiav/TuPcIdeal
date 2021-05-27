@@ -13,6 +13,7 @@ def fala():
     Resultados1 = falabella(0)
     global ResultadosPortatil
     global ResultadosDesk
+    
     if Resultados1.empty:
         print("null")
     else:
@@ -68,31 +69,26 @@ def startServ():
     print("Complete")
 
 def processreco(recos,self,typeform:int):
-    print("gola",Activated)
     try:
         RAM =''
         SSD =''
         CAPACIDAD=''
         Pantalla = self.pantalla
-
         TIPO={
-            "Portatil":0,
+            "Portátil":0,
             "Escritorio":1,
             "All in one":2
         }
-
         Tamano={
             "Grande":[15,16],
             "Equilibrado":[13.6,14.9],
             "Pequeño":[12,13.5]
         }
-
         TamanoM={
             "Grande":[23,30],
             "Equilibrado":[19,22],
             "Pequeño":[18,19]
         }
-
         presupuesto={
             "bajo":[1000000,2000000],
             "ajustado":[1500000,2000000],
@@ -104,7 +100,6 @@ def processreco(recos,self,typeform:int):
         Pantalla2 = TamanoM[Pantalla]
         TipoPc = TIPO[self.tipo]
         print(TipoPc)
-
         if typeform == 1 or typeform == 2:
             RAM = self.memoria
             SSD = self.solido
@@ -112,9 +107,9 @@ def processreco(recos,self,typeform:int):
                 SSD = True
             else:
                 SSD = False
-        
+
         Resultados = pd.DataFrame(columns=['urli','Precio','CPU','RAM','Spantalla','HDD','SSD','Tipos almacenamiento','Almacenamiento','Modelo del procesador','RAM expandible','GPU','Modelo tarjeta de video','Capacidad de la tarjeta de video','url','Marca','Tipo'])
-        
+
         if typeform == 2:
             CAPACIDAD = self.almacenamiento
         if TipoPc == 0:
@@ -122,7 +117,7 @@ def processreco(recos,self,typeform:int):
             Resultados = ResultadosPortatil  
         if TipoPc == 1 or TipoPc == 2:
             global ResultadosDesk       
-            Resultados = ResultadosDesk 
+            Resultados = ResultadosDesk
 
         Recomendaciones = pd.DataFrame(columns=['urli','Precio','CPU','RAM','Spantalla','HDD','SSD','Tipos almacenamiento','Almacenamiento','Modelo del procesador','RAM expandible','GPU','Modelo tarjeta de video','Capacidad de la tarjeta de video','url','Marca','Tipo'])
 
@@ -136,21 +131,24 @@ def processreco(recos,self,typeform:int):
             Gpu = recos['GPU'][values]
             Ram = recos['RAM'][values]
             Ssd = recos['SSD'][values]
-            Ram = Ram.replace(' gb','gb')
+            try:
+                Ram = int(Ram.replace(' gb',''))
+            except:
+                Ram = Ram.replace(' gb','')
             if RAM != 'otro' and RAM !='':
                 print("RAM:",RAM,"Ram:",Ram)
-                Ram = RAM
-                Ram = Ram.replace('GB','gb')
+                try:
+                    Ram = int(RAM.replace('GB',''))
+                except:
+                    Ram = RAM.replace('GB','')
                 print("entre")
-
             print(Cpu)
             print(Gpu)
             print(Ssd,SSD)
             print(Ram)
-
             RecoF = Resultados.loc[Resultados['CPU'].isin([Cpu])]
             if TipoPc == 0:
-                RecoF = RecoF.loc[RecoF['RAM'].isin([Ram])& ((RecoF['Spantalla']>=Pantalla1[0])&(RecoF['Spantalla']<=Pantalla1[1]))]
+                RecoF = RecoF.loc[((RecoF['RAM']>=Ram) & (RecoF['Spantalla']>=Pantalla1[0])&(RecoF['Spantalla']<=Pantalla1[1]))]#(RecoF['RAM']>=Ram) &
             if TipoPc == 1:
                 #RecoF = RecoF.loc[RecoF['RAM'].isin([Ram])]
                 RecoF = RecoF.loc[RecoF['RAM'].isin([Ram])]
@@ -167,22 +165,20 @@ def processreco(recos,self,typeform:int):
                 opcion1='disco estado solido (ssd)'
                 opcion2='disco hibrido (hdd + sdd)'
                 RecoF = RecoF.loc[(RecoF['Tipos almacenamiento'] == opcion1)]
-            #print(RecoF)
+
             if not RecoF.empty:
                 Recomendaciones = Recomendaciones.append(RecoF, ignore_index=True)
             else:
                 print("Sorry but we can't found any pc on internet")
-
         Recomendaciones=Recomendaciones.drop_duplicates()
         Precios = self.presupuesto
         Rango = Precios
 
         if "Indiferente" not in Marca:
-            for marcas in Marca:
-                Recomendaciones = Recomendaciones.loc[Recomendaciones['Marca'].isin([marcas.lower()])]
+            Marcas = [x.lower() for x in Marca]
+            Recomendaciones = Recomendaciones.loc[Recomendaciones['Marca'].isin(Marcas)]
 
         Recomendaciones = Recomendaciones.loc[((Recomendaciones['Precio']>=Rango[0])&(Recomendaciones['Precio']<=Rango[1]))]
-
         if Recomendaciones.empty:
             '''
             jsonf = recos.to_json(orient="records")
@@ -195,18 +191,17 @@ def processreco(recos,self,typeform:int):
             jsonf = recos.to_json(orient="records")
             parsed = json.loads(jsonf)
             Recomendaciones= parsed
-
         elif len(Recomendaciones)>=1:
             jsonf = Recomendaciones.to_json(orient="records")
             parsed = json.loads(jsonf)
             Recomendaciones= parsed
-
         print(len(Recomendaciones))
         return Recomendaciones
-    except:
+    except:   
         print("error")
         recos = recos.loc[recos['PRESUPUESTO'].isin([self.presupuesto])]
         recos = recos.head(2)
         jsonf = recos.to_json(orient="records")
         parsed = json.loads(jsonf)
         return parsed
+        

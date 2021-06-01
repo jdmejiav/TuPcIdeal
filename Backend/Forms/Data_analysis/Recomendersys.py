@@ -16,8 +16,8 @@ Diccionario = {
 Translate ={
     "Programación": "Programacion",
     "Ofimática": "Ofimática",
-    "Diseño Gráfico": "",
-    "Arquitectura": "",
+    "Diseño Gráfico": "Diseño Grafico",
+    "Arquitectura": "Arquitectura",
     "Programas de ingeniería": "Programas de ingenieria",
     "Estudio": "Estudio",
     "Multimedia": "Multimedia"

@@ -1,9 +1,10 @@
 import Navbar from "../Navbar/Navbar";
-import { FooterContainer } from "../footer/containers/footer";
+//import { FooterContainer } from "../footer/containers/footer";
 import React, { useState } from "react";
 import "./intermedio.css";
 import { Formik, Field, Form } from "formik";
 import Slider, { SliderTooltip } from 'rc-slider';import 'rc-slider/assets/index.css';
+import Swal from 'sweetalert2'
 
 
 const { createSliderWithTooltip } = Slider;
@@ -24,6 +25,7 @@ const handle = props => {
     </SliderTooltip>
   );
 };
+
 
 const Tipo = ["Portátil", "Escritorio", "All in one"];
 const Marca = ["HP", "Lenovo", "Asus", "Indiferente"];
@@ -205,9 +207,28 @@ const FormikCheck = () => {
             Usos: [],
             Memoria: [],
             Solido: [],
+            Pantalla:[]
           }}
           onSubmit={async (values) => {
-            console.log(values);
+
+            if (values.Tipo=="Portátil" && values.Pantalla.length==0){
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Por favor llena todo el formulario',
+              })
+            }else if (values.Tipo.length==0 || values.Marca.length==0 ||
+              values.Usos.length==0 || values.Memoria.length==0 || values.Solido.length==0)
+            {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Por favor llena todo el formulario',
+              })
+              
+            }else{
+            
+            console.log(values.Tipo);
             values.Presupuesto = variable
             //alert(JSON.stringify(values, null, nJSON));
             if(values.Tipo=="Escritorio" || values.Tipo=="All in one" )
@@ -217,11 +238,11 @@ const FormikCheck = () => {
             localStorage.setItem("formResult", JSON.stringify(values));
             window.location = "/resultados"
             
-          }}
+          }}}
         >
           {({ values }) => (
             <Form>
-              <div className="preguntas_bas">
+              <div className="preguntas-int">
 
               <div className="cont1">
                   <div className="preguntai">
@@ -236,7 +257,6 @@ const FormikCheck = () => {
 
                 <div className="cont2">
                   <div className="preguntai2">¿Qué presupuesto tienes?
-                    
                   <div className="icon info-presupuesto">
                     <div className="texto-info-presupuesto">
                       <p>{infoPresupuesto["Presupuesto"]}</p>
@@ -332,7 +352,7 @@ const FormikCheck = () => {
                     <div className="PreguntaPantalla">
                       ¿Qué Tamaño de pantalla necesitas?
                     </div>
-                    <div className="check5">
+                    <div className="checki6">
                       {Pantalla.map((name) => (
                         <FormikPantalla name={name} />
                       ))}
@@ -340,12 +360,10 @@ const FormikCheck = () => {
                   </div>
                 )}
               </div>
-
-              <div className="btnint">
+              
                 <button type="submit" className="btn-int">
                   Continuar{" "}
                 </button>
-              </div>
             </Form>
           )}
         </Formik>

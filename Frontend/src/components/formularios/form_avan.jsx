@@ -3,7 +3,7 @@ import { FooterContainer } from "../footer/containers/footer";
 import React, { useState } from "react";
 import "./avanzado.css";
 import { Formik, Field, Form } from "formik";
-
+import Swal from 'sweetalert2'
 import Slider, { SliderTooltip } from 'rc-slider';import 'rc-slider/assets/index.css';
 
 const { createSliderWithTooltip } = Slider;
@@ -212,7 +212,7 @@ const FormikCheck = () => {
   return (
     <div>
       <Navbar />
-      <div className="container_basico">
+      
         <div className="titulo_clas">
           <h2>Encuentra con nosotros TuPCideal</h2>
         </div>
@@ -221,6 +221,7 @@ const FormikCheck = () => {
           computadores así podremos darte una mejor experiencia.
           <p>Nivel avanzado</p>
         </div>
+        <div className="container_avanzado">
         <Formik
           initialValues={{
             tipof: 2,
@@ -232,8 +233,26 @@ const FormikCheck = () => {
             Solido: [],
             Almacenamiento: [],
             Gama: [],
+            Pantalla: [],
           }}
           onSubmit={async (values) => {
+
+            if (values.Tipo=="Portátil" && values.Pantalla.length==0){
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Por favor llena todo el formulario',
+              })
+            }else if (values.Tipo.length==0 || values.Marca.length==0 ||
+              values.Usos.length==0 || values.Memoria.length==0 || values.Solido.length==0 || values.Gama.length==0 || values.Almacenamiento.length==0)
+            {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Por favor llena todo el formulario',
+              })
+
+            }else{
             console.log(values);
             values.Presupuesto= variable
             //alert(JSON.stringify(values, null, nJSON));
@@ -244,14 +263,11 @@ const FormikCheck = () => {
             localStorage.setItem("formResult", JSON.stringify(values));
             window.location = "/resultados"
           }}
+        }
         >
           {({ values }) => (
             <Form>
-              <div
-                role="group"
-                aria-labelledby="checkbox-group"
-                className="preguntas_bas"
-              >
+              <div className="preguntas-avan">
                 <div className="conta1">
                   <div className="preguntaa1">
                     ¿Qué tipo de computador quieres?

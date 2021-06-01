@@ -21,13 +21,11 @@ p{
     justify-content: center;
 }
 .cont1{
-    
-    width: 210px;
-    height: 100px;
-
-
+    width:  fit-content;
+    height:  fit-content;
+    margin: 1rem;
 }
-.preguntas_bas{
+.preguntas-int{
     display: flex;
     flex-direction: row;
 
@@ -47,13 +45,15 @@ p{
 }
 
 .cont2{
-    width: 210px;
-    height: 100px;
+    width:  fit-content;
+    height:  100px;
+    margin: 1rem;
 }
 
 .preguntai2{
     box-sizing: border-box;
     margin-top: 0%;
+    
 }
 
 .checki2{
@@ -63,9 +63,9 @@ p{
 }
 
 .cont3{
-
-    width: 210px;
-    height: 100px;
+    width:  fit-content;
+    height:  fit-content;
+    margin: 1rem;
 
 }
 
@@ -81,10 +81,9 @@ p{
 }
 
 .cont4{
-    
-
-    width: 210px;
-    height: 100px;
+    width:  fit-content;
+    height:  fit-content;
+    margin: 1rem;
 
 }
 .PreguntaPantalla{
@@ -103,8 +102,9 @@ p{
 }
 
 .cont5{
-    width: 210px;
-    height: 100px;
+    width:  fit-content;
+    height:  fit-content;
+    margin: 1rem;
 
 }
 
@@ -120,9 +120,17 @@ p{
 }
 
 
+.checki6{
+    box-sizing: content-box;
+    margin-top: 40px;
+    padding-top: 2%;
+}
+
+
 .cont6{
-    width: 210px;
-    height: 100px;
+    width:  fit-content;
+    height:  fit-content;
+    margin: 1rem;
 }
 
 .preguntai6{
@@ -162,51 +170,18 @@ p{
 }
 @media screen and (max-width: 600px){
     
-    .container_medio{
-        display:  !important flex;
-        flex-direction: !important column;
-        
-    }
-    .cont1{
-        display: flex;
-        flex-direction: !important column;
-    }
-
-    .cont2{
-        display: flex;
-        flex-direction: !important column;
-    }
-
-    .cont3{
-        display: flex;
-        flex-direction: !important column;
-    }
-
-    .cont4{
-        display: flex;
-        flex-direction: !important column;
-    }
-
-    .cont5{
-        display: flex;
-        flex-direction: !important column;
-    }
-
+    
     .cont{
         display: flex;
-        flex-direction: !important column;
+        flex-direction:  column;
     }
 
-    body{
-        background-color: aquamarine;
-    }
-    .preguntas_bas{
-        border: red 1px solid;
-
+    .preguntas-int{
+        flex-direction:  column;
     }
 
-    #main {
-        flex-direction: column;
+    .rc-slider{
+        padding-bottom: 30px;
     }
     
 }

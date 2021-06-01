@@ -132,11 +132,55 @@ export default class Body extends React.Component {
           <p>
             Pantalla : {this.state.answer1[key]}"
           </p>
-
+	  <hr></hr>
         </div>
       )
     }
     
+    if (key=="SSD"){
+      if (key=="SSD" && this.state.answer1[key]==""){
+        return(
+          <div></div>
+        )
+      }else{
+        return (
+          <div>
+            <p>
+              Unidad de estado Sólido : {this.state.answer1[key]} GB
+            </p>
+            <hr></hr>
+          </div>
+        )
+      }
+    }
+
+    if (key=="HDD" && this.state.answer1[key]!=""){
+      return (
+        <div>
+          <p>
+            Disco Duro : {this.state.answer1[key]} GB
+          </p>
+          <hr></hr>
+        </div>
+      )
+    }else{
+      if (this.state.answer1[key]==""){
+        return (
+          <div></div>
+        )
+      }
+    }
+
+    if (key == "RAM" || key=="Almacenamiento"){
+      return (
+        <div>
+          <p>
+            {key} : {this.state.answer1[key]} GB
+          </p>
+          <hr></hr>
+        </div>
+      )
+    }
     if (key == "Precio") {
       const formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
@@ -149,7 +193,7 @@ export default class Body extends React.Component {
           <p style={{"color":"#AE3434"}}>
              {formatter.format(this.state.answer1[key])}$
           </p>
-	<hr></hr>
+	      <hr></hr>
         </div>
       );
 
@@ -160,7 +204,8 @@ export default class Body extends React.Component {
       return (
         <div>
           <p>URL : </p>
-          <a href={this.state.answer1[key]}>{this.state.answer1[key]}</a>
+          <a href={this.state.answer1[key]}>URL</a>
+          <hr></hr>
         </div>
       );
     }
@@ -182,6 +227,65 @@ export default class Body extends React.Component {
           <p>
             Pantalla : {this.state.answer2[key]}"
           </p>
+          <hr></hr>
+        </div>
+      )
+    }
+
+    if (key=="SSD"){
+      if (key=="SSD" && this.state.answer2[key]==""){
+        return(
+          <div></div>
+        )
+      }else{
+        return (
+          <div>
+            <p>
+              Unidad de estado Sólido : {this.state.answer2[key]} GB
+            </p>
+            <hr></hr>
+          </div>
+        )
+      }
+    }
+
+    if (key=="HDD" && this.state.answer2[key]!=""){
+
+      return (
+        <div>
+          <p>
+            Disco Duro : {this.state.answer2[key]} GB
+          </p>
+          <hr></hr>
+        </div>
+      )
+    }else{
+      if (this.state.answer2[key]==""){
+        return (
+          <div></div>
+        )
+      }
+    }
+
+    if (key == "RAM" || key=="Almacenamiento"){
+      return (
+        <div>
+          <p>
+            {key} : {this.state.answer2[key]} GB
+          </p>
+          <hr></hr>
+        </div>
+      )
+    }
+
+
+    if (key == "RAM" || key=="Almacenamiento"){
+      return (
+        <div>
+          <p>
+            {key} : {this.state.answer2[key]} GB
+          </p>
+          <hr></hr>
         </div>
       )
     }
@@ -207,8 +311,10 @@ export default class Body extends React.Component {
       return (
         <div>
           <p>URL : </p>
-          <a href={this.state.answer2[key]}>{this.state.answer2[key]}</a>
+          <a href={this.state.answer2[key]}>URL</a>
+          <hr></hr>
         </div>
+
       );
     }
     return (
@@ -229,7 +335,7 @@ export default class Body extends React.Component {
           style: 'currency',
           currency: 'COP',
         });
-
+        return (
         <div>
           <p>{key} : </p>
           {this.state.form[key].map((key2) => (
@@ -237,6 +343,7 @@ export default class Body extends React.Component {
           ))}
           <hr />
         </div>
+        )
       }
 
       

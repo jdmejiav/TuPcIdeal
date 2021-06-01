@@ -4,6 +4,9 @@ import React, { useState } from "react";
 import "./basico.css";
 import { Formik, Field, Form } from "formik";
 import Slider, { SliderTooltip } from 'rc-slider';import 'rc-slider/assets/index.css';
+import Swal from 'sweetalert2'
+
+
 
 const { createSliderWithTooltip } = Slider;
 const Range = createSliderWithTooltip(Slider.Range);
@@ -167,8 +170,7 @@ const FormikCheck = () => {
 
   return (
     <div>
-      <Navbar />
-      <div className="container_basico">
+      <Navbar />     
         <div className="titulo_clas">
           <h2>Encuentra con nosotros TuPCideal</h2>
         </div>
@@ -176,6 +178,8 @@ const FormikCheck = () => {
           Con el siguiente formulario nos haremos una idea de cuanto sabes sobre
           computadores así podremos darte una mejor experiencia.
         </div>
+        <div className="  container-basic">
+
 
         <Formik
           initialValues={{
@@ -188,9 +192,22 @@ const FormikCheck = () => {
           }}
           onSubmit={async (values) => {
             //console.log(values);
-
+            if (values.Tipo=="Portátil" && values.Pantalla.length==0){
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Por favor llena todo el formulario',
+              })
+            }else if (values.Tipo.length==0 || values.Marca.length==0 ||
+              values.Usos.length==0)
+            {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Por favor llena todo el formulario',
+              })
+            }else{
             values.Presupuesto=variable
-
             if(values.Tipo=="Escritorio" || values.Tipo=="All in one" )
             {
               values.Pantalla="Equilibrado"
@@ -198,14 +215,11 @@ const FormikCheck = () => {
             //alert(JSON.stringify(values, null, nJSON));
             localStorage.setItem("formResult", JSON.stringify(values));
             window.location= "/resultados"
-          }}
+          }}}
         >
           {({ values }) => (
             <Form>
-              <div
-                role="group"
-                aria-labelledby="checkbox-group"
-                className="preguntas_bas"
+              <div className="preguntas-bas"
               >
                 <div className="cont1">
                   <div className="pregunta1">¿Qué tipo de computador quieres?</div>
@@ -217,27 +231,42 @@ const FormikCheck = () => {
                 </div>
                   
                 </div>
-                <div className="pregunta2">
-                  ¿Qué presupuesto tienes?
-                  <div className="icon info-presupuesto">
-                    <div className="texto-info-presupuesto">
-                      <p>{infoPresupuesto["Presupuesto"]}</p>
-                    </div>
-                    <span>
-                      <i class="far fa-question-circle"></i>
-                    </span>
-                 </div>
+
+                <div className="cont2">
+                  <div className="pregunta2">
+                    ¿Qué presupuesto tienes?
+                    <div className="icon info-presupuesto">
+                      <div className="texto-info-presupuesto">
+                        <p>{infoPresupuesto["Presupuesto"]}</p>
+                      </div>
+                      <span>
+                        <i class="far fa-question-circle"></i>
+                      </span>
+                  </div>
                 </div>
-                
                 <div className="check2">
                     <FormikPresupuesto/>
                   </div>
-                <div className="pregunta3">¿Tienes alguna marca en mente?</div>
-                <div className="check3">
-                  {Marca.map((name) => (
-                    <FormikMarca name={name} />
-                  ))}
                 </div>
+                
+                
+
+
+
+                 <div className="cont3">
+                  <div className="pregunta3">
+                    ¿Tienes alguna marca en mente?
+                  </div>
+                  <div className="check3">
+                    {Marca.map((name) => (
+                      <FormikMarca name={name} />
+                    ))}
+                  </div>
+                </div>
+
+
+                <div className="cont4">
+
                 <div className="pregunta4">
                   ¿Para qué vas a utilizar el computador?
                 </div>
@@ -246,8 +275,9 @@ const FormikCheck = () => {
                     <FormikUsos name={name} />
                   ))}
                 </div>
+                </div>
                 {portatil && (
-                  <div>
+                  <div className="cont5">
                     <div className="pregunta5">
                       ¿Qué Tamaño de pantalla necesitas?
                     </div>
@@ -259,14 +289,14 @@ const FormikCheck = () => {
                   </div>
                 )}
               </div>
-              <button type="submit" className="btn-basic">
+              <button type="submit" className="btn-int">
                 Continuar{" "}
               </button>
             </Form>
           )}
         </Formik>
       </div>
-      <FooterContainer />
+
     </div>
   );
 };

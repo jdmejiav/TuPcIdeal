@@ -188,6 +188,7 @@ def processreco(recos,self,typeform:int):
             Recomendaciones = Recomendaciones.loc[Recomendaciones['Marca'].isin(Marcas)]
 
         Recomendaciones = Recomendaciones.loc[((Recomendaciones['Precio']>=Rango[0])&(Recomendaciones['Precio']<=Rango[1]))]
+        Recomendaciones= Recomendaciones.sort_values(by=['RAM','Precio','Almacenamiento'])
 
         if Recomendaciones.empty:
             recos = recos.loc[recos['PRESUPUESTO'].isin([self.presupuesto])]

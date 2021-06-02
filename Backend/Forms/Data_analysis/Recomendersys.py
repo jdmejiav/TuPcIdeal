@@ -29,11 +29,13 @@ def analyze_data(self):
     for i in Usos:
         if i in Translate:
             value0 = Translate[i]
-            value = Diccionario[value0]
-            if value<Seleccion:
-                Seleccion = value
-                Reco = i
-    print(Reco,self.presupuesto)
+            if value0 in Diccionario:
+                value = Diccionario[value0]
+                if value<Seleccion:
+                    Seleccion = value
+                    Reco = value
+    #print(Reco,self.presupuesto)
+    print("asdkadasjlsad",Reco)
     return get_recommendations(Reco)
 
 def get_recommendations(title):

@@ -10,6 +10,8 @@ ResultadosDesk = pd.DataFrame(columns=['CPU','RAM','Spantalla','HDD','SSD','Tipo
 Activated = False
 
 def fala():
+    global Activated
+    Activated=False
     print("Searching products on falabella.com")
     Resultados1 = falabella(0)
     global ResultadosPortatil
@@ -27,7 +29,8 @@ def fala():
         ResultadosDesk = ResultadosDesk.append(Resultados2, ignore_index=True)
         del Resultados2
     print("Finish")
-    '''
+    '''    
+    Activated=True
     #ktron()
 def ktron():
     print("Searching products on Ktronix.com")
@@ -42,10 +45,8 @@ def ktron():
     print("Finish")
 
 def startServ():
-    global Activated
     global ResultadosPortatil
     global ResultadosDesk
-    Activated = True
     t1 = threading.Thread(target=fala)
     #t2 = threading.Thread(target=ktron)
   
@@ -68,8 +69,6 @@ def startServ():
         ResultadosDesk = Resultados2
         del Resultados2
     '''
-    Activated = True
-
 def processreco(recos,self,typeform:int):
     if Activated:
         RAM =''
@@ -188,7 +187,7 @@ def processreco(recos,self,typeform:int):
             Recomendaciones = Recomendaciones.loc[Recomendaciones['Marca'].isin(Marcas)]
 
         Recomendaciones = Recomendaciones.loc[((Recomendaciones['Precio']>=Rango[0])&(Recomendaciones['Precio']<=Rango[1]))]
-        Recomendaciones= Recomendaciones.sort_values(by=['RAM','Precio','Almacenamiento'])
+        Recomendaciones= Recomendaciones.sort_values(by=['RAM','Precio','Almacenamiento'],ascending=False)
 
         if Recomendaciones.empty:
             recos = recos.loc[recos['PRESUPUESTO'].isin([self.presupuesto])]

@@ -36,7 +36,7 @@ def getpages(url:str):
     for pages in range(1 ,numberpages+1):
         URL = url+"?page="+str(pages)
         GetURLS(URL)
-        print("Processing page 1")
+        print("Processing page",pages)
 def GetURLS(url:str):
     '''
     page = requests.get(url)

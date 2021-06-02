@@ -49,7 +49,7 @@ class Getintermediateform(APIView):
             solido = data.get('Solido')
             pantalla = data.get('Pantalla')
             Info = FI.FormIntermediate(presupuesto,tipo,marca,usos,memoria,solido,pantalla)
-            print(data)
+            #print(data)
             Results = RDS.analyze_data(Info)
             RecoF = WS.processreco(Results,Info,1)
 

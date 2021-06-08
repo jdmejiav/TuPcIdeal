@@ -21,15 +21,13 @@ def fala():
     else:
         ResultadosPortatil = ResultadosPortatil.append(Resultados1, ignore_index=True)
         del Resultados1
-    '''
     Resultados2 = falabella(1)
     if Resultados2.empty:
         print("null")
     else:
         ResultadosDesk = ResultadosDesk.append(Resultados2, ignore_index=True)
         del Resultados2
-    print("Finish")
-    '''    
+    print("Finish")   
     Activated=True
     #ktron()
 def ktron():

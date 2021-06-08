@@ -1,7 +1,7 @@
 import React from "react";
 import "./resultados.css";
 import axiosInstance from "../../axios";
-
+import Swal from 'sweetalert2'
 
 export default class Body extends React.Component {
   constructor(props) {
@@ -12,7 +12,17 @@ export default class Body extends React.Component {
       answer1: {},
       answer2: {},
       thereIsAnswer: false,
+      pregunto:false,
     };
+  }
+  componentDidUpdate(){
+    if (this.state.thereIsAnswer && this.state.pregunto){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'No pudimos encontrar TuPCideal con las indicaciones que nos diste :(',
+      })
+    }
   }
   componentDidMount() {
     if (this.state.form["tipof"] == "0") {
@@ -29,10 +39,11 @@ export default class Body extends React.Component {
             this.setState({ answer1: response.data[0] });
           } else {
             this.setState({
-              answer: {
+              answer1: {
                 "Error":
-                  "Lo sentimos, no encontramos un computador que de solución a sus necesidades",
+                  "No se encontró ningún computador para tus necesidades",
               },
+              pregunto:true
             });
           }
           if (response.data[1] != null) {
@@ -43,7 +54,9 @@ export default class Body extends React.Component {
                 "Error":
                   "Lo sentimos, no encontramos un segundo computador que de solución a sus necesidades",
               },
+              
             });
+            
           }
           this.setState({ thereIsAnswer: true });
           console.log(JSON.stringify(response.data[0]));
@@ -68,6 +81,7 @@ export default class Body extends React.Component {
                 "Error":
                   "Lo sentimos, no encontramos un computador que de solución a sus necesidades",
               },
+              pregunto:true
             });
           }
           if (response.data[1] != null) {
@@ -108,6 +122,7 @@ export default class Body extends React.Component {
                 "Error":
                   "Lo sentimos, no encontramos un computador que de solución a sus necesidades",
               },
+              pregunto:true
             });
           }
           if (response.data[1] != null) {
@@ -117,6 +132,7 @@ export default class Body extends React.Component {
               answer2: {
                 "Error": "Lo sentimos, no encontramos un segundo computador que de solución a sus necesidades",
               },
+              
             });
           }
           this.setState({ thereIsAnswer: true });

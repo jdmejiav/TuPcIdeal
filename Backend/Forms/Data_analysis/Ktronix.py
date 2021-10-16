@@ -1,7 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
-from chromedriver_py import binary_path # this will get you the path variable
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from progress.bar import ChargingBar
@@ -28,7 +27,7 @@ def GetURLS(url:str):
     options.add_argument('--incognito')
     options.add_argument('--headless')
     options.add_argument('--remote-debugging-port=9222')
-    driver = webdriver.Chrome(executable_path=binary_path, chrome_options=options)
+    driver = webdriver.Chrome("D:\Downloads\chromedriver", options=options)
     driver.get(url)
     page_source = driver.page_source
     soup= BeautifulSoup(page_source,"lxml")
@@ -148,8 +147,12 @@ def ktronix(Sele:int):
                             specs["Almacenamiento"]=capacidad
                         except:
                             x=x[0]
+                            x+="tb"
+                        else:
+                            x=x[0]
+                            x+='gb'
                     specs[ValorN]= x  
-            results3 = soup.find(id='collapse_classification_4')
+            results3 = soup.find(id='collapse_classification_0')
             results3 = results3.find_all('tr')
             for process in results3:
                 Nombre1 = process.find('td',class_='attrib specifications_lines')

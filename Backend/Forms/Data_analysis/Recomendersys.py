@@ -16,8 +16,8 @@ Diccionario = {
 Translate ={
     "Programación": "Programacion",
     "Ofimática": "Ofimática",
-    "Diseño Gráfico": "Diseño Grafico",
-    "Arquitectura": "Arquitectura",
+    "Diseño Gráfico": "",
+    "Arquitectura": "",
     "Programas de ingeniería": "Programas de ingenieria",
     "Estudio": "Estudio",
     "Multimedia": "Multimedia"
@@ -29,13 +29,11 @@ def analyze_data(self):
     for i in Usos:
         if i in Translate:
             value0 = Translate[i]
-            if value0 in Diccionario:
-                value = Diccionario[value0]
-                if value<Seleccion:
-                    Seleccion = value
-                    Reco = value
-    #print(Reco,self.presupuesto)
-    print("asdkadasjlsad",Reco)
+            value = Diccionario[value0]
+            if value<Seleccion:
+                Seleccion = value
+                Reco = i
+    print(Reco,self.presupuesto)
     return get_recommendations(Reco)
 
 def get_recommendations(title):

@@ -16,20 +16,20 @@ def fala():
     Resultados1 = falabella(0)
     global ResultadosPortatil
     global ResultadosDesk
+    
     if Resultados1.empty:
         print("null")
     else:
         ResultadosPortatil = ResultadosPortatil.append(Resultados1, ignore_index=True)
         del Resultados1
+    '''
     Resultados2 = falabella(1)
     if Resultados2.empty:
         print("null")
     else:
         ResultadosDesk = ResultadosDesk.append(Resultados2, ignore_index=True)
         del Resultados2
-    print("Finish")   
-    Activated=True
-    #ktron()
+    '''
 def ktron():
     print("Searching products on Ktronix.com")
     global ResultadosPortatil
@@ -68,41 +68,37 @@ def startServ():
         del Resultados2
     '''
 def processreco(recos,self,typeform:int):
-    if Activated:
+    try:
         RAM =''
         SSD =''
         CAPACIDAD=''
         Pantalla = self.pantalla
-
         TIPO={
             "Portátil":0,
             "Escritorio":1,
             "All in one":2
         }
-
         Tamano={
             "Grande":[15,16],
             "Equilibrado":[13.6,14.9],
             "Pequeño":[12,13.5]
         }
-
         TamanoM={
             "Grande":[23,30],
             "Equilibrado":[19,22],
             "Pequeño":[18,19]
         }
-
         presupuesto={
-            "bajo":[1000000,1500000],
-            "moderado":[1500000,2200000],
-            "alto":[2200000]
+            "bajo":[1000000,2000000],
+            "ajustado":[1500000,2000000],
+            "moderado":[2000000,2600000],
+            "alto":[26000000,4000000]
         }
         Marca = self.marca
         Pantalla1 = Tamano[Pantalla]
         Pantalla2 = TamanoM[Pantalla]
         TipoPc = TIPO[self.tipo]
         print(TipoPc)
-
         if typeform == 1 or typeform == 2:
             RAM = self.memoria
             SSD = self.solido
@@ -110,9 +106,9 @@ def processreco(recos,self,typeform:int):
                 SSD = True
             else:
                 SSD = False
-        
-        Resultados = pd.DataFrame(columns=['urli','CPU','RAM','Spantalla','HDD','SSD','Tipos almacenamiento','Almacenamiento','Modelo del procesador','RAM expandible','GPU','Modelo tarjeta de video','Capacidad de la tarjeta de video','url','Marca','Tipo'])
-        
+
+        Resultados = pd.DataFrame(columns=['urli','Precio','CPU','RAM','Spantalla','HDD','SSD','Tipos almacenamiento','Almacenamiento','Modelo del procesador','RAM expandible','GPU','Modelo tarjeta de video','Capacidad de la tarjeta de video','url','Marca','Tipo'])
+
         if typeform == 2:
             CAPACIDAD = self.almacenamiento
         if TipoPc == 0:
@@ -120,7 +116,7 @@ def processreco(recos,self,typeform:int):
             Resultados = ResultadosPortatil  
         if TipoPc == 1 or TipoPc == 2:
             global ResultadosDesk       
-            Resultados = ResultadosDesk 
+            Resultados = ResultadosDesk
 
         Recomendaciones = pd.DataFrame(columns=['urli','Precio','CPU','RAM','Spantalla','HDD','SSD','Tipos almacenamiento','Almacenamiento','Modelo del procesador','RAM expandible','GPU','Modelo tarjeta de video','Capacidad de la tarjeta de video','url','Marca','Tipo'])
 
@@ -145,16 +141,13 @@ def processreco(recos,self,typeform:int):
                 except:
                     Ram = RAM.replace('GB','')
                 print("entre")
-            '''
             print(Cpu)
             print(Gpu)
             print(Ssd,SSD)
             print(Ram)
-            '''
-
             RecoF = Resultados.loc[Resultados['CPU'].isin([Cpu])]
             if TipoPc == 0:
-                RecoF = RecoF.loc[ ((RecoF['RAM']>=Ram) & (RecoF['Spantalla']>=Pantalla1[0])&(RecoF['Spantalla']<=Pantalla1[1]))]#(RecoF['RAM']>=Ram) &
+                RecoF = RecoF.loc[((RecoF['RAM']>=Ram) & (RecoF['Spantalla']>=Pantalla1[0])&(RecoF['Spantalla']<=Pantalla1[1]))]#(RecoF['RAM']>=Ram) &
             if TipoPc == 1:
                 #RecoF = RecoF.loc[RecoF['RAM'].isin([Ram])]
                 RecoF = RecoF.loc[RecoF['RAM'].isin([Ram])]
@@ -167,6 +160,7 @@ def processreco(recos,self,typeform:int):
                 RecoF = RecoF.loc[RecoF['Capacidad de la tarjeta de video']==False]
 
             if SSD:
+                print("HOLA")
                 opcion1='disco estado solido (ssd)'
                 opcion2='disco hibrido (hdd + sdd)'
                 RecoF = RecoF.loc[(RecoF['Tipos almacenamiento'] == opcion1)]
@@ -175,7 +169,6 @@ def processreco(recos,self,typeform:int):
                 Recomendaciones = Recomendaciones.append(RecoF, ignore_index=True)
             else:
                 print("Sorry but we can't found any pc on internet")
-
         Recomendaciones=Recomendaciones.drop_duplicates()
         Precios = self.presupuesto
         Rango = Precios
@@ -185,25 +178,29 @@ def processreco(recos,self,typeform:int):
             Recomendaciones = Recomendaciones.loc[Recomendaciones['Marca'].isin(Marcas)]
 
         Recomendaciones = Recomendaciones.loc[((Recomendaciones['Precio']>=Rango[0])&(Recomendaciones['Precio']<=Rango[1]))]
-        Recomendaciones= Recomendaciones.sort_values(by=['RAM','Precio','Almacenamiento'],ascending=False)
-
         if Recomendaciones.empty:
+            '''
+            jsonf = recos.to_json(orient="records")
+            parsed = json.loads(jsonf)
+            Recomendaciones= parsed
+            print("Vacio")
+            '''
             recos = recos.loc[recos['PRESUPUESTO'].isin([self.presupuesto])]
             recos = recos.head(2)
             jsonf = recos.to_json(orient="records")
             parsed = json.loads(jsonf)
             Recomendaciones= parsed
-
         elif len(Recomendaciones)>=1:
             jsonf = Recomendaciones.to_json(orient="records")
             parsed = json.loads(jsonf)
             Recomendaciones= parsed
-
         print(len(Recomendaciones))
         return Recomendaciones
-    else:
+    except:   
+        print("error")
         recos = recos.loc[recos['PRESUPUESTO'].isin([self.presupuesto])]
         recos = recos.head(2)
         jsonf = recos.to_json(orient="records")
         parsed = json.loads(jsonf)
         return parsed
+        

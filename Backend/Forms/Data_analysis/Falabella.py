@@ -74,7 +74,7 @@ def GetURLS(url:str):
                 urls.append(enlace)
             else:    
                 urls.append(link.get('href'))
-
+                
     driver.quit()
 
 def falabella(Sele:int):
@@ -164,23 +164,23 @@ def falabella(Sele:int):
             if ssd == "" or ssd =="no aplica":
                 specs['SSD']=False
             else:
-                #print(ssd)
-                if 'gb' in ssd:       
+                if 'gb' in ssd:
+                    value1 = ssd.replace('gb','')
+                    #print("GB",int(value1))       
                     try:
-                        value1 = int(ssd.replace('gb',''))
-                        ssd = value1
-                        capacidad1 = specs['Almacenamiento']
-                        specs['Almacenamiento']= capacidad1+ssd
-                        #print(ssd)
+                        ssd = int(value1)
+                        specs['Almacenamiento']+=ssd
+                        #print(ssd,specs['Almacenamiento'])
                     except:
-                        ssd=value1                     
+                        ssd=value1
+                        
                 elif 'tb' in ssd:
+                    value2 = ssd.replace('tb','')
+                    #print("TB",value2)
                     try:
-                        value2 = int(ssd.replace('tb',''))
-                        ssd = value2*1000
-                        capacidad2 = specs['Almacenamiento']
-                        specs['Almacenamiento']= capacidad2+ssd
-                        #print(ssd)
+                        ssd = int(value2)*1000
+                        specs['Almacenamiento']+=ssd
+                        #print(ssd,specs['Almacenamiento'])
                     except:
                         ssd=value2
                 specs['SSD']=ssd

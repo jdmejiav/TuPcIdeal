@@ -2,8 +2,9 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from progress.bar import ChargingBar
-
+import re
 urls= list()
 def getpages(url:str):
     page = requests.get(url)
@@ -21,6 +22,7 @@ def GetURLS(url:str):
     options.add_argument('--ignore-certificate-errors')
     options.add_argument('--ignore-certificate-errors-spki-list')
     options.add_argument('--ignore-ssl-errors')
+    options.add_argument('--no-sandbox')
     options.add_argument("--log-level=3")
     options.add_argument('--incognito')
     options.add_argument('--headless')
@@ -84,8 +86,8 @@ def ktronix(Sele:int):
                 "CPU": "",
                 "RAM": "",
                 "Spantalla": "",
-                "HDD":"",
-                "SSD":"",
+                "HDD":0,
+                "SSD":0,
                 "Tipos almacenamiento":"",
                 "Modelo del procesador":"",
                 "GPU":"",
@@ -94,7 +96,7 @@ def ktronix(Sele:int):
                 "url":url,
                 "Marca":"",
                 "Tipo":TIPO,
-                "Almacenamiento":""
+                "Almacenamiento":0
             }
             translate = {
                 "Referencia Tarjeta Gráfica":"GPU",
@@ -132,16 +134,18 @@ def ktronix(Sele:int):
                         vram =  x[-3:]
                         if "gb" in vram:
                             specs['Capacidad de la tarjeta de video']= vram
-                    if ValorN == "RAM":
-                        x= x.replace(' gb','gb')
+                    
                     if ValorN == "CPU" and "amd" in x:
                         if x in cputranslate:
                             x = cputranslate[x]
                     
                     if ValorN == 'HDD' or ValorN == 'SSD':
                         x=x.split()
-                        if int(x[0])>999:
-                            x=x[0]
+                        try:
+                            x=int(x[0])
+                            capacidad = specs["Almacenamiento"]+x
+                            specs["Almacenamiento"]=capacidad
+                        except:
                             x=x[0]
                             x+="tb"
                         else:
@@ -162,8 +166,36 @@ def ktronix(Sele:int):
                         tamano=float(spec1[0])
                     except:
                         tamano=0
-                    specs[ValorN1]= tamano  
+                        print("error")
+                    specs[ValorN1]= tamano              
+            ssd = specs['SSD']
+            if ssd == 0:
+                specs['SSD']=False
+            hdd = specs['HDD']
+            if hdd == 0:
+                specs['HDD']=False    
+            ram= specs['RAM']
+            if 'gb' in ram:
+                value = ram.replace('gb','')
+                try:
+                    value = int(value)
+                except:
+                    value = value
+                specs['RAM']=value        
 
+            gpu = specs["Modelo tarjeta de video"]
+            if gpu !="":
+                specs["GPU"]="sí"
+            else:
+                specs["GPU"]="no"
+            try:
+                found = re.findall(r'\d{1,2}gb', gpu)
+                if not found:
+                    found = re.findall(r'\d{1,2} gb', gpu)
+            except:
+                found = '' # apply your error handling
+            if found:
+                specs["Capacidad de la tarjeta de video"]=found[0]
             pcs.append(specs)
         except:
             error+=1

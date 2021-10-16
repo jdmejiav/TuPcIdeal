@@ -10,6 +10,9 @@ ResultadosDesk = pd.DataFrame(columns=['CPU','RAM','Spantalla','HDD','SSD','Tipo
 Activated = False
 
 def fala():
+    global Activated
+    Activated=False
+    print("Searching products on falabella.com")
     Resultados1 = falabella(0)
     global ResultadosPortatil
     global ResultadosDesk
@@ -28,6 +31,7 @@ def fala():
         del Resultados2
     '''
 def ktron():
+    print("Searching products on Ktronix.com")
     global ResultadosPortatil
     global ResultadosDesk
     Resultados1 = ktronix(0)
@@ -36,13 +40,11 @@ def ktron():
     else:
         ResultadosPortatil = ResultadosPortatil.append(Resultados1, ignore_index=True)
         del Resultados1
+    print("Finish")
 
 def startServ():
-    print("Searching products on falabella.com")
-    global Activated
     global ResultadosPortatil
     global ResultadosDesk
-    Activated = True
     t1 = threading.Thread(target=fala)
     #t2 = threading.Thread(target=ktron)
   
@@ -65,9 +67,6 @@ def startServ():
         ResultadosDesk = Resultados2
         del Resultados2
     '''
-    Activated = True
-    print("Complete")
-
 def processreco(recos,self,typeform:int):
     try:
         RAM =''

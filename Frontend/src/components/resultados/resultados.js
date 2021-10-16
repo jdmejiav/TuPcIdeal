@@ -1,7 +1,7 @@
 import React from "react";
 import "./resultados.css";
 import axiosInstance from "../../axios";
-
+import Swal from 'sweetalert2'
 
 export default class Body extends React.Component {
   constructor(props) {
@@ -12,7 +12,17 @@ export default class Body extends React.Component {
       answer1: {},
       answer2: {},
       thereIsAnswer: false,
+      pregunto:false,
     };
+  }
+  componentDidUpdate(){
+    if (this.state.thereIsAnswer && this.state.pregunto){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'No pudimos encontrar TuPCideal con las indicaciones que nos diste :(',
+      })
+    }
   }
   componentDidMount() {
     if (this.state.form["tipof"] == "0") {
@@ -29,10 +39,11 @@ export default class Body extends React.Component {
             this.setState({ answer1: response.data[0] });
           } else {
             this.setState({
-              answer: {
+              answer1: {
                 "Error":
-                  "Lo sentimos, no encontramos un computador que de solución a sus necesidades",
+                  "No se encontró ningún computador para tus necesidades",
               },
+              pregunto:true
             });
           }
           if (response.data[1] != null) {
@@ -43,7 +54,9 @@ export default class Body extends React.Component {
                 "Error":
                   "Lo sentimos, no encontramos un segundo computador que de solución a sus necesidades",
               },
+              
             });
+            
           }
           this.setState({ thereIsAnswer: true });
           console.log(JSON.stringify(response.data[0]));
@@ -68,6 +81,7 @@ export default class Body extends React.Component {
                 "Error":
                   "Lo sentimos, no encontramos un computador que de solución a sus necesidades",
               },
+              pregunto:true
             });
           }
           if (response.data[1] != null) {
@@ -108,6 +122,7 @@ export default class Body extends React.Component {
                 "Error":
                   "Lo sentimos, no encontramos un computador que de solución a sus necesidades",
               },
+              pregunto:true
             });
           }
           if (response.data[1] != null) {
@@ -117,6 +132,7 @@ export default class Body extends React.Component {
               answer2: {
                 "Error": "Lo sentimos, no encontramos un segundo computador que de solución a sus necesidades",
               },
+              
             });
           }
           this.setState({ thereIsAnswer: true });
@@ -126,11 +142,86 @@ export default class Body extends React.Component {
     }
   }
   URL = (key) => {
+    if (key == "Spantalla"){
+      return (
+        <div>
+          <p>
+            Pantalla : {this.state.answer1[key]}"
+          </p>
+	  <hr></hr>
+        </div>
+      )
+    }
+    
+    if (key=="SSD"){
+      if (key=="SSD" && this.state.answer1[key]==""){
+        return(
+          <div></div>
+        )
+      }else{
+        return (
+          <div>
+            <p>
+              Unidad de estado Sólido : {this.state.answer1[key]} GB
+            </p>
+            <hr></hr>
+          </div>
+        )
+      }
+    }
+
+    if (key=="HDD" && this.state.answer1[key]!=""){
+      return (
+        <div>
+          <p>
+            Disco Duro : {this.state.answer1[key]} GB
+          </p>
+          <hr></hr>
+        </div>
+      )
+    }else{
+      if (this.state.answer1[key]==""){
+        return (
+          <div></div>
+        )
+      }
+    }
+
+    if (key == "RAM" || key=="Almacenamiento"){
+      return (
+        <div>
+          <p>
+            {key} : {this.state.answer1[key]} GB
+          </p>
+          <hr></hr>
+        </div>
+      )
+    }
+    if (key == "Precio") {
+      const formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'COP',
+      });
+
+      return (
+        <div>
+          <p>{key} : </p>
+          <p style={{"color":"#AE3434"}}>
+             {formatter.format(this.state.answer1[key])}$
+          </p>
+	      <hr></hr>
+        </div>
+      );
+
+    }
+    
+
     if (key == "url") {
       return (
         <div>
           <p>URL : </p>
-          <a href={this.state.answer1[key]}>{this.state.answer1[key]}</a>
+          <a href={this.state.answer1[key]}>URL</a>
+          <hr></hr>
         </div>
       );
     }
@@ -143,13 +234,103 @@ export default class Body extends React.Component {
       </div>
     );
   };
+
+
   URL2 = (key) => {
+    if (key == "Spantalla"){
+      return (
+        <div>
+          <p>
+            Pantalla : {this.state.answer2[key]}"
+          </p>
+          <hr></hr>
+        </div>
+      )
+    }
+
+    if (key=="SSD"){
+      if (key=="SSD" && this.state.answer2[key]==""){
+        return(
+          <div></div>
+        )
+      }else{
+        return (
+          <div>
+            <p>
+              Unidad de estado Sólido : {this.state.answer2[key]} GB
+            </p>
+            <hr></hr>
+          </div>
+        )
+      }
+    }
+
+    if (key=="HDD" && this.state.answer2[key]!=""){
+
+      return (
+        <div>
+          <p>
+            Disco Duro : {this.state.answer2[key]} GB
+          </p>
+          <hr></hr>
+        </div>
+      )
+    }else{
+      if (this.state.answer2[key]==""){
+        return (
+          <div></div>
+        )
+      }
+    }
+
+    if (key == "RAM" || key=="Almacenamiento"){
+      return (
+        <div>
+          <p>
+            {key} : {this.state.answer2[key]} GB
+          </p>
+          <hr></hr>
+        </div>
+      )
+    }
+
+
+    if (key == "RAM" || key=="Almacenamiento"){
+      return (
+        <div>
+          <p>
+            {key} : {this.state.answer2[key]} GB
+          </p>
+          <hr></hr>
+        </div>
+      )
+    }
+
+    
+    if (key == "Precio") {
+      const formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'COP',
+      });
+
+      return (
+        <div>
+          <p>{key} : </p>
+          <p>
+             {formatter.format(this.state.answer2[key])}$
+          </p>
+    	<hr></hr>
+        </div>
+      );
+    }
     if (key == "url") {
       return (
         <div>
           <p>URL : </p>
-          <a href={this.state.answer2[key]}>{this.state.answer2[key]}</a>
+          <a href={this.state.answer2[key]}>URL</a>
+          <hr></hr>
         </div>
+
       );
     }
     return (
@@ -163,7 +344,25 @@ export default class Body extends React.Component {
   };
 
   USOS = (key) => {
-    if (key == "Usos" || key == "Marca") {
+    if (key == "Usos" || key == "Marca" || key =="Presupuesto") {
+      
+      if (key == "Presupuesto"){
+        const formatter = new Intl.NumberFormat('en-US', {
+          style: 'currency',
+          currency: 'COP',
+        });
+        return (
+        <div>
+          <p>{key} : </p>
+          {this.state.form[key].map((key2) => (
+            <div>{formatter.format(parseInt(key2))}</div>
+          ))}
+          <hr />
+        </div>
+        )
+      }
+
+      
       return (
         <div>
           <p>{key} : </p>
@@ -173,7 +372,7 @@ export default class Body extends React.Component {
           <hr />
         </div>
       );
-    }
+    };
     return (
       <div>
         <p>
@@ -184,7 +383,7 @@ export default class Body extends React.Component {
     );
   };
 
-  render() {
+  render(){
     return (
       <div>
         {this.state.thereIsAnswer ? (

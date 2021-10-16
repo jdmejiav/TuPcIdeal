@@ -85,7 +85,7 @@ const styleField= {
                                   timerProgressBar: true,
                                 }).then( () =>
                                 {
-                                  window.location = "http://localhost:3000/login";
+                                  window.location = "/login";
                                 });
                             })
                             .catch(function (error) {

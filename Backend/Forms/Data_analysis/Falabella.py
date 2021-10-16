@@ -2,6 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from chromedriver_py import binary_path # this will get you the path variable
 from progress.bar import ChargingBar
 '''
 borrar cuando funcione todo
@@ -34,6 +36,7 @@ def getpages(url:str):
     for pages in range(1 ,numberpages+1):
         URL = url+"?page="+str(pages)
         GetURLS(URL)
+        print("Processing page",pages)
 def GetURLS(url:str):
     '''
     page = requests.get(url)
@@ -46,13 +49,15 @@ def GetURLS(url:str):
     '''
 
     options = webdriver.ChromeOptions()
+    options.add_argument('--no-sandbox')
     options.add_argument('--ignore-certificate-errors')
     options.add_argument('--ignore-certificate-errors-spki-list')
     options.add_argument('--ignore-ssl-errors')
     options.add_argument("--log-level=3")
     options.add_argument('--incognito')
     options.add_argument('--headless')
-    driver = webdriver.Chrome("D:\Downloads\chromedriver", options=options)
+    options.add_argument("--remote-debugging-port=9221")
+    driver = webdriver.Chrome(executable_path=binary_path, options=options)
 
 
     driver.get(url)
@@ -112,7 +117,7 @@ def falabella(Sele:int):
                 "urli":img['src'],
                 "Precio":price,
                 "CPU": "",
-                "RAM": "",
+                "RAM": 0,
                 "Spantalla": "",
                 "HDD":0,
                 "SSD":0,
@@ -184,8 +189,25 @@ def falabella(Sele:int):
             if hdd == "" or hdd =="no aplica":
                 specs['HDD']=False
             else:
+                if 'gb' in hdd:       
+                    try:
+                        value3 = int(hdd.replace('gb',''))
+                        hdd = value3
+                        capacidad3 = specs['Almacenamiento']
+                        specs['Almacenamiento']= capacidad3+hdd
+                        #print(ssd)
+                    except:
+                        hdd=value3                     
+                elif 'tb' in hdd:
+                    try:
+                        value4 = int(hdd.replace('tb',''))
+                        hdd = value4*1000
+                        capacidad4 = specs['Almacenamiento']
+                        specs['Almacenamiento']= capacidad4+hdd
+                        #print(ssd)
+                    except:
+                        hdd=value4
                 specs['HDD']=hdd
-                specs['Almacenamiento']=""
             hdd = specs['HDD']
             ssd = specs['SSD']
             if hdd!=False and ssd!=False:

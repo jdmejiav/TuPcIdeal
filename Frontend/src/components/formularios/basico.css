@@ -1,14 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@1,100&display=swap');
 
 
-.container_basico{
-    display: block;
+.container-basic{
     width: 100%;
-    height: 100vh;
+    height: 45vh;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    
 }
 
 .infobasic{
-    position: absolute;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     top: 15%;
     left: 17%;
@@ -18,20 +22,42 @@
 }
 
 .cont1{
-    display: inline-block;
-    width: 210px;
-    height: 100px;
-    position: absolute;
-    top:30%;
-    left: 7%;;
+    width:  fit-content;
+    height:  100px;
+    margin: 1rem;
+
+}
+.cont2{
+    width:  fit-content;
+    height:  100px;
+    margin: 1rem;
+
+}
+.cont3{
+    width:  fit-content;
+    height:  100px;
+    margin: 1rem;
+
+}
+.cont4{
+    width:  fit-content;
+    height:  100px;
+    margin: 1rem;
+
+}
+.cont5{
+    width:  fit-content;
+    height:  100px;
+    margin: 1rem;
+
 }
 .pregunta1{
-    position: absolute;
+    
     margin-top: 0%;
     box-sizing: content-box;
 }
 .check1{
-    position: absolute;
+
     margin-top: 40px;
     box-sizing: border-box;
 }
@@ -46,62 +72,65 @@
 }
 
 .pregunta2{
-    position: absolute;
-    top: 30%;
-    left: 26%;
+
+    margin-bottom: 30px;
 }
 
 .check2{
-    position: absolute;
+
     top: 35%;
     left: 26%;
 }
 
 
 .pregunta3{
-    position: absolute;
+
     top: 30%;
     left: 50%;
+    padding-bottom: 30px;
 }
 
 .check3{
-    position: absolute;
+
     top: 35%;
     left: 50%;
 }
 
 
 .pregunta4{
-    position: absolute;
+
     top: 30%;
+    padding-bottom: 30px;
     left: 75%;
 }
 
 .check4{
-    position: absolute;
+
     top: 35%;
     left: 75%;
 }
 
 
 .pregunta5{
-    position: absolute;
+
     top: 50%;
     left: 5%;
-    box-sizing: content-box;
+    padding-bottom: 30px;
 }
 .check5{
-    position: absolute;
+
     top: 54%;
     left: 5%;
     box-sizing: border-box;
 }
 
 
-
+.preguntas-bas{
+    display: flex;
+    flex-direction: row;
+}
 .btn-basic{
     text-align:"center";
-    display:inline-block;
     padding: 16px 48px 18px;
     font-size: 14px;
     white-space: normal;
@@ -115,7 +144,6 @@
     color: white;
     top: 65%;
     left: 50%;
-    position: absolute;
 }
 
 .btn-basic:hover

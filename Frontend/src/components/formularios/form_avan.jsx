@@ -3,17 +3,38 @@ import { FooterContainer } from "../footer/containers/footer";
 import React, { useState } from "react";
 import "./avanzado.css";
 import { Formik, Field, Form } from "formik";
+import Swal from 'sweetalert2'
+import Slider, { SliderTooltip } from 'rc-slider';import 'rc-slider/assets/index.css';
 
-const Presupuesto = ["Bajo", "Moderado", "Alto"];
-const Tipo = ["Portatil", "Escritorio", "All in one"];
+const { createSliderWithTooltip } = Slider;
+const Range = createSliderWithTooltip(Slider.Range);
+const { Handle } = Slider;
+
+
+const handle = props => {
+  const { value, dragging, index, ...restProps } = props;
+  return (
+    <SliderTooltip
+      prefixCls="rc-slider-tooltip"
+      overlay={`${value}`}
+      visible={dragging}
+      placement="top"
+      key={index}
+    >
+      <Handle value={value} {...restProps} />
+    </SliderTooltip>
+  );
+};
+
+const Tipo = ["Portátil", "Escritorio", "All in one"];
 const Marca = ["HP", "Lenovo", "Asus", "Indiferente"];
 const Usos = [
   "Ofimática",
   "Estudio",
   "Multimedia",
-  "Diseño Grafico",
+  "Diseño Gráfico",
   "Programacion",
-  "Programas de ingenieria",
+  "Programas de ingeniería",
 ];
 const Memoria = ["4GB", "8GB", "16GB", "Otro"];
 const Solido = ["Si", "No"];
@@ -22,13 +43,8 @@ const Pantalla = ["Grande", "Equilibrado", "Pequeño"];
 const Gama = ["Baja", "Media", "Alta"];
 
 const infoPresupuesto = {
-  Bajo:
-    "1'000.000-1'700.000 COP",
-  Moderado:
-    "1'750.000-2'100.000 COP",
-  Alto:
-    "+2'100.000 COP",
-};
+  "Presupuesto":"Elije un mínimo y un máximo que estas dispueso a pagar para encontrar TuPCIdeal (COP)"
+  };
 
 const infoTipo = {
   Portatil: "Computador Portátil",
@@ -50,27 +66,28 @@ const FormikCheck = () => {
   const [portatil, setPortatil] = useState(false);
   const [nJSON, setnJSON] = useState(6);
 
+  var variable = [1000000,6000000]
+
   const FormikPresupuesto = ({ name }) => {
     return (
-      <div>
-        <label id="medio">
-          <Field type="radio" name="Presupuesto" value={name} />
-          <span> {name}</span>
-        </label>
-        <div className="icon info-presupuesto">
-          <div className="texto-info-presupuesto">
-            <p>{infoPresupuesto[name]}</p>
-          </div>
-          <span>
-            <i class="far fa-question-circle"></i>
-          </span>
-        </div>
+      <div className="pregunta-presuspuesto">
+          <Range 
+          min={1000000} 
+          max={6000000} 
+          defaultValue={[1000000, 2000000]} 
+          allowCross={false}
+          tipFormatter={value => `${value}`} 
+          onChange = {async e => {
+            variable=e
+          }
+          }
+          />
       </div>
     );
   };
 
   const handleOnclickTipo = async (e, name) => {
-    if (name == "Portatil") {
+    if (name == "Portátil") {
       setPortatil(true);
       setnJSON(7);
     } else {
@@ -195,7 +212,7 @@ const FormikCheck = () => {
   return (
     <div>
       <Navbar />
-      <div className="container_basico">
+      
         <div className="titulo_clas">
           <h2>Encuentra con nosotros TuPCideal</h2>
         </div>
@@ -204,6 +221,7 @@ const FormikCheck = () => {
           computadores así podremos darte una mejor experiencia.
           <p>Nivel avanzado</p>
         </div>
+        <div className="container_avanzado">
         <Formik
           initialValues={{
             tipof: 2,
@@ -215,9 +233,28 @@ const FormikCheck = () => {
             Solido: [],
             Almacenamiento: [],
             Gama: [],
+            Pantalla: [],
           }}
           onSubmit={async (values) => {
+
+            if (values.Tipo=="Portátil" && values.Pantalla.length==0){
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Por favor llena todo el formulario',
+              })
+            }else if (values.Tipo.length==0 || values.Marca.length==0 ||
+              values.Usos.length==0 || values.Memoria.length==0 || values.Solido.length==0 || values.Gama.length==0 || values.Almacenamiento.length==0)
+            {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Por favor llena todo el formulario',
+              })
+
+            }else{
             console.log(values);
+            values.Presupuesto= variable
             //alert(JSON.stringify(values, null, nJSON));
             if(values.Tipo=="Escritorio" || values.Tipo=="All in one" )
             {
@@ -226,24 +263,13 @@ const FormikCheck = () => {
             localStorage.setItem("formResult", JSON.stringify(values));
             window.location = "/resultados"
           }}
+        }
         >
           {({ values }) => (
             <Form>
-              <div
-                role="group"
-                aria-labelledby="checkbox-group"
-                className="preguntas_bas"
-              >
+              <div className="preguntas-avan">
                 <div className="conta1">
-                  <div className="preguntaa1">¿Qué presupuesto tienes?</div>
-                  <div className="checka1">
-                    {Presupuesto.map((name) => (
-                      <FormikPresupuesto name={name} />
-                    ))}
-                  </div>
-                </div>
-                <div className="conta2">
-                  <div className="preguntaa2">
+                  <div className="preguntaa1">
                     ¿Qué tipo de computador quieres?
                   </div>
                   <div className="checka2">
@@ -252,6 +278,27 @@ const FormikCheck = () => {
                     ))}
                   </div>
                 </div>
+
+                <div className="conta2">
+                  <div className="preguntaa2">¿Qué presupuesto tienes?
+                  
+                  <div className="icon info-presupuesto">
+                    <div className="texto-info-presupuesto">
+                      <p>{infoPresupuesto["Presupuesto"]}</p>
+                    </div>
+                    <span>
+                      <i class="far fa-question-circle"></i>
+                    </span>
+                 </div>
+                  
+                  
+                  
+                  </div>
+                  <div className="checka1">
+                      <FormikPresupuesto  />
+                  </div>
+                </div>
+
                 <div className="conta3">
                   <div className="preguntaa3">
                     ¿Tienes alguna marca en mente?
@@ -274,7 +321,7 @@ const FormikCheck = () => {
                 </div>
                 <div className="conta5">
                   <div className="preguntaa5">
-                    ¿Memoria minima?
+                    ¿Memoria mínima?
                     <div
                       className="icon info-presupuesto"
                       style={{ top: "25px", left: "0px" }}
@@ -299,7 +346,7 @@ const FormikCheck = () => {
                 </div>
                 <div className="conta6">
                   <div className="preguntaa6">
-                    ¿Necesitas disco de estado solido?
+                    ¿Necesitas disco de estado sólido?
                     <div
                       className="icon info-presupuesto"
                       style={{ top: "25px", left: "0px" }}
@@ -324,7 +371,7 @@ const FormikCheck = () => {
                 </div>
                 <div className="conta7">
                   <div className="preguntaa7">
-                    ¿Almacenamiento minimo?
+                    ¿Almacenamiento mínimo?
                     <div
                       className="icon info-presupuesto"
                       style={{ top: "25px", left: "0px" }}
@@ -362,7 +409,7 @@ const FormikCheck = () => {
                 )}
                 <div className="conta9">
                   <div className="preguntaa9">
-                    ¿Qué gama de tarjeta grafica?
+                    ¿Qué gama de tarjeta gráfica?
                   </div>
                   <div className="checka9">
                     {Gama.map((name) => (

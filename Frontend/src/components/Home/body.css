@@ -30,18 +30,6 @@
     left: 2%;
   }
 }
-@media screen and (max-width: 670px) {
-    .cuadrado {
-      visibility: hidden;
-
-    }
-  }
-  @media screen and (max-height: 750px) {
-    .cuadrado {
-      visibility: hidden;
-    }
-  }
-
   .img-pc-home{
     position: absolute;
     left: 17.5%;

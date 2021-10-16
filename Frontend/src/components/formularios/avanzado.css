@@ -5,113 +5,100 @@ p{
     font-family: 'Libre Franklin', sans-serif;
 }
 
-.container_basico{
-    display: block;
+.container_avanzado{
     width: 100%;
-    height: 100vh;
+    height: 45vh;
+    display: grid;
+    align-items: center;
+    justify-content: center;
 }
 .conta1{
-    display: inline-block;
-    width: 230px;
-    height: 100px;
-    position: absolute;
-    top:30%;
-    left: 5%;;
+    width:  fit-content;
+    height:  fit-content;
+    margin: 1rem;
 }
 .preguntaa1{
-    position: absolute;
+
     margin-top: 0%;
     box-sizing: content-box;
 }
 .checka1{
-    position: absolute;
+    
     margin-top: 40px;
     box-sizing: border-box;
 }
 
 .conta2{
-    display: inline-block;
-    width: 210px;
-    height: 100px;
-    position: absolute;
-    top:30%;
-    left: 20%;;
+    width:  fit-content;
+    height:  fit-content;
+    margin: 1rem;
 }
 
 .preguntaa2{
-    position: absolute;
+
     box-sizing: border-box;
     margin-top: 0%;
 }
 
 .checka2{
-    position: absolute;
+
     box-sizing: border-box;
     margin-top: 40px;
     padding-top: 2%;
 }
 
 .conta3{
-    display: inline-block;
-    width: 210px;
-    height: 100px;
-    position: absolute;
-    top:30%;
-    left: 35%;;
+    width:  fit-content;
+    height:  fit-content;
+    margin: 1rem;
 }
 
 .preguntaa3{
-    position: absolute;
+
     box-sizing: border-box;
     margin-top: 0%;
 }
 
 .checka3{
-    position: absolute;
+
     box-sizing: content-box;
     margin-top: 40px;
     padding-top: 2%;
 }
 
 .conta4{
-    display: inline-block;
-    width: 210px;
-    height: 174px;
-    position: absolute;
-    top:30%;
-    left: 50%;;
+    width:  fit-content;
+    height:  fit-content;
+    margin: 1rem;
 }
 
 .preguntaa4{
-    position: absolute;
+
     box-sizing: border-box;
     margin-top: 0%;
 }
 
 .checka4{
-    position: absolute;
+
     box-sizing: content-box;
     margin-top: 40px;
     padding-top: 2%;
 }
 
 .conta5{
-    display: inline-block;
-    width: 210px;
-    height: 100px;
-    position: absolute;
-    top:30%;
-    left: 65%;;
+    width:  fit-content;
+    height:  fit-content;
+    margin: 1rem;
 }
 
 .preguntaa5{
-    position: absolute;
+
     box-sizing: border-box;
     margin-top: 0%;
 }
 
 .checka5{
-    position: absolute;
+
     box-sizing: content-box;
     margin-top: 40px;
     padding-top: 2%;
@@ -119,44 +106,38 @@ p{
 
 
 .conta6{
-    display: inline-block;
-    width: 210px;
-    height: 100px;
-    position: absolute;
-    top:30%;
-    left: 80%;;
+    width:  fit-content;
+    height:  fit-content;
+    margin: 1rem;
 }
 
 .preguntaa6{
-    position: absolute;
+
     box-sizing: border-box;
     margin-top: 0%;
 }
 
 .checka6{
-    position: absolute;
+
     box-sizing: content-box;
     margin-top: 40px;
     padding-top: 2%;
 }
 
 .conta7{
-    display: inline-block;
-    width: 220px;
-    height: 155px;
-    position: absolute;
-    top:50%;
-    left: 80%;
+    width:  fit-content;
+    height:  fit-content;
+    margin: 1rem;
 }
 
 .preguntaa7{
-    position: absolute;
+
     box-sizing: border-box;
     margin-top: 0%;
 }
 
 .checka7{
-    position: absolute;
+
     box-sizing: content-box;
     margin-top: 40px;
     padding-top: 2%;
@@ -164,51 +145,45 @@ p{
 
 
 .conta8{
-    display: inline-block;
-    width: 210px;
-    height: 100px;
-    position: absolute;
-    top:50%;
-    left: 5%;
+    width:  fit-content;
+    height:  fit-content;
+    margin: 1rem;
 }
 
 .preguntaa8{
-    position: absolute;
+
     box-sizing: border-box;
     margin-top: 0%;
 }
 
 .checka8{
-    position: absolute;
+
     box-sizing: content-box;
     margin-top: 40px;
     padding-top: 2%;
 }
 
 .conta9{
-    display: inline-block;
-    width: 210px;
-    height: 100px;
-    position: absolute;
-    top:50%;
-    left: 20%;
+    width:  fit-content;
+    height:  fit-content;
+    margin: 1rem;
 }
 
 .preguntaa9{
-    position: absolute;
+
     box-sizing: border-box;
     margin-top: 0%;
 }
 
 .checka9{
-    position: absolute;
+
     box-sizing: content-box;
     margin-top: 40px;
     padding-top: 2%;
 }
 .btn-int{
     text-align:"center";
-    display:inline-block;
+    display:flex;
     padding: 16px 48px 18px;
     font-size: 14px;
     white-space: normal;
@@ -231,10 +206,13 @@ p{
   cursor: pointer;
 }
 
+.preguntas-avan{
+    display: flex;
+    flex-direction: row;
+}
+
 .btn-basic{
     text-align:"center";
-    display:inline-block;
-    padding: 16px 48px 18px;
     font-size: 14px;
     white-space: normal;
     text-decoration: none;
@@ -245,9 +223,7 @@ p{
     padding: 14px;
     cursor: pointer;
     color: white;
-    top: 65%;
-    left: 50%;
-    position: absolute;
+
 }
 
 .btn-basic:hover
@@ -264,14 +240,15 @@ p{
 }
 
 .info-presupuesto{
-    padding-left: 80px;
+    padding-left: 30px;
+    padding-right: 30px;
     float: right;
     position: relative;
 }
 
 
 .texto-info-presupuesto  {
-    position: absolute;
+
     top: 0%;
     margin-left: 25px;
     display: none;

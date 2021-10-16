@@ -56,7 +56,7 @@ export default class Login extends Component {
           //console.log(res.data);
         })
         .then(() => {
-          window.location = "http://localhost:3000/form";
+          window.location = "/form";
         })
         .catch((err) => {
           Swal.fire({
